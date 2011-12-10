@@ -1,8 +1,3 @@
-# @markup markdown
-# @title Pool Scoring App
-# @author Daniel Thorpe, dan@blindingskies.com
-# @author Rowan Manning, rowan@rowanmanning.com
-
 Pool Scoring
 ============
 
