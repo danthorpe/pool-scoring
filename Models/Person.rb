@@ -1,8 +1,11 @@
-require 'json'
+# @author Daniel Thorpe dan@blindingskies.com
+# @date 10/12/2011
 
 # Person class
 class Person  
 
+  # Constructor
+  # @param doc A CouchDB document representing the person
   def initialize(doc)
     @doc = doc
   end
