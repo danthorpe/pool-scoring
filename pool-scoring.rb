@@ -3,6 +3,7 @@ require 'sinatra/base'
 require 'couchrest'
 
 require './Models/Person.rb'
+require './Models/Game.rb'
 
 class PoolScoring < Sinatra::Base
 
@@ -60,6 +61,29 @@ class PoolScoring < Sinatra::Base
     # Get the Person object
     person = self.playerWithUsername params[:username]
     person.to_json
+  end
+
+
+  # Add a new game
+  get '/new' do
+  
+    # Create a new game
+    game = Game.new
+    
+    # Get some people
+    rowan = self.playerWithUsername("rowan")
+    dan = self.playerWithUsername("daniel")
+    
+    # Add them to the teams
+    game.addPersonToBreakingTeam(rowan)
+    game.addPersonToOtherTeam(dan)
+    
+    # End the game
+    game.endGame(true, true)
+  
+    # Print out the document hash
+    game.document.to_json
+  
   end
 
 end
