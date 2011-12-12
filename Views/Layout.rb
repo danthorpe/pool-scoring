@@ -14,7 +14,12 @@ class PoolScoring
       
       # Page title
       def title
-        (@title || 'Untitled') + ' : Pool Scoring'
+        @title || 'Untitled'
+      end
+      
+      # Page title (full with site suffix)
+      def fullTitle
+        title + ' : Pool Scoring'
       end
       
       # Page meta description
