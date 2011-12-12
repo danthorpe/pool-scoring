@@ -1,12 +1,18 @@
 require 'json/ext'
 require 'sinatra/base'
 require 'couchrest'
+require 'mustache/sinatra'
 
+# Load models
 require './Models/Person.rb'
 require './Models/Game.rb'
 
 class PoolScoring < Sinatra::Base
-
+  
+  # Register mustache and initialise the Views module - Mustache requires this
+  register Mustache::Sinatra
+  module Views end
+  
   # Define which CouchDB instance to use.
   if ENV['CLOUDANT_URL']
     set :db, ENV['CLOUDANT_URL'] + '/poolscoring'
@@ -17,7 +23,10 @@ class PoolScoring < Sinatra::Base
   set :root, File.dirname(__FILE__)
   set :public_folder, 'public'
   set :static, true
-
+  set :mustache, {
+    :views => './Views',
+    :templates => './Views/templates'
+  }
 
   def players
 
@@ -44,7 +53,8 @@ class PoolScoring < Sinatra::Base
 
   # Index page
   get '/' do
-    "Welcome to pool scoring, make this pretty."
+    @title = "Welcome to Pool Scoring!"
+    mustache :index
   end
 
   # Index page
