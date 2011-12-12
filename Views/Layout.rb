@@ -14,12 +14,12 @@ class PoolScoring
       
       # Page title
       def title
-        @title || "Untitled Page"
+        (@title || 'Untitled') + ' : Pool Scoring'
       end
       
       # Page meta description
       def description
-        @description || ""
+        @description || ''
       end
       
     end
