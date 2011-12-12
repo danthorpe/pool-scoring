@@ -56,6 +56,12 @@ class PoolScoring < Sinatra::Base
     @title = "Welcome to Pool Scoring!"
     mustache :index
   end
+  
+  # Style-guide page - temporary
+  get '/styleguide' do
+    @title = "Pool Scoring Style-Guide"
+    mustache :styleguide
+  end
 
   # Index page
   get '/players' do
