@@ -65,19 +65,16 @@ class PoolScoring < Sinatra::Base
 
   # All players page
   get '/players' do
-
-    # Render
     @title = 'Players'
     @players = self.players
     mustache :players
-
   end
 
+  # Single player page
   get '/player/:username' do
-    
-    # Get the Person object
-    person = self.playerWithUsername params[:username]
-    person.to_json
+    @player = self.playerWithUsername params[:username]
+    @title = @player.name
+    mustache :player
   end
 
 
