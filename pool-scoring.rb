@@ -21,7 +21,7 @@ class PoolScoring < Sinatra::Base
   end
 
   set :root, File.dirname(__FILE__)
-  set :public_folder, 'public'
+  set :public_folder, './Public'
   set :static, true
   set :mustache, {
     :views => './Views',
