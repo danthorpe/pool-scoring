@@ -25,7 +25,7 @@ class PoolScoring < Sinatra::Base
   set :static, true
   set :mustache, {
     :views => './Views',
-    :templates => './Views/templates'
+    :templates => './Templates'
   }
 
   def players
