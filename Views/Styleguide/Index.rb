@@ -3,10 +3,12 @@
 
 class PoolScoring
   module Views
+    module Styleguide
     
-    # Style-guide view class.
-    class Styleguide < Layout
+      # Style-guide index view class.
+      class Index < Layout
+      end
+    
     end
-    
   end
 end
