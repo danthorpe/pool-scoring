@@ -3,8 +3,8 @@
 
 class PoolScoring
   module Views
-  	
-  	# Styleguide view class
+    
+    # Styleguide view class
     class Styleguide < Layout
     end
     

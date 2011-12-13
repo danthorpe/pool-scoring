@@ -3,8 +3,8 @@
 
 class PoolScoring
   module Views
-  	
-  	# Index view class
+    
+    # Index view class
     class Index < Layout
     end
     

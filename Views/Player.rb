@@ -3,8 +3,8 @@
 
 class PoolScoring
   module Views
-  	
-  	# Player view class
+  
+    # Player view class
     class Player < Layout
       
       def player
