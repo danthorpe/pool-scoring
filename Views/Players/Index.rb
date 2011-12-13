@@ -1,5 +1,5 @@
 # @author Rowan Manning info@rowanmanning.co.uk
-# @date 13/12/2011
+# @date 12/12/2011
 
 class PoolScoring
   module Views

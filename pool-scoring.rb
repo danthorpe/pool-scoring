@@ -69,6 +69,15 @@ class PoolScoring < Sinatra::Base
     @players = self.players
     mustache :'players/index'
   end
+  
+  # Create players page.
+  get '/players/new' do
+    @title = 'Create a Player'
+    mustache :'players/new'
+  end
+  post '/players/new' do
+    'Boom! ' + params.to_s
+  end
 
   # Single player profile.
   get '/player/:username' do
