@@ -5,7 +5,7 @@ require './Models/Person.rb'
 
 # An extensible Pool Game class.
 # 
-# This is Very simple. Create the game, and then add
+# This is very simple. Create the game, and then add
 # players to either the breaking team, or the other team.
 # Call, `endGame` asserting whether the breaking team won
 # or not, and optionally, include whether the game was won
@@ -26,12 +26,13 @@ class Game
   end 
   
   def endGame(didBreakingTeamWin, foulOnBlack=false)
+    @endDate = Time.now
     @breakingTeamWon = didBreakingTeamWin
     @foulOnBlack = foulOnBlack
   end
   
   def document    
-    doc = {:type => "Game", :date => Time.now, :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
+    doc = {:type => "Game", :date => @endDate, :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
     return doc    
   end
   
