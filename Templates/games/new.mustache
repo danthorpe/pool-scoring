@@ -1,0 +1,53 @@
+
+<h1>{{title}}</h1>
+
+<form method="post" action="{{request.path}}">
+    
+    <div class="field">
+        <label>Breaking Player</label>
+        <ul>
+            {{#players}}
+                <li>
+                    <input type="radio" name="breaking-player" id="breaking-player-{{username}}" value="{{username}}"/>
+                    <label for="breaking-player-{{username}}">{{name}}</label>
+                </li>
+            {{/players}}
+        </ul>
+    </div>
+    
+    <div class="field">
+        <label>Other Player</label>
+        <ul>
+            {{#players}}
+                <li>
+                    <input type="radio" name="other-player" id="other-player-{{username}}" value="{{username}}"/>
+                    <label for="other-player-{{username}}">{{name}}</label>
+                </li>
+            {{/players}}
+        </ul>
+    </div>
+    
+    <div class="field">
+        <label>Winner</label>
+        <ul>
+            <li>
+                <input type="radio" name="winning-player" id="winning-player-breaking" value="breaking"/>
+                <label for="winning-player-breaking">Breaking Player</label>
+            </li>
+            <li>
+                <input type="radio" name="winning-player" id="winning-player-other" value="other"/>
+                <label for="winning-player-other">Other Player</label>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="field">
+        <label for="foul-on-black">Was there a foul on the black?</label>
+        <input type="checkbox" name="foul-on-black" id="foul-on-black"/>
+    </div>
+    
+    <div class="field">
+        <input type="submit" value="Record Game"/>
+    </div>
+    
+</form>

@@ -86,6 +86,15 @@ class PoolScoring < Sinatra::Base
     mustache :'players/profile'
   end
 
+  # Record a game (temporary URL - didn't want to step on the '/new' route)
+  get '/games/new' do
+    @title = 'Record a Game'
+    @players = self.players
+    mustache :'games/new'
+  end
+  post '/games/new' do
+    'Boom! ' + params.to_s
+  end
 
   # Add a new game
   get '/new' do
