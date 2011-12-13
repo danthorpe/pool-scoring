@@ -10,19 +10,24 @@ class PoolScoring
     # functionality.
     class Layout < Mustache
       
-      # Page title
+      # Page title.
       def title
         @title || 'Untitled'
       end
       
-      # Page title (full with site suffix)
+      # Page title (full with site suffix).
       def fullTitle
         title + ' : Pool Scoring'
       end
       
-      # Page meta description
+      # Page meta description.
       def description
         @description || ''
+      end
+      
+      # The current HTTP request.
+      def request
+        @request
       end
       
     end
