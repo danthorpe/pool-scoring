@@ -4,7 +4,7 @@
 class PoolScoring
   module Views
   
-    # Players view class
+    # Players view class.
     class Players < Layout
       
       def players

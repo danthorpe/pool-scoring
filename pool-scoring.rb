@@ -51,26 +51,26 @@ class PoolScoring < Sinatra::Base
     return Person.new result['rows'][0]['value']
   end
 
-  # Index page
+  # Index page.
   get '/' do
     @title = 'Welcome!'
     mustache :index
   end
   
-  # Style-guide page - temporary
+  # Style-guide page - temporary.
   get '/styleguide' do
     @title = 'Style-Guide'
     mustache :styleguide
   end
 
-  # All players page
+  # All players page.
   get '/players' do
     @title = 'Players'
     @players = self.players
     mustache :players
   end
 
-  # Single player page
+  # Single player page.
   get '/player/:username' do
     @player = self.playerWithUsername params[:username]
     @title = @player.name

@@ -4,8 +4,6 @@
 class PoolScoring
   module Views
     
-    # Main layout class
-    # 
     # This is the class extended by all other application
     # views. The main purpose of this is to provide defaults
     # for the common view parameters as well as common view
