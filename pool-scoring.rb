@@ -47,7 +47,7 @@ class PoolScoring < Sinatra::Base
   def playerWithUsername(username)
 
     # Get all the players
-    result = CouchRest.get(settings.db + '/_design/Person/_view/byUsername?key=%22' + username + '%22')
+    result = CouchRest.get settings.db + '/_design/Person/_view/byUsername?key=%22' + username + '%22'
     return Person.new result['rows'][0]['value']
   end
 
