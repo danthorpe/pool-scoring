@@ -1,7 +1,7 @@
 Pool Scoring
 ============
 
-This is a very simple web app used to keep track of pool scores within an orgnaization.
+This is a very simple web app used to keep track of pool scores within an organization.
 
 Documentation
 -------------
