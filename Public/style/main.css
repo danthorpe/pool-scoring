@@ -51,14 +51,14 @@ blockquote:before, blockquote:after, q:before, q:after {
 /*========================================================*/
 /* clear fixes */
 
-.clearfix:before, .clearfix:after {
+.clearfix:before, .container:before, .clearfix:after, .container:after {
     content: '';
     display: table;
 }
-.clearfix:after {
+.clearfix:after, .container:after {
     clear: both;
 }
-.clearfix {
+.clearfix, .container {
     zoom: 1;
 }
 
@@ -232,6 +232,40 @@ hr {
     border: none;
     border-top: solid .143em #ccc;
     color: #ccc;
+}
+
+/*========================================================*/
+/* grid */
+
+/* inner element for gutters */
+.inner {
+    padding: 0 1em;
+}
+
+/* columns */
+.half, .third, .quarter, .fifth, .sixth {
+    float: left;
+}
+.half {
+    width: 50%;
+}
+.third {
+    width: 33%;
+}
+.third:first-child {
+    width: 34%;
+}
+.quarter {
+    width: 25%;
+}
+.fifth {
+    width: 20%;
+}
+.sixth {
+    width: 16.5%;
+}
+.sixth:first-child, .sixth:last-child {
+    width: 17%;
 }
 
 /*========================================================*/
