@@ -30,6 +30,11 @@ class PoolScoring
         @request
       end
       
+      # The current time
+      def now
+        Time.now
+      end
+      
     end
     
   end
