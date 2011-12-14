@@ -1,9 +1,164 @@
 
 <h1>{{title}}</h1>
 
-<p>Introductory paragraph goes here consectetur adipiscing elit. Quisque <strong>facilisis</strong> faucibus tincidunt. Proin interdum diam ut ante <a href="#1">fermentum ultricies</a>. Nam lacus urna, interdum commodo condimentum a, mollis nec enim. Aenean a auctor turpis. Suspendisse vitae orci diam. Morbi nec tellus eu odio <q cite="http://www.google.co.uk/">“This is a quote…”</q> vitae ac dui. Nam gravida, mi non adipiscing dapibus, enim ante <abbr title="Hyper Text Markup Language">HTML</abbr> volutpat enim, quis condimentum risus augue at odio.</p>
+<hr/>
 
-<h2>This is a secondary heading</h2>
+<h2>Simple Responsive Grid</h2>
+
+<!-- some styling to illustrate the grid better -->
+<style>
+    .container {
+        padding: .5em;
+        background: #f8f8f8;
+        border: .143em solid #ddd;
+    }
+    .inner {
+        margin: .5em;
+        padding: .1em 1em;
+    }
+    .container .inner {
+        background: #ddd;
+    }
+</style>
+
+<div class="container">
+    <div class="inner">
+        <pre>whole</pre>
+    </div>
+</div>
+
+<br/>
+
+<div class="container">
+    <div class="half">
+        <div class="inner">
+            <pre>half</pre>
+        </div>
+    </div>
+    <div class="half">
+        <div class="inner">
+            <pre>half</pre>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="container">
+    <div class="third">
+        <div class="inner">
+            <pre>third</pre>
+        </div>
+    </div>
+    <div class="third">
+        <div class="inner">
+            <pre>third</pre>
+        </div>
+    </div>
+    <div class="third">
+        <div class="inner">
+            <pre>third</pre>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="container">
+    <div class="quarter">
+        <div class="inner">
+            <pre>quarter (with a load of extra content)</pre>
+        </div>
+    </div>
+    <div class="quarter">
+        <div class="inner">
+            <pre>quarter</pre>
+        </div>
+    </div>
+    <div class="quarter">
+        <div class="inner">
+            <pre>quarter</pre>
+        </div>
+    </div>
+    <div class="quarter">
+        <div class="inner">
+            <pre>quarter</pre>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="container">
+    <div class="fifth">
+        <div class="inner">
+            <pre>fifth</pre>
+        </div>
+    </div>
+    <div class="fifth">
+        <div class="inner">
+            <pre>fifth (with a load of extra content)</pre>
+        </div>
+    </div>
+    <div class="fifth">
+        <div class="inner">
+            <pre>fifth</pre>
+        </div>
+    </div>
+    <div class="fifth">
+        <div class="inner">
+            <pre>fifth</pre>
+        </div>
+    </div>
+    <div class="fifth">
+        <div class="inner">
+            <pre>fifth</pre>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<div class="container">
+    <div class="sixth">
+        <div class="inner">
+            <pre>sixth</pre>
+        </div>
+    </div>
+    <div class="sixth">
+        <div class="inner">
+            <pre>sixth</pre>
+        </div>
+    </div>
+    <div class="sixth">
+        <div class="inner">
+            <pre>sixth (with a load of extra content)</pre>
+        </div>
+    </div>
+    <div class="sixth">
+        <div class="inner">
+            <pre>sixth (with a load of extra content)</pre>
+        </div>
+    </div>
+    <div class="sixth">
+        <div class="inner">
+            <pre>sixth</pre>
+        </div>
+    </div>
+    <div class="sixth">
+        <div class="inner">
+            <pre>sixth</pre>
+        </div>
+    </div>
+</div>
+
+<br/>
+
+<hr/>
+
+<h2>Typography and general styling</h2>
+
+<p>Introductory paragraph goes here consectetur adipiscing elit. Quisque <strong>facilisis</strong> faucibus tincidunt. Proin interdum diam ut ante <a href="#1">fermentum ultricies</a>. Nam lacus urna, interdum commodo condimentum a, mollis nec enim. Aenean a auctor turpis. Suspendisse vitae orci diam. Morbi nec tellus eu odio <q cite="http://www.google.co.uk/">“This is a quote…”</q> vitae ac dui. Nam gravida, mi non adipiscing dapibus, enim ante <abbr title="Hyper Text Markup Language">HTML</abbr> volutpat enim, quis condimentum risus augue at odio.</p>
 
 <p>Fusce sed felis sed nibh commodo iaculis et vel orci. Praesent ac iaculis dui. Quisque eget leo eu est accumsan feugiat. Mauris sit amet mauris nunc. Donec sed sem vel ante <a href="#2">pulvinar mollis</a> sit amet sit amet arcu. Praesent convallis nisi sit amet turpis ultrices <del>eget eleifend</del> <ins>felis placerat</ins>. Nam elit ligula, tincidunt id rutrum id, tempus vel sem. Proin augue nisl, varius sed egestas non, accumsan in sapien.</p>
 
@@ -24,8 +179,6 @@
     <em>“I don’t mean to boast, but this styling is pretty awesome.”</em><br/>
     -Rowan Manning
 </blockquote>
-
-<h3>This is a tertiary heading</h3>
 
 <p>In vitae risus eget ligula <a href="#3">sollicitudin congue</a> a vitae lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. <a href="#4">Maecenas venenatis purus</a> ut nibh porta tincidunt. Quisque tempor vestibulum bibendum. Donec vulputate ipsum nec arcu mattis scelerisque.</p>
 
@@ -70,138 +223,3 @@ me.say( 'Hello' )</code></pre>
 <h4>Heading level 4</h4>
 <h5>Heading level 5</h5>
 <h6>Heading level 6</h6>
-
-<hr/>
-
-<h1>Basic Grid</h1>
-
-<div class="container" style="background: #ccc;">
-    <div class="inner">
-        <pre>whole</pre>
-    </div>
-</div>
-
-<br/>
-
-<div class="container">
-    <div class="half" style="background: #ccc;">
-        <div class="inner">
-            <pre>half</pre>
-        </div>
-    </div>
-    <div class="half" style="background: #ddd;">
-        <div class="inner">
-            <pre>half</pre>
-        </div>
-    </div>
-</div>
-
-<br/>
-
-<div class="container">
-    <div class="third" style="background: #ccc;">
-        <div class="inner">
-            <pre>third</pre>
-        </div>
-    </div>
-    <div class="third" style="background: #ddd;">
-        <div class="inner">
-            <pre>third</pre>
-        </div>
-    </div>
-    <div class="third" style="background: #ccc;">
-        <div class="inner">
-            <pre>third</pre>
-        </div>
-    </div>
-</div>
-
-<br/>
-
-<div class="container">
-    <div class="quarter" style="background: #ccc;">
-        <div class="inner">
-            <pre>quarter</pre>
-        </div>
-    </div>
-    <div class="quarter" style="background: #ddd;">
-        <div class="inner">
-            <pre>quarter</pre>
-        </div>
-    </div>
-    <div class="quarter" style="background: #ccc;">
-        <div class="inner">
-            <pre>quarter</pre>
-        </div>
-    </div>
-    <div class="quarter" style="background: #ddd;">
-        <div class="inner">
-            <pre>quarter</pre>
-        </div>
-    </div>
-</div>
-
-<br/>
-
-<div class="container">
-    <div class="fifth" style="background: #ccc;">
-        <div class="inner">
-            <pre>fifth</pre>
-        </div>
-    </div>
-    <div class="fifth" style="background: #ddd;">
-        <div class="inner">
-            <pre>fifth</pre>
-        </div>
-    </div>
-    <div class="fifth" style="background: #ccc;">
-        <div class="inner">
-            <pre>fifth</pre>
-        </div>
-    </div>
-    <div class="fifth" style="background: #ddd;">
-        <div class="inner">
-            <pre>fifth</pre>
-        </div>
-    </div>
-    <div class="fifth" style="background: #ccc;">
-        <div class="inner">
-            <pre>fifth</pre>
-        </div>
-    </div>
-</div>
-
-<br/>
-
-<div class="container">
-    <div class="sixth" style="background: #ccc;">
-        <div class="inner">
-            <pre>sixth</pre>
-        </div>
-    </div>
-    <div class="sixth" style="background: #ddd;">
-        <div class="inner">
-            <pre>sixth</pre>
-        </div>
-    </div>
-    <div class="sixth" style="background: #ccc;">
-        <div class="inner">
-            <pre>sixth</pre>
-        </div>
-    </div>
-    <div class="sixth" style="background: #ddd;">
-        <div class="inner">
-            <pre>sixth</pre>
-        </div>
-    </div>
-    <div class="sixth" style="background: #ccc;">
-        <div class="inner">
-            <pre>sixth</pre>
-        </div>
-    </div>
-    <div class="sixth" style="background: #ddd;">
-        <div class="inner">
-            <pre>sixth</pre>
-        </div>
-    </div>
-</div>
