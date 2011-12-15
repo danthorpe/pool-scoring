@@ -239,7 +239,7 @@ hr {
 
 /* inner element for gutters */
 .inner {
-    padding: 0 1em;
+    padding: 0 1em 0 0;
 }
 
 /* columns */

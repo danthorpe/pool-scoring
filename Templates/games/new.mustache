@@ -3,28 +3,36 @@
 
 <form method="post" action="{{request.path}}">
     
-    <div class="field">
-        <label>Breaking Player</label>
-        <ul>
-            {{#players}}
-                <li>
-                    <input type="radio" name="breaking-player" id="breaking-player-{{username}}" value="{{username}}"/>
-                    <label for="breaking-player-{{username}}">{{name}}</label>
-                </li>
-            {{/players}}
-        </ul>
-    </div>
+    <div class="container">
+        
+        <div class="half">
+            <div class="field inner">
+                <label>Breaking Player</label>
+                <ul>
+                    {{#players}}
+                        <li>
+                            <input type="radio" name="breaking-player" id="breaking-player-{{username}}" value="{{username}}"/>
+                            <label for="breaking-player-{{username}}">{{name}}</label>
+                        </li>
+                    {{/players}}
+                </ul>
+            </div>
+        </div>
     
-    <div class="field">
-        <label>Other Player</label>
-        <ul>
-            {{#players}}
-                <li>
-                    <input type="radio" name="other-player" id="other-player-{{username}}" value="{{username}}"/>
-                    <label for="other-player-{{username}}">{{name}}</label>
-                </li>
-            {{/players}}
-        </ul>
+        <div class="half">
+            <div class="field inner">
+                <label>Other Player</label>
+                <ul>
+                    {{#players}}
+                        <li>
+                            <input type="radio" name="other-player" id="other-player-{{username}}" value="{{username}}"/>
+                            <label for="other-player-{{username}}">{{name}}</label>
+                        </li>
+                    {{/players}}
+                </ul>
+            </div>
+        </div>
+    
     </div>
     
     <div class="field">

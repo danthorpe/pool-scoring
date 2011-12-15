@@ -1,13 +1,15 @@
 
 <h1>{{title}}</h1>
 
-<ul>
+<ul class="container">
     {{#players}}
         
-        <li>
-            <a href="/player/{{username}}">
-                {{name}}
-            </a>
+        <li class="quarter">
+            <div class="inner">
+                <a href="/player/{{username}}">
+                    {{name}}
+                </a>
+            </div>
         </li>
     
     {{/players}}
