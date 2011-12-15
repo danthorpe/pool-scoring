@@ -246,13 +246,16 @@ hr {
 .half, .third, .quarter, .fifth, .sixth {
     float: left;
 }
+.half:nth-child(2n+1), .third:nth-child(3n+1), .quarter:nth-child(4n+1), .fifth:nth-child(5n+1), .sixth:nth-child(6n+1) {
+    clear: left;
+}
 .half {
     width: 50%;
 }
 .third {
     width: 33%;
 }
-.third:first-child {
+.third:nth-child(3n+1) {
     width: 34%;
 }
 .quarter {
@@ -264,7 +267,7 @@ hr {
 .sixth {
     width: 16.5%;
 }
-.sixth:first-child, .sixth:last-child {
+.sixth:nth-child(6n+1), .sixth:nth-child(6n) {
     width: 17%;
 }
 
@@ -285,7 +288,7 @@ hr {
     .body {
         width: 80%;
     }
-    .sixth, .sixth:last-child {
+    .sixth, .sixth:nth-child(6n) {
         width: 33%;
     }
     .sixth:nth-child(3n+1) {
@@ -305,14 +308,20 @@ hr {
     .quarter:nth-child(2n+1) {
         clear: left;
     }
-    .fifth {
+    .fifth, .fifth:nth-child(5n+1) {
+        width: 33%;
+        clear: none;
+    }
+    .fifth:nth-child(3n+1) {
+        width: 34%;
+        clear: left;
+    }
+    .sixth, .sixth:nth-child(6n) {
         width: 33%;
     }
-    .fifth:first-child, .fifth:nth-child(2) {
-        width: 50%;
-    }
-    .fifth:last-child {
+    .sixth:nth-child(3n+1) {
         width: 34%;
+        clear: left;
     }
 }
 
