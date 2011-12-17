@@ -11,7 +11,7 @@ class Person
   # @param doc A CouchDB document representing the person
   def initialize(doc)
     @doc = doc
-    @avatar = Gravatar.new doc['email']
+    @avatar = Gravatar.new doc['email'], 80, 'kitten'
   end
 
   # Use define_method for accessing the underlying CouchDB attributes

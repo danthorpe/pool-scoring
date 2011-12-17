@@ -21,9 +21,20 @@ class Gravatar
   def emailHash
     Digest::MD5.hexdigest @email.downcase
   end
+  
+  def default
+    case @default
+      when 'unicorn'
+        "http://unicornify.appspot.com/avatar/ba95799ceedd18316033196cb243cfc0?s=#{ @size }"
+      when 'kitten'
+        "http://placekitten.com/#{ @size }/#{ @size }"
+      else
+        @default
+    end
+  end
 
   def url
-    "http://www.gravatar.com/avatar/#{ self.emailHash }.jpg?s=#{ @size }&d=#{ @default }"
+    "http://www.gravatar.com/avatar/#{ self.emailHash }.jpg?s=#{ @size }&d=#{ default }"
   end
 
   def to_s
