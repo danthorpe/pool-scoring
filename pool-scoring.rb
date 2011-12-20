@@ -9,7 +9,8 @@ require './Models/Game.rb'
 
 # Load controllers
 require './Controllers/PlayerController.rb'
-
+require './Controllers/GameController.rb'
+ 
 class PoolScoring < Sinatra::Base
   
   # Register mustache and initialise the Views module - Mustache requires this
@@ -18,9 +19,9 @@ class PoolScoring < Sinatra::Base
   
   # Define which CouchDB instance to use.
   if ENV['CLOUDANT_URL']
-    set :db, ENV['CLOUDANT_URL'] + '/poolscoring'
+    set :couchdb, ENV['CLOUDANT_URL']
   else
-    set :db, 'http://localhost:5984/poolscoring'
+    set :couchdb, 'http://poolscoring:yourmum@localhost:5984'
   end
 
   set :root, File.dirname(__FILE__)
@@ -46,7 +47,7 @@ class PoolScoring < Sinatra::Base
   # All players page.
   get '/players' do
     @title = 'Players'
-    pc = PlayerController.new settings.db
+    pc = PlayerController.new settings.couchdb
     @players = pc.all
     mustache :'players/index'
   end
@@ -57,27 +58,44 @@ class PoolScoring < Sinatra::Base
     mustache :'players/new'
   end
   post '/players/new' do
-    'Boom! ' + params.to_s
+    # Create a player controller
+    pc = PlayerController.new settings.couchdb    
+    # Check to see if the username & email are taken
+    if !pc.isUsernameAvailable params['username']
+      body "#{params['username']} is taken"
+      status 400
+      return
+    elsif !pc.isEmailAvailable params['email']
+      body "#{params['email']} is taken"
+      status 400
+      return
+    else
+      @player = pc.createPlayer params
+      redirect to("/player/#{@player.username}")
+    end
   end
 
   # Single player profile.
   get '/player/:username' do
-    pc = PlayerController.new settings.db
+    pc = PlayerController.new settings.couchdb
     @player = pc.playerWithUsername params[:username]
-    @title = @player.name
+    @title = @player.name if @player != nil
     mustache :'players/profile'
   end
 
   # Record a game
   get '/games/new' do
     @title = 'Record a Game'
-    pc = PlayerController.new settings.db
+    pc = PlayerController.new settings.couchdb
     @players = pc.all
     mustache :'games/new'
-  end
-  
+  end  
   post '/games/new' do
-    'Boom! ' + params.to_s
+    # Create a Game Controller
+    gc = GameController.new settings.couchdb
+    # Record this game
+    game = gc.record params
+    game.to_s
   end
 
 end
