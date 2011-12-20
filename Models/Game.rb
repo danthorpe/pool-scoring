@@ -12,16 +12,22 @@ require './Models/Person.rb'
 # due to a foul on the back
 class Game
 
-  def initialize
+  def initialize(doc=nil)
+    @doc = doc if doc != nil
     @breakingTeam = Array.new
     @otherTeam = Array.new
   end
 
-  def addPersonToBreakingTeam(player)
+  # Use define_method for accessing the underlying CouchDB attributes
+  %w(_id date breakingTeamWon).each do | method |
+    define_method(method) { @doc[method.to_s] }
+  end
+
+  def addPlayerToBreakingTeam(player)
     @breakingTeam.push player
   end 
   
-  def addPersonToOtherTeam(player)
+  def addPlayerToOtherTeam(player)
     @otherTeam.push player
   end 
   
@@ -35,5 +41,8 @@ class Game
     doc = {:type => "Game", :date => @endDate, :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
     return doc    
   end
+  
+# @todo Needs methods to get the player objects  
+  
   
 end
