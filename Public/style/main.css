@@ -275,7 +275,7 @@ hr {
 /* layout */
 
 /* desktop (default) layout */
-.body {
+.body, .header .navigation {
     width: 80%;
     min-width: 280px;
     max-width: 900px;
@@ -285,7 +285,7 @@ hr {
 
 /* small desktop */
 @media all and (max-width: 1024px) {
-    .body {
+    .body, .header .navigation {
         width: 80%;
     }
     .sixth, .sixth:nth-child(6n) {
@@ -299,7 +299,7 @@ hr {
 
 /* tablet */
 @media all and (max-width: 768px) {
-    .body {
+    .body, .header .navigation {
         width: 90%;
     }
     .quarter {
@@ -343,10 +343,12 @@ body {
 
 /* header / navigation */
 .header {
-    padding: .5em 1em;
     background: #fff;
     background: rgba(255, 255, 255, .4);
-    line-height: 3em;
+    line-height: 4em;
+}
+.header .navigation {
+    padding: 0 1em;
 }
 .navigation {
     margin: 0;
