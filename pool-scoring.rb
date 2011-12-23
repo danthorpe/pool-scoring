@@ -53,11 +53,11 @@ class PoolScoring < Sinatra::Base
   end
   
   # Create players page.
-  get '/players/new' do
+  get '/player/new' do
     @title = 'Create a Player'
     mustache :'players/new'
   end
-  post '/players/new' do
+  post '/player/new' do
     # Create a player controller
     pc = PlayerController.new settings.couchdb    
     # Check to see if the username & email are taken
@@ -84,18 +84,28 @@ class PoolScoring < Sinatra::Base
   end
 
   # Record a game
-  get '/games/new' do
+  get '/game/new' do
     @title = 'Record a Game'
     pc = PlayerController.new settings.couchdb
     @players = pc.all
     mustache :'games/new'
   end  
-  post '/games/new' do
+  post '/game/new' do
     # Create a Game Controller
     gc = GameController.new settings.couchdb
     # Record this game
-    game = gc.record params
-    game.document.to_json
+    @game = gc.record params
+    redirect to("/game/#{@game._id}")
+  end
+
+  # Display a game
+  get '/game/:gameId' do
+    # Create a Game Controller
+    gc = GameController.new settings.couchdb
+    # Get the game
+    @game = gc.byId params[:gameId]
+    # Do something with the game
+    @game.document.to_json
   end
 
 end

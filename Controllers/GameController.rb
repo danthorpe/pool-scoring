@@ -47,7 +47,14 @@ class GameController
     return game
   end
 
-
+  # Get a game by identifier
+  #
+  # This just gets the document and uses it to create
+  # a new Game object.
+  def byId(identifier)
+    doc = CouchRest.get @server + "/#{CouchDB::DB}/#{identifier}"
+    return Game.new(doc, @server)
+  end
 
   # Record a new game
   def record(params)
@@ -94,7 +101,7 @@ class GameController
     
     # Return a Game object from the document
     doc = CouchRest.get @server + "/#{CouchDB::DB}/#{uuid}"
-    return Game.new doc
+    return Game.new(doc, @server)
 
   end
 
