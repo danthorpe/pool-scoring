@@ -105,7 +105,7 @@ class PoolScoring < Sinatra::Base
     # Get the game
     @game = gc.byId params[:gameId]
     # Do something with the game
-    @game.document.to_json
+    mustache :'games/game'
   end
 
   # The Leaderboard
