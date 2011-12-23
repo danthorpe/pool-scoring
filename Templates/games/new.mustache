@@ -8,11 +8,19 @@
         <div class="half">
             <div class="field inner">
                 <label>Breaking Player</label>
-                <ul>
+                <ul class="players">
                     {{#players}}
-                        <li>
-                            <input type="radio" name="breaking-player" id="breaking-player-{{username}}" value="{{username}}"/>
-                            <label for="breaking-player-{{username}}">{{name}}</label>
+                        <li class="player clearfix" data-username="{{username}}">
+                            <label for="breaking-player-{{username}}">
+                                
+                                <img src="{{avatar}}" alt="{{name}}"/>
+                                
+                                <div class="details">
+                                    <h3>{{name}}</h3>
+                                    <input type="radio" name="breaking-player" id="breaking-player-{{username}}" value="{{username}}"/>
+                                </div>
+                                
+                            </label>
                         </li>
                     {{/players}}
                 </ul>
@@ -22,11 +30,18 @@
         <div class="half">
             <div class="field inner">
                 <label>Other Player</label>
-                <ul>
+                <ul class="players">
                     {{#players}}
-                        <li>
-                            <input type="radio" name="other-player" id="other-player-{{username}}" value="{{username}}"/>
-                            <label for="other-player-{{username}}">{{name}}</label>
+                        <li class="player clearfix" data-username="{{username}}">
+                            <label for="other-player-{{username}}">
+                                
+                                <img src="{{avatar}}" alt="{{name}}"/>
+                                
+                                <div class="details">
+                                    <h3>{{name}}</h3>
+                                    <input type="radio" name="other-player" id="other-player-{{username}}" value="{{username}}"/>
+                                </div>
+                            </label>
                         </li>
                     {{/players}}
                 </ul>
