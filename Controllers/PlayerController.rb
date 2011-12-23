@@ -46,6 +46,32 @@ class PlayerController
     return people    
   end
 
+  # Get a player by identifier
+  #
+  # This just gets the document and uses it to create
+  # a new Player object.
+  def byId(identifier)
+    doc = CouchRest.get @server + "/#{CouchDB::DB}/#{identifier}"
+    return Person.new(doc, @server)
+  end
+
+
+  # Get the leaderboard
+  #
+  # This gets a leaderboard of players
+  def leaderboard
+    # Get the key/values
+    result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/leaderboard?group=true"
+    # Create an array for the result
+    ranks = Array.new
+    # Sort the objects
+    return result["rows"].sort_by { |a|
+      -a['value'].to_f
+    }.collect { |item|
+      {:person => self.byId(item['key']), :rank => item['value']}
+    }
+  end
+
 
   # Get a specific player using a username
   # 

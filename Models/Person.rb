@@ -9,8 +9,10 @@ class Person
 
   # Constructor
   # @param doc A CouchDB document representing the person
-  def initialize(doc)
-    @doc = doc
+  # @param server A CouchDB server on which the document exists
+  def initialize(doc=nil, server=nil)
+    @doc = doc if doc != nil
+    @server = server if server != nil
     @avatar = Gravatar.new doc['email'], 80, 'kitten'
   end
 

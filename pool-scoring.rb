@@ -108,4 +108,12 @@ class PoolScoring < Sinatra::Base
     @game.document.to_json
   end
 
+  # The Leaderboard
+  get '/leaderboard' do
+    # Create a Player Controller
+    pc = PlayerController.new settings.couchdb
+    leaderboard = pc.leaderboard
+    leaderboard.to_s
+  end
+
 end
