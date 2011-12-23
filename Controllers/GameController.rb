@@ -53,7 +53,7 @@ class GameController
   def record(params)
     
     # Create a player controller
-    pc = PlayerController.new @settings
+    pc = PlayerController.new @server
     
     # Create a game
     game = Game.new
@@ -80,7 +80,7 @@ class GameController
     end
     
     # End the game
-    game.endGame breakingDidWin foulOnBlack
+    game.endGame(breakingDidWin, foulOnBlack)
     
     # Get the game as a document
     doc = game.document
