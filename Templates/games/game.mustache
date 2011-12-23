@@ -1,0 +1,21 @@
+
+{{#game.breakingTeamWon}}
+    
+    <p>{{game.breakingPlayers}} won!</p>
+    
+    <p>{{game.otherPlayers}} lost...</p>
+    
+{{/game.breakingTeamWon}}
+{{^game.breakingTeamWon}}
+
+    <p>{{game.otherPlayers}} won!</p>
+    
+    <p>{{game.breakingPlayers}} lost...</p>
+
+{{/game.breakingTeamWon}}
+
+{{#game.foulOnBlack}}
+    <p>This game was won because there was a foul on the black.</p>
+{{/game.foulOnBlack}}
+
+{{game.date}}
