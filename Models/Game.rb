@@ -37,7 +37,8 @@ class Game
     @foulOnBlack = foulOnBlack
   end
   
-  def document    
+  def document 
+    return @doc if @doc != nil    
     doc = {:type => "Game", :date => @endDate, :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
     return doc    
   end

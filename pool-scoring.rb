@@ -95,7 +95,7 @@ class PoolScoring < Sinatra::Base
     gc = GameController.new settings.couchdb
     # Record this game
     game = gc.record params
-    game.to_s
+    game.document.to_json
   end
 
 end
