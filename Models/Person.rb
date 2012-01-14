@@ -45,5 +45,29 @@ class Person
         
         return games
     end
+    
+    # Basic player statistics
+    def stats
+        # Store simple statistical measures in a hash
+        stats = Hash.new
+        
+        # Get the player's games
+        games = self.games
+        
+        # Number of games played in total
+        stats[:total] = games.count
+        stats[:wins] = 0
+        stats[:losses] = 0
+         
+        # Count the number of wins/losses
+        games.each do |game|
+            if game.winningPlayers.include? self._id
+                stats[:wins] += 1
+            else
+                stats[:losses] += 1
+            end
+        end        
+        return stats
+    end
 
 end
