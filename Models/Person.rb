@@ -33,4 +33,17 @@ class Person
         @doc.to_json
     end
 
+    def games
+        
+        # Get all the games for the player
+        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?key=%22" + self._id + "%22"
+        # Define an array for Games
+        games = Array.new
+        response['rows'].each do |item|
+            games.push Game.new item['value']
+        end
+        
+        return games
+    end
+
 end
