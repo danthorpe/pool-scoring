@@ -48,6 +48,13 @@ class Game
         return persons
     end
 
+    def winningPlayers
+        if (self.breakingTeamWon)
+            return @doc['breakingTeam']
+        else
+            return @doc['otherTeam']
+        end    
+    end
 
     def addPlayerToBreakingTeam(player)
         @breakingTeam.push player
