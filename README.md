@@ -10,10 +10,10 @@ Running Locally
 ### Requirements ###
 
 To run the app locally, you need the following:
-  - Ruby (ideally 1.9.2)
-  - Bundler. Install with `gem install bundler`
-  - Shotgun. Install with `gem install shotgun`
-  - CouchDB
+ * Ruby (ideally 1.9.2)
+ * Bundler. Install with `gem install bundler`
+ * Shotgun. Install with `gem install shotgun`
+ * CouchDB
 
 ### Setup ###
 
