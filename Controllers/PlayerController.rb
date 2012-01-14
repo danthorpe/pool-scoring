@@ -40,7 +40,7 @@ class PlayerController
         
         # Iterate through the people and create Person objects
         result['rows'].each do |row|    
-            people.push Person.new row['value']
+            people.push Person.new(row['value'], @server)
         end
         
         return people    

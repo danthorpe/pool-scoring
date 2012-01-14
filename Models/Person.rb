@@ -2,11 +2,15 @@
 # @date 10/12/2011
 
 # Dependencies
+require './Controllers/CouchDB.rb'
 require './Library/Gravatar.rb'
 
 # Person class
 class Person
-
+    
+    # Mixin CouchDB
+    include CouchDB
+    
     # Constructor
     # @param doc A CouchDB document representing the person
     # @param server A CouchDB server on which the document exists
@@ -37,6 +41,7 @@ class Person
         
         # Get all the games for the player
         response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?key=%22" + self._id + "%22"
+        
         # Define an array for Games
         games = Array.new
         response['rows'].each do |item|
