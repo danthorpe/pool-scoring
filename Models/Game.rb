@@ -68,5 +68,9 @@ class Game
         doc = {:type => "Game", :date => @endDate, :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
         return doc    
     end
+    
+    def to_json
+        @doc.to_json
+    end
 
 end
