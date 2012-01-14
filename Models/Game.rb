@@ -69,5 +69,4 @@ class Game
         return doc    
     end
 
->>>>>>> Stashed changes
 end
