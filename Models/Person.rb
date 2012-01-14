@@ -33,4 +33,41 @@ class Person
         @doc.to_json
     end
 
+    def games
+        
+        # Get all the games for the player
+        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?key=%22" + self._id + "%22"
+        # Define an array for Games
+        games = Array.new
+        response['rows'].each do |item|
+            games.push Game.new item['value']
+        end
+        
+        return games
+    end
+    
+    # Basic player statistics
+    def stats
+        # Store simple statistical measures in a hash
+        stats = Hash.new
+        
+        # Get the player's games
+        games = self.games
+        
+        # Number of games played in total
+        stats[:total] = games.count
+        stats[:wins] = 0
+        stats[:losses] = 0
+         
+        # Count the number of wins/losses
+        games.each do |game|
+            if game.winningPlayers.include? self._id
+                stats[:wins] += 1
+            else
+                stats[:losses] += 1
+            end
+        end        
+        return stats
+    end
+
 end

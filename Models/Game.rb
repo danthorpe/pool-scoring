@@ -48,6 +48,13 @@ class Game
         return persons
     end
 
+    def winningPlayers
+        if (self.breakingTeamWon)
+            return @doc['breakingTeam']
+        else
+            return @doc['otherTeam']
+        end    
+    end
 
     def addPlayerToBreakingTeam(player)
         @breakingTeam.push player
@@ -67,6 +74,10 @@ class Game
         return @doc if @doc != nil    
         doc = {:type => "Game", :date => @endDate, :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
         return doc    
+    end
+    
+    def to_json
+        @doc.to_json
     end
 
 end
