@@ -87,7 +87,7 @@ class PlayerController
     def playerWithUsername(username)
         result = CouchRest.get  @server + "/#{CouchDB::DB}/_design/Person/_view/byUsername?key=%22#{username}%22"
         if result["rows"].length == 1
-            return Person.new result['rows'][0]['value']
+            return Person.new(result['rows'][0]['value'], @server)
         else
             return nil
         end
@@ -107,7 +107,7 @@ class PlayerController
     def playerWithEmail(email)
         result = CouchRest.get  @server + "/#{CouchDB::DB}/_design/Person/_view/byEmail?key=%22#{email}%22"
         if result["rows"].length == 1
-            return Person.new result['rows'][0]['value']
+            return Person.new(result['rows'][0]['value'], @server)
         else
             return nil
         end
@@ -149,7 +149,7 @@ class PlayerController
         CouchRest.put @server + "/#{CouchDB::DB}/#{uuid}", doc
         
         # Return the person
-        return Person.new CouchRest.get @server + "/#{CouchDB::DB}/#{uuid}"
+        return Person.new(CouchRest.get @server + "/#{CouchDB::DB}/#{uuid}", @server)
     
     end
 
