@@ -13,7 +13,7 @@ class Person
   def initialize(doc=nil, server=nil)
     @doc = doc if doc != nil
     @server = server if server != nil
-    @avatar = Gravatar.new doc['email'], 80, 'kitten'
+    @avatar = Gravatar.new doc['email'], 80, 'unicorn'
   end
 
   # Use define_method for accessing the underlying CouchDB attributes

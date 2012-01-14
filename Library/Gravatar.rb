@@ -25,7 +25,7 @@ class Gravatar
   def default
     case @default
       when 'unicorn'
-        "http://unicornify.appspot.com/avatar/ba95799ceedd18316033196cb243cfc0?s=#{ @size }"
+        "http://unicornify.appspot.com/avatar/#{ self.emailHash }?s=#{ @size }"
       when 'kitten'
         "http://placekitten.com/#{ @size }/#{ @size }"
       else
