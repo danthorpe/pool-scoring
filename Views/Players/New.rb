@@ -2,13 +2,13 @@
 # @date 13/12/2011
 
 class PoolScoring
-  module Views
-    module Players
-      
-      # Players new view class.
-      class New < Layout
-      end
-    
+    module Views
+        module Players
+          
+            # Players new view class.
+            class New < Layout
+            end
+        
+        end
     end
-  end
 end

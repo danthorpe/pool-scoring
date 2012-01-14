@@ -2,18 +2,18 @@
 # @date 12/12/2011
 
 class PoolScoring
-  module Views
-    module Players
-  
-      # Player profile view class.
-      class Profile < Layout
+    module Views
+        module Players
         
-        def player
-          @player || nil
+            # Player profile view class.
+            class Profile < Layout
+            
+                def player
+                    @player || nil
+                end
+            
+            end
+        
         end
-        
-      end
-    
     end
-  end
 end
