@@ -1,0 +1,15 @@
+
+/* TEAM */
+
+Dan Thorpe
+http://blindingskies.com/
+London, UK
+
+Rowan Manning
+http://rowanmanning.co.uk/
+Ampthill, UK
+
+
+/* SITE */
+
+Build lovingly with HTML5, CSS3, Ruby and CouchDB

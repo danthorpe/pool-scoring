@@ -1,0 +1,457 @@
+@charset 'utf-8';
+
+/*========================================================*/
+/* reset */
+
+/* base styling */
+a, abbr, address, applet, article, aside, audio, b, big,
+blockquote, body, br, canvas, caption, cite, code, command,
+datalist, dd, del, details, dfn, div, dl, dt, em, embed,
+fieldset, figcaption, figure, footer, form, h1, h2, h3, h4,
+h5, h6, header, hgroup, hr, html, i, iframe, img, ins, kbd,
+keygen, label, legend, li, mark, menu, meter, nav, object,
+ol, output, p, pre, progress, q, rp, rt, ruby, s, samp,
+section, small, source, span, strike, strong, sub, summary,
+sup, table, tbody, td, tfoot, th, thead, time, tr, tt, ul,
+var, video, wbr, .reset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: lighter;
+    font-style: normal;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+    text-decoration: none;
+}
+article, aside, details, figcaption, figure, footer, header,
+hgroup, menu, nav, section {
+    display: block;
+}
+
+/* tables */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+caption, td, th {
+    text-align: left;
+}
+
+/* quotes */
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+/*========================================================*/
+/* clear fixes */
+
+.clearfix:before, .container:before, .navigation:before, .header:before, .clearfix:after, .container:after, .navigation:after, .header:after {
+    content: '';
+    display: table;
+}
+.clearfix:after, .container:after, .navigation:after, .header:after {
+    clear: both;
+}
+.clearfix, .container, .navigation, .header {
+    zoom: 1;
+}
+
+.clear {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
+    clear: both;
+    overflow: hidden;
+    font-size: 1px;
+    line-height: 0;
+}
+
+/*========================================================*/
+/* type */
+
+/* defaults */
+body {
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    color: #333;
+    font-size: 1em;
+    line-height: 1.625em;
+}
+
+/* layout */
+blockquote, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, ul {
+    margin: .875em 0;
+}
+
+/* size */
+sub, sup {
+    font-size: .875em;
+    line-height: 1.375em;
+}
+h6, h5, h4, h3, h2, h1 {
+    line-height: 1.625em;
+}
+h6, h5 {
+    font-size: 1.125em;
+    line-height: 1.444em;
+    margin: .778em 0;
+}
+h4 {
+    font-size: 1.375em;
+    line-height: 1.182em;
+    margin: .636em 0;
+}
+h3 {
+    font-size: 1.625em;
+    line-height: 2em;
+    margin: .538em 0;
+}
+h2 {
+    font-size: 1.875em;
+    line-height: 1.733em;
+    margin: .467em 0;
+}
+h1 {
+    font-size: 2.125em;
+    line-height: 1.529em;
+    margin: .412em 0;
+}
+
+/* links */
+a {
+    color: #0a8fa2;
+    border-bottom: .063em dotted #333;
+}
+a:hover {
+    border-bottom: .063em solid #333;
+}
+a:visited {
+    color: #666;
+}
+a:focus {
+    border: none;
+    outline: .063em dotted #333;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    border-bottom: none;
+}
+
+/* text-level semantics */
+strong, b, mark {
+    font-weight: bold;
+}
+em, i, mark, q {
+    font-style: italic;
+}
+abbr[title], dfn[title] {
+    border-bottom: .063em dotted #333;
+    cursor: help;
+}
+ins, mark {
+    color: inherit;
+    background: #ffc;
+}
+del, s {
+    text-decoration: line-through;
+}
+cite {
+    font-style: italic;
+}
+sub {
+    vertical-align: bottom;
+}
+sup {
+    vertical-align: top;
+}
+
+/* selection */
+::-moz-selection {
+    background: #0a8fa2;
+    color: #fff;
+}
+::selection {
+    background: #0a8fa2;
+    color: #fff;
+}
+
+/*========================================================*/
+/* lists */
+
+ol, ul {
+    padding: 0 0 0 1.375em;
+    list-style-position: outside;
+}
+ol {
+    padding: 0 0 0 1.875em;
+}
+li ol, li ul {
+    margin: 0;
+    padding: 0 0 0 1.375em;
+}
+
+/*========================================================*/
+/* preformatted text and code */
+
+pre, code {
+    font-family: Courier, 'Courier New', monospace;
+}
+code {
+    padding: .214em .357em;
+    display: inline;
+    background: #eee;
+    border: .063em solid #ccc;
+    font-size: 1em;
+    line-height: 1.286em;
+    color: #333;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+code::-moz-selection {
+    background: #333;
+    color: #fff;
+}
+code::selection {
+    background: #333;
+    color: #fff;
+}
+pre, pre code {
+    display: block;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+pre code {
+    padding: 1em;
+}
+
+/*========================================================*/
+/* rules */
+
+hr {
+    height: 0;
+    border: none;
+    border-top: solid .125em #ccc;
+    color: #ccc;
+}
+
+/*========================================================*/
+/* grid */
+
+/* inner element for gutters */
+.inner {
+    padding: 0 1em 0 0;
+}
+
+/* columns */
+.half, .third, .quarter, .fifth, .sixth {
+    float: left;
+}
+.half:nth-child(2n+1), .third:nth-child(3n+1), .quarter:nth-child(4n+1), .fifth:nth-child(5n+1), .sixth:nth-child(6n+1) {
+    clear: left;
+}
+.half {
+    width: 50%;
+}
+.third {
+    width: 33%;
+}
+.third:nth-child(3n+1) {
+    width: 34%;
+}
+.quarter {
+    width: 25%;
+}
+.fifth {
+    width: 20%;
+}
+.sixth {
+    width: 16.5%;
+}
+.sixth:nth-child(6n+1), .sixth:nth-child(6n) {
+    width: 17%;
+}
+
+/*========================================================*/
+/* layout */
+
+/* desktop (default) layout */
+.body {
+    width: 80%;
+    min-width: 280px;
+    max-width: 900px;
+    margin: auto;
+    padding: 1em;
+}
+
+/* small desktop */
+@media all and (max-width: 1024px) {
+    .body {
+        width: 80%;
+    }
+    .sixth, .sixth:nth-child(6n) {
+        width: 33%;
+    }
+    .sixth:nth-child(3n+1) {
+        width: 34%;
+        clear: left;
+    }
+}
+
+/* tablet */
+@media all and (max-width: 768px) {
+    .body {
+        width: 90%;
+    }
+    .quarter {
+        width: 50%;
+    }
+    .quarter:nth-child(2n+1) {
+        clear: left;
+    }
+    .fifth, .fifth:nth-child(5n+1) {
+        width: 33%;
+        clear: none;
+    }
+    .fifth:nth-child(3n+1) {
+        width: 34%;
+        clear: left;
+    }
+    .sixth, .sixth:nth-child(6n) {
+        width: 33%;
+    }
+    .sixth:nth-child(3n+1) {
+        width: 34%;
+        clear: left;
+    }
+}
+
+/* smart-phone */
+@media all and (max-width: 480px) {
+    .half, .third, .quarter, .fifth, .sixth {
+        width: auto !important;
+        float: none;
+    }
+}
+
+/*========================================================*/
+/* general styling */
+
+/* body */
+body {
+    background: url('assets/body.png') repeat 0 0;
+}
+
+/* navigation */
+.navigation {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+    .navigation li {
+        display: block;
+        float: left;
+    }
+        .navigation li a {
+            display: block;
+            border: none;
+        }
+
+/* header */
+.header {
+    background: #fff;
+    background: rgba(255, 255, 255, .4);
+    line-height: 5em;
+    border-top: .063em solid #6db7c4;
+}
+    .header:before {
+        display: block;
+        border-top: .188em solid #2e98ab;
+        border-bottom: .063em solid #206a77;
+    }
+    .header a, .header a:visited {
+        color: #0a8fa2;
+    }
+    .header .logo {
+        margin: 0;
+        padding: 0 .412em;
+        display: block;
+        float: left;
+        border: none;
+        font-size: 2.125em;
+    }
+    .header .navigation {
+        padding: 0 1em;
+        float: right;
+    }
+        .header .navigation li {
+            line-height: 3em;
+            margin: 0 0 0 1em;
+            padding: 1em 0;
+        }
+            .header .navigation li a {
+                padding: 0 .5em;
+                background: rgba(255, 255, 255);
+                background: rgba(255, 255, 255, .4);
+                font-weight: normal;
+                -moz-transition: all .2s ease-in;
+                -ms-transition: all .2s ease-in;
+                -webkit-transition: all .2s ease-in;
+                transition: all .2s ease-in;
+            }
+                .header .navigation li a:hover {
+                    padding: 0 .5em;
+                    background: rgb(46, 152, 171);
+                    background: rgba(46, 152, 171, .8);
+                    color: #fff;
+                }
+
+/* players */
+.players {
+    list-style: none;
+    padding: 0;
+}
+.player {
+    margin: 0 1em 1em 0;
+    padding: 0;
+}
+    a.player, label.player {
+        min-height: 80px;
+        padding: .875em;
+        position: relative;
+        display: block;
+        background: #fff;
+        background: rgba(255, 255, 255, .4);
+        border: .125em solid transparent;
+        color: #333;
+        -moz-transition: all .5s ease-in-out;
+        -ms-transition: all .5s ease-in-out;
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
+    }
+        a.player:hover, label.player:hover {
+            background: #fff;
+            background: rgba(255, 255, 255, .8);
+            border: .125em solid rgb(46, 152, 171);
+        }
+    .player img {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        display: block;
+        border: .125em solid #fff;
+    }
+    .player .details {
+        padding: 0 0 0 100px;
+    }
+    .player h3 {
+        margin-top: 0;
+        line-height: 1.308em;
+    }
+
+/*========================================================*/

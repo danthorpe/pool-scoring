@@ -1,0 +1,28 @@
+
+<h1>{{title}}</h1>
+
+<form method="post" action="{{request.path}}">
+    
+    <div class="field">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" value=""/>
+        <span class="help">Enter the player's name</span>
+    </div>
+    
+    <div class="field">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" value=""/>
+        <span class="help">Enter a short username for the player (alphanumeric + underscore)</span>
+    </div>
+    
+    <div class="field">
+        <label for="email">Email Address</label>
+        <input type="email" name="email" id="email" value=""/>
+        <span class="help">Enter the player's (unique) email address</span>
+    </div>
+    
+    <div class="field">
+        <input type="submit" value="Create Player"/>
+    </div>
+    
+</form>

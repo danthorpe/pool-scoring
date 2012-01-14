@@ -61,7 +61,7 @@ class PlayerController
     # This gets a leaderboard of players
     def leaderboard
         # Get the key/values
-        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/leaderboard?group=true"
+        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/pointsLeaderboard?group=true"
         # Create an array for the result
         ranks = Array.new
         # Sort the objects

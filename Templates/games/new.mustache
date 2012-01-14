@@ -1,0 +1,76 @@
+
+<h1>{{title}}</h1>
+
+<form method="post" action="{{request.path}}">
+    
+    <div class="container">
+        
+        <div class="half">
+            <div class="field inner">
+                <label>Breaking Player</label>
+                <ul class="players">
+                    {{#players}}
+                        <li>
+                            <label class="player clearfix" data-username="{{username}}" for="breaking-player-{{username}}">
+                                
+                                <img src="{{avatar}}" alt="{{name}}"/>
+                                
+                                <div class="details">
+                                    <h3>{{name}}</h3>
+                                    <input type="radio" name="breaking-player" id="breaking-player-{{username}}" value="{{username}}"/>
+                                </div>
+                                
+                            </label>
+                        </li>
+                    {{/players}}
+                </ul>
+            </div>
+        </div>
+    
+        <div class="half">
+            <div class="field inner">
+                <label>Other Player</label>
+                <ul class="players">
+                    {{#players}}
+                        <li>
+                            <label class="player clearfix" data-username="{{username}}" for="other-player-{{username}}">
+                                
+                                <img src="{{avatar}}" alt="{{name}}"/>
+                                
+                                <div class="details">
+                                    <h3>{{name}}</h3>
+                                    <input type="radio" name="other-player" id="other-player-{{username}}" value="{{username}}"/>
+                                </div>
+                            </label>
+                        </li>
+                    {{/players}}
+                </ul>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="field">
+        <label>Winner</label>
+        <ul>
+            <li>
+                <input type="radio" name="breaking-player-won" id="winning-player-breaking" value="1"/>
+                <label for="winning-player-breaking">Breaking Player</label>
+            </li>
+            <li>
+                <input type="radio" name="breaking-player-won" id="winning-player-other" value="0"/>
+                <label for="winning-player-other">Other Player</label>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="field">
+        <label for="foul-on-black">Was there a foul on the black?</label>
+        <input type="checkbox" name="foul-on-black" id="foul-on-black"/>
+    </div>
+    
+    <div class="field">
+        <input type="submit" value="Record Game"/>
+    </div>
+    
+</form>
