@@ -41,10 +41,10 @@ class GameController
         
         # Iterate through the game and create Game objects
         result['rows'].each do |row|    
-            people.push Game.new row['value']
+            games.push Game.new row['value']
         end
         
-        return game
+        return games
     end
 
     # Get a game by identifier
