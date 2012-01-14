@@ -56,6 +56,36 @@ class GameController
         return Game.new(doc, @server)
     end
 
+    # Get the games between two players
+    #
+    # This makes use of a CouchDB view 
+    def gamesBetweenPlayers(a, b)
+
+        # Get all the games for player A
+        responseForA = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?key=%22" + a._id + "%22"
+        gamesForA = responseForA['rows'].collect do |item|
+            item['value']
+        end
+
+        # Get all the games for player B
+        responseForB = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?key=%22" + b._id + "%22"
+        gamesForB = responseForB['rows'].collect do |item|
+            item['value']
+        end
+
+        # We just need to union these two results now.
+        gameDocs = gamesForA & gamesForB
+
+        # Create Game objects
+        games = Array.new
+        
+        gameDocs.each do |doc|
+            games.push Game.new doc
+        end
+
+        return games
+    end
+
     # Record a new game
     def record(params)
         
