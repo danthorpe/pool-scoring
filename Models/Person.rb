@@ -63,6 +63,7 @@ class Person
         stats[:total] = games.count
         stats[:wins] = 0
         stats[:losses] = 0
+        stats[:percentage] = 0
          
         # Count the number of wins/losses
         games.each do |game|
@@ -71,7 +72,13 @@ class Person
             else
                 stats[:losses] += 1
             end
-        end        
+        end
+        
+        # Calculate the percentage wins
+        if stats[:total] != 0
+            stats[:percentage] = ((stats[:wins].to_f / stats[:total].to_f).to_f * 100).to_i
+        end
+
         return stats
     end
 
