@@ -5,17 +5,15 @@
     {{#players}}
         
         <li class="half">
-            <div class="inner player clearfix">
-                <a href="/player/{{username}}">
-                    
-                    <img src="{{avatar}}" alt="{{name}}"/>
-                    
-                    <div class="details">
-                        <h3>{{name}}</h3>
-                    </div>
-                    
-                </a>
-            </div>
+            <a class="inner player clearfix" href="/player/{{username}}">
+                
+                <img src="{{avatar}}" alt="{{name}}"/>
+                
+                <div class="details">
+                    <h3>{{name}}</h3>
+                </div>
+                
+            </a>
         </li>
     
     {{/players}}

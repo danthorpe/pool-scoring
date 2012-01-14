@@ -416,7 +416,7 @@ body {
     margin: 0 1em 1em 0;
     padding: 0;
 }
-    .player a, .player label {
+    a.player, label.player {
         min-height: 80px;
         padding: 1em;
         position: relative;
@@ -426,7 +426,7 @@ body {
         border: none;
         color: #333;
     }
-        .player a:hover, .player label:hover {
+        a.player:hover, label.player:hover {
             background: #fff;
             background: rgba(255, 255, 255, .8);
         }
