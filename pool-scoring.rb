@@ -81,6 +81,21 @@ class PoolScoring < Sinatra::Base
         mustache :'players/profile'
     end
 
+    # Player vs Player statistics
+    get '/player/:primary/:secondary' do
+        # Get the two players from the player controller
+        pc = PlayerController.new settings.couchdb
+        @primary = pc.playerWithUsername params[:primary]
+        @secondary = pc.playerWithUsername params[:secondary]
+        gc = GameController.new settings.couchdb
+        @games = gc.gamesBetweenPlayers(@primary, @secondary)
+        
+        # These are the games between the primary and secondary players.
+        # Should probably generate more interesting statistics, but for 
+        # now can just list the games.
+        
+    end
+
     # Record a game
     get '/game/new' do
         @title = 'Record a Game'
