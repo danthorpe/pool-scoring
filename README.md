@@ -14,7 +14,8 @@ To run the app locally, you need the following:
  * Ruby (ideally 1.9.2)
  * Bundler. Install with `gem install bundler`
  * Shotgun. Install with `gem install shotgun`
- * CouchDB
+ * CouchDB. Install with `brew install couchdb`
+ * CouchApp. Install using [Installing CouchApp](http://couchapp.org/page/installing)
 
 ### Setup ###
 
@@ -25,7 +26,13 @@ From the root of the application, run the following to install all gem dependenc
     $ bundle install
 
 To set up CouchDB, you need a database and a user named `poolscoring`. The user's
-password should be `yourmum`. Replicate the live database (ask Dan for help).
+password should be `yourmum`. To create the design documents, change into the 
+`CouchApp` directory, and perform the following commands:
+
+    $ couchapp push Game http://poolscoring:yourmum@localhost:5984/poolscoring
+    $ couchapp push Person http://poolscoring:yourmum@localhost:5984/poolscoring
+
+Double check that the design documents are present from within [Futon](http://localhost:5984/_utils/database.html?poolscoring/_design_docs).
 
 ### Running ###
 
