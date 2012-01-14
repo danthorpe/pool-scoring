@@ -129,5 +129,11 @@ class PoolScoring < Sinatra::Base
         leaderboard = pc.leaderboard
         mustache :'leaderboard/index'
     end
+    
+    # 404 page
+    not_found do
+        @title = 'Not Found'
+        mustache :'errors/error404'
+    end
 
 end

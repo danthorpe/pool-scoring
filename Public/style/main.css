@@ -347,6 +347,14 @@ body {
     background: url('assets/body.png') repeat 0 0;
 }
 
+/* error pages */
+.error {
+    text-align: center;
+}
+    .error img {
+        border: 2px solid #fff;
+    }
+
 /* navigation */
 .navigation {
     margin: 0;
