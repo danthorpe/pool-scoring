@@ -1,9 +1,13 @@
 require 'json/ext'
 require 'sinatra/base'
 require 'couchrest'
+require 'mustache/sinatra'
 
 require './Models/Person.rb'
 require './Models/Game.rb'
+
+require './Controllers/PlayerController.rb'
+require './Controllers/GameController.rb'
 
 class PoolScoring < Sinatra::Base
   
