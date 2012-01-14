@@ -11,32 +11,6 @@ require './Models/Person.rb'
 # or not, and optionally, include whether the game was won
 # due to a foul on the back
 class Game
-<<<<<<< Updated upstream
-
-  def initialize
-    @breakingTeam = Array.new
-    @otherTeam = Array.new
-  end
-
-  def addPersonToBreakingTeam(player)
-    @breakingTeam.push player
-  end 
-  
-  def addPersonToOtherTeam(player)
-    @otherTeam.push player
-  end 
-  
-  def endGame(didBreakingTeamWin, foulOnBlack=false)
-    @breakingTeamWon = didBreakingTeamWin
-    @foulOnBlack = foulOnBlack
-  end
-  
-  def document    
-    doc = {:type => "Game", :date => Time.now, :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
-    return doc    
-  end
-  
-=======
   
     def initialize(doc=nil, server=nil)
         @doc = doc if doc != nil
