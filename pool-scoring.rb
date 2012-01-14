@@ -77,6 +77,7 @@ class PoolScoring < Sinatra::Base
     get '/player/:username' do
         pc = PlayerController.new settings.couchdb
         @player = pc.playerWithUsername params[:username]
+        @games = @player.games
         @title = @player.name if @player != nil
         mustache :'players/profile'
     end
