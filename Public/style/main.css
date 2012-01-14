@@ -18,7 +18,7 @@ var, video, wbr, .reset {
     padding: 0;
     border: 0;
     outline: 0;
-    font-weight: normal;
+    font-weight: lighter;
     font-style: normal;
     font-size: 100%;
     font-family: inherit;
@@ -51,14 +51,14 @@ blockquote:before, blockquote:after, q:before, q:after {
 /*========================================================*/
 /* clear fixes */
 
-.clearfix:before, .container:before, .clearfix:after, .container:after {
+.clearfix:before, .container:before, .navigation:before, .header:before, .clearfix:after, .container:after, .navigation:after, .header:after {
     content: '';
     display: table;
 }
-.clearfix:after, .container:after {
+.clearfix:after, .container:after, .navigation:after, .header:after {
     clear: both;
 }
-.clearfix, .container {
+.clearfix, .container, .navigation, .header {
     zoom: 1;
 }
 
@@ -134,7 +134,7 @@ a:hover {
 a:visited {
     color: #666;
 }
-a:active {
+a:focus {
     border: none;
     outline: .063em dotted #333;
 }
@@ -281,7 +281,7 @@ hr {
 /* layout */
 
 /* desktop (default) layout */
-.body, .header .navigation {
+.body {
     width: 80%;
     min-width: 280px;
     max-width: 900px;
@@ -291,7 +291,7 @@ hr {
 
 /* small desktop */
 @media all and (max-width: 1024px) {
-    .body, .header .navigation {
+    .body {
         width: 80%;
     }
     .sixth, .sixth:nth-child(6n) {
@@ -305,7 +305,7 @@ hr {
 
 /* tablet */
 @media all and (max-width: 768px) {
-    .body, .header .navigation {
+    .body {
         width: 90%;
     }
     .quarter {
@@ -347,24 +347,65 @@ body {
     background: url('assets/body.png') repeat 0 0;
 }
 
-/* header / navigation */
-.header {
-    background: #fff;
-    background: rgba(255, 255, 255, .4);
-    line-height: 4em;
-}
-.header .navigation {
-    padding: 0 1em;
-}
+/* navigation */
 .navigation {
     margin: 0;
     padding: 0;
     list-style: none;
 }
-.navigation li {
-    margin: 0 .5em 0 0;
-    display: inline;
+    .navigation li {
+        display: block;
+        float: left;
+    }
+        .navigation li a {
+            display: block;
+            border: none;
+        }
+
+/* header */
+.header {
+    background: #fff;
+    background: rgba(255, 255, 255, .4);
+    line-height: 4em;
+    border-top: .063em solid #6db7c4;
 }
+    .header:before {
+        display: block;
+        border-top: .188em solid #2e98ab;
+        border-bottom: .063em solid #206a77;
+    }
+    .header a, .header a:visited {
+        color: #0a8fa2;
+    }
+    .header .logo {
+        margin: 0;
+        padding: 0 .412em;
+        display: block;
+        float: left;
+        border: none;
+        font-size: 2.125em;
+    }
+    .header .navigation {
+        padding: 0 1em;
+        float: right;
+    }
+        .header .navigation li {
+            line-height: 3em;
+            margin: 0 0 0 1em;
+            padding: .5em 0;
+        }
+            .header .navigation li a {
+                padding: 0 .5em;
+                background: rgba(255, 255, 255);
+                background: rgba(255, 255, 255, .4);
+                font-weight: normal;
+            }
+                .header .navigation li a:hover {
+                    padding: 0 .5em;
+                    background: rgb(46, 152, 171);
+                    background: rgba(46, 152, 171, .8);
+                    color: #fff;
+                }
 
 /* players */
 .players {
