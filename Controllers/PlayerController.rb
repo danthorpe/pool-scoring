@@ -59,7 +59,7 @@ class PlayerController
     # Get the leaderboard
     #
     # This gets a leaderboard of players
-    def leaderboard
+    def leaderboard        
         # Get the key/values
         result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/pointsLeaderboard?group=true"
         # Create an array for the result
@@ -67,8 +67,8 @@ class PlayerController
         # Sort the objects
         return result["rows"].sort_by { |a|
             -a['value'].to_f
-        }.collect { |item|
-            {:person => self.byId(item['key']), :rank => item['value']}
+        }.enum_for(:each_with_index).collect { |item, i|
+            {:person => self.byId(item['key']), :rank => item['value'], :position => i + 1}
         }
     end
 

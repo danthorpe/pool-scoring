@@ -428,6 +428,9 @@ body {
     margin: 0 1em 1em 0;
     padding: 0;
 }
+.whole .player {
+    margin: 0 0 1em 0;
+}
     a.player, label.player {
         min-height: 80px;
         padding: .875em;
@@ -461,5 +464,56 @@ body {
         margin-top: 0;
         line-height: 1.308em;
     }
+
+/* leaderboard */
+.leaderboard li {
+    padding: 0 0 0 5em;
+    position: relative;
+}
+    .leaderboard li .position {
+        position: absolute;
+        width: 2.038em;
+        margin: 0;
+        padding: 0.538em;
+        left: 0;
+        top: 0;
+        display: block;
+        line-height: 1.308em;
+        background: #0a8fa2;
+        color: #fff;
+    }
+    .leaderboard .player {
+        border-left: .125em solid rgb(46, 152, 171);
+    }
+/* position 1 */
+.leaderboard li.position-1 .position {
+    background: #e9c05f;
+}
+.leaderboard li.position-1 .player {
+    border-left-color: #e9c05f;
+}
+.leaderboard li.position-1 .player:hover {
+    border-color: #e9c05f;
+}
+/* position 2 */
+.leaderboard li.position-2 .position {
+    background: #b4bbbf;
+}
+.leaderboard li.position-2 .player {
+    border-left-color: #b4bbbf;
+}
+.leaderboard li.position-2 .player:hover {
+    border-color: #b4bbbf;
+}
+/* position 3 */
+.leaderboard li.position-3 .position {
+    background: #c4834a;
+}
+.leaderboard li.position-3 .player {
+    border-left-color: #c4834a;
+}
+.leaderboard li.position-3 .player:hover {
+    border-color: #c4834a;
+}
 
 /*========================================================*/

@@ -1,4 +1,26 @@
 
 <h1>{{title}}</h1>
 
-<p>Leaderboard FTW!</p>
+<ol class="container players leaderboard">
+    {{#leaderboard}}
+        
+        <li class="whole position-{{position}}">
+            
+            <h3 class="position">{{position}}</h3>
+            
+            {{#person}}
+                <a class="inner player clearfix" href="/player/{{username}}">
+                    
+                    <img src="{{avatar}}" alt="{{name}}"/>
+                    
+                    <div class="details">
+                        <h3>{{name}}</h3>
+                    </div>
+                    
+                </a>
+            {{/person}}
+            
+        </li>
+        
+    {{/leaderboard}}
+</ol>
