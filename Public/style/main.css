@@ -366,7 +366,7 @@ body {
 .header {
     background: #fff;
     background: rgba(255, 255, 255, .4);
-    line-height: 4em;
+    line-height: 5em;
     border-top: .063em solid #6db7c4;
 }
     .header:before {
@@ -392,13 +392,17 @@ body {
         .header .navigation li {
             line-height: 3em;
             margin: 0 0 0 1em;
-            padding: .5em 0;
+            padding: 1em 0;
         }
             .header .navigation li a {
                 padding: 0 .5em;
                 background: rgba(255, 255, 255);
                 background: rgba(255, 255, 255, .4);
                 font-weight: normal;
+                -moz-transition: all .2s ease-in;
+                -ms-transition: all .2s ease-in;
+                -webkit-transition: all .2s ease-in;
+                transition: all .2s ease-in;
             }
                 .header .navigation li a:hover {
                     padding: 0 .5em;
@@ -418,26 +422,36 @@ body {
 }
     a.player, label.player {
         min-height: 80px;
-        padding: 1em;
+        padding: .875em;
         position: relative;
         display: block;
         background: #fff;
         background: rgba(255, 255, 255, .4);
-        border: none;
+        border: .125em solid transparent;
         color: #333;
+        -moz-transition: all .5s ease-in-out;
+        -ms-transition: all .5s ease-in-out;
+        -webkit-transition: all .5s ease-in-out;
+        transition: all .5s ease-in-out;
     }
         a.player:hover, label.player:hover {
             background: #fff;
             background: rgba(255, 255, 255, .8);
+            border: .125em solid rgb(46, 152, 171);
         }
     .player img {
         position: absolute;
-        left: 1em;
-        top: 1em;
+        left: 12px;
+        top: 12px;
         display: block;
+        border: .125em solid #fff;
     }
     .player .details {
         padding: 0 0 0 100px;
+    }
+    .player h3 {
+        margin-top: 0;
+        line-height: 1.308em;
     }
 
 /*========================================================*/
