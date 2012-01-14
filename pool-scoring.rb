@@ -108,10 +108,11 @@ class PoolScoring < Sinatra::Base
     
     # The Leaderboard
     get '/leaderboard' do
+        @title = 'Leaderboard'
         # Create a Player Controller
         pc = PlayerController.new settings.couchdb
         leaderboard = pc.leaderboard
-        leaderboard.to_s
+        mustache :'leaderboard/index'
     end
 
 end
