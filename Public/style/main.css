@@ -280,6 +280,7 @@ hr {
     width: 80%;
     min-width: 280px;
     max-width: 900px;
+    min-height: 400px;
     margin: auto;
     padding: 1em;
 }
@@ -363,7 +364,6 @@ body {
         .navigation li a {
             display: block;
             float: left;
-            border: none;
         }
 
 /* header */
@@ -380,13 +380,13 @@ body {
     }
     .header a, .header a:visited {
         color: #0a8fa2;
+        border: none;
     }
     .header .logo {
         margin: 0;
         padding: 0 .412em;
         display: block;
         float: left;
-        border: none;
         font-size: 2.125em;
     }
     .header .navigation {
@@ -414,6 +414,17 @@ body {
                     background: rgba(46, 152, 171, .8);
                     color: #fff;
                 }
+
+/* footer */
+.footer {
+    padding: 2em 0 1em 0;
+}
+    .footer .navigation {
+        padding: 0 1em;
+    }
+        .footer li {
+            margin: 0 1em 0 0;
+        }
 
 /* item - shared styles for players and games */
 .items {
