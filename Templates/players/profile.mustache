@@ -1,6 +1,10 @@
 
 <h1>{{title}}</h1>
 
-<img src="{{player.avatar}}" alt="{{player.name}}"/>
-
-<p><a href="mailto:{{player.email}}">Send {{player.name}} an email</a></p>
+{{#player}}
+    
+    <img src="{{#avatarSize}}200{{/avatarSize}}" alt="{{name}}"/>
+    
+    <p><a href="mailto:{{email}}">Send {{name}} an email</a></p>
+    
+{{/player}}

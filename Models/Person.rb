@@ -17,7 +17,6 @@ class Person
     def initialize(doc=nil, server=nil)
         @doc = doc if doc != nil
         @server = server if server != nil
-        @avatar = Gravatar.new doc['email'], 80, 'unicorn'
     end
     
     # Use define_method for accessing the underlying CouchDB attributes
@@ -25,8 +24,16 @@ class Person
         define_method(method) { @doc[method.to_s] }
     end
     
+    # Get the user's avatar at a specified size (as a lambda, mainly for use with Mustache)
+    def avatarSize
+        lambda { |size = 80|
+            Gravatar.new self.email, size, 'unicorn'
+        }
+    end
+    
+    # Get the user's avatar (standard size - 80)
     def avatar
-        @avatar
+        avatarSize.call
     end
     
     def to_s
