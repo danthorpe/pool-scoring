@@ -439,7 +439,7 @@ body {
     .whole .item {
         margin: 0 0 1em 0;
     }
-        .item:hover {
+        .item:hover, .item:active, .item:focus {
             background: #fff;
             background: rgba(255, 255, 255, .8);
             border: .125em solid rgb(46, 152, 171);

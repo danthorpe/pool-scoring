@@ -1,11 +1,26 @@
 
-<h1>{{title}}</h1>
-
 {{#game}}
     
-    <p style="color: #f00;">Todo: this needs building properly</p>
+    <h1>
+        {{#winningPlayers}}
+            {{name}}
+        {{/winningPlayers}}
+        
+        beat
+        
+        {{#losingPlayers}}
+            {{name}}
+            {{#foulOnBlack}}
+                (foul on the black)
+            {{/foulOnBlack}}
+        {{/losingPlayers}}
+    </h1>
     
-    {{> partials/game}}
+    <p class="time">
+        <time datetime="{{#dateFormatted}}%FT%T%z{{/dateFormatted}}">
+            {{#dateFormatted}}%B %d, %Y at %l:%M%P{{/dateFormatted}}
+        </time>
+    </p>
     
     <h2>Players in this Game</h2>
     
