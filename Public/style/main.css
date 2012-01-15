@@ -199,7 +199,7 @@ li ol, li ul {
 /* preformatted text and code */
 
 pre, code {
-    font-family: Courier, 'Courier New', monospace;
+    font-family: 'Courier New', Courier, monospace;
 }
 code {
     padding: .214em .357em;
