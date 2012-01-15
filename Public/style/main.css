@@ -243,11 +243,6 @@ hr {
 /*========================================================*/
 /* grid */
 
-/* inner element for gutters */
-.inner {
-    padding: 0 1em 0 0;
-}
-
 /* columns */
 .half, .third, .quarter, .fifth, .sixth {
     float: left;
@@ -460,17 +455,42 @@ body {
     .player .details {
         padding: 0 0 0 100px;
     }
+    .player .stats {
+        padding: 0;
+        list-style: none;
+    }
+        .player .stats li {
+            padding: 0 .313em;
+            display: inline;
+            display: inline-block;
+            zoom: 1;
+            background: #fff;
+            background: rgba(255, 255, 255, .4);
+            font-weight: normal;
+        }
+        .player .stats .wins {
+            color: #060;
+        }
+        .player .stats .losses {
+            color: #c00;
+        }
+        .player .stats .percentage {
+            color: #009cff;
+        }
+    .player .stats {
+        
+    }
     .player h3 {
         margin-top: 0;
         line-height: 1.308em;
     }
 
 /* leaderboard */
-.leaderboard li {
+.leaderboard > li {
     padding: 0 0 0 5em;
     position: relative;
 }
-    .leaderboard li .position {
+    .leaderboard > li .position {
         position: absolute;
         width: 2.038em;
         margin: 0;
@@ -486,33 +506,33 @@ body {
         border-left: .125em solid rgb(46, 152, 171);
     }
 /* position 1 */
-.leaderboard li.position-1 .position {
+.leaderboard > li.position-1 .position {
     background: #e9c05f;
 }
-.leaderboard li.position-1 .player {
+.leaderboard > li.position-1 .player {
     border-left-color: #e9c05f;
 }
-.leaderboard li.position-1 .player:hover {
+.leaderboard > li.position-1 .player:hover {
     border-color: #e9c05f;
 }
 /* position 2 */
-.leaderboard li.position-2 .position {
+.leaderboard > li.position-2 .position {
     background: #b4bbbf;
 }
-.leaderboard li.position-2 .player {
+.leaderboard > li.position-2 .player {
     border-left-color: #b4bbbf;
 }
-.leaderboard li.position-2 .player:hover {
+.leaderboard > li.position-2 .player:hover {
     border-color: #b4bbbf;
 }
 /* position 3 */
-.leaderboard li.position-3 .position {
+.leaderboard > li.position-3 .position {
     background: #c4834a;
 }
-.leaderboard li.position-3 .player {
+.leaderboard > li.position-3 .player {
     border-left-color: #c4834a;
 }
-.leaderboard li.position-3 .player:hover {
+.leaderboard > li.position-3 .player:hover {
     border-color: #c4834a;
 }
 

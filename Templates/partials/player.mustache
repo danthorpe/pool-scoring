@@ -1,0 +1,17 @@
+
+<a class="player clearfix" href="/player/{{username}}">
+    
+    <img src="{{avatar}}" alt="{{name}}"/>
+    
+    <div class="details">
+        <h3>{{name}}</h3>
+        <ul class="stats">
+            {{#stats}}
+                <li class="wins">&plus;{{wins}}</li>
+                <li class="losses">&minus;{{losses}}</li>
+                <li class="percentage">{{percentage}}%</li>
+            {{/stats}}
+        </ul>
+    </div>
+    
+</a>

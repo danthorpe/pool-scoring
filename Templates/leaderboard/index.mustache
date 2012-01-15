@@ -9,15 +9,7 @@
             <h3 class="position">{{position}}</h3>
             
             {{#person}}
-                <a class="inner player clearfix" href="/player/{{username}}">
-                    
-                    <img src="{{avatar}}" alt="{{name}}"/>
-                    
-                    <div class="details">
-                        <h3>{{name}}</h3>
-                    </div>
-                    
-                </a>
+                {{> partials/player}}
             {{/person}}
             
         </li>
