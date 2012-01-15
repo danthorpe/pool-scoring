@@ -415,19 +415,14 @@ body {
                     color: #fff;
                 }
 
-/* players */
-.players {
+/* item - shared styles for players and games */
+.items {
     list-style: none;
     padding: 0;
 }
-.player {
-    margin: 0 1em 1em 0;
-    padding: 0;
-}
-.whole .player {
-    margin: 0 0 1em 0;
-}
-    a.player, label.player {
+    .item {
+        margin: 0 1em 1em 0;
+        padding: 0;
         min-height: 80px;
         padding: .875em;
         position: relative;
@@ -441,50 +436,62 @@ body {
         -webkit-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out;
     }
-        a.player:hover, label.player:hover {
+    .whole .item {
+        margin: 0 0 1em 0;
+    }
+        .item:hover {
             background: #fff;
             background: rgba(255, 255, 255, .8);
             border: .125em solid rgb(46, 152, 171);
         }
-    .player img {
-        position: absolute;
-        left: 12px;
-        top: 12px;
-        display: block;
-        border: .125em solid #fff;
-    }
-    .player .details {
-        padding: 0 0 0 100px;
-    }
-    .player .stats {
-        padding: 0;
-        list-style: none;
-    }
-        .player .stats li {
-            padding: 0 .313em;
-            display: inline;
-            display: inline-block;
-            zoom: 1;
-            background: #fff;
-            background: rgba(255, 255, 255, .4);
-            font-weight: normal;
+        .item img {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            display: block;
+            border: .125em solid #fff;
         }
-        .player .stats .wins {
-            color: #060;
+        .item .details {
+            padding: 0 0 0 100px;
         }
-        .player .stats .losses {
-            color: #c00;
+        .item h3 {
+            margin-top: 0;
+            line-height: 1.308em;
         }
-        .player .stats .percentage {
-            color: #009cff;
-        }
-    .player .stats {
-        
+
+/* players */
+.player .stats {
+    padding: 0;
+    list-style: none;
+}
+    .player .stats li {
+        padding: 0 .313em;
+        display: inline;
+        display: inline-block;
+        zoom: 1;
+        background: #fff;
+        background: rgba(255, 255, 255, .4);
+        font-weight: normal;
     }
-    .player h3 {
-        margin-top: 0;
-        line-height: 1.308em;
+    .player .stats .wins {
+        color: #060;
     }
+    .player .stats .losses {
+        color: #c00;
+    }
+    .player .stats .percentage {
+        color: #009cff;
+    }
+
+/* games */
+.game img.winner {
+    z-index: 10;
+}
+.game img.loser {
+    z-index: 5;
+    left: 32px;
+    top: 32px;
+}
 
 /* leaderboard */
 .leaderboard > li {

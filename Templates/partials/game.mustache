@@ -1,14 +1,14 @@
 
-<a class="game clearfix" href="/game/{{_id}}">
+<a class="item game clearfix" href="/game/{{_id}}">
     
     <div class="game-players">
         
         {{#winningPlayers}}
-            <img src="{{avatar}}" alt="{{name}} won!" title="{{name}} won!" class="winner"/>
+            <img src="{{#avatarSize}}60{{/avatarSize}}" alt="{{name}} won!" title="{{name}} won!" class="winner"/>
         {{/winningPlayers}}
         
         {{#losingPlayers}}
-            <img src="{{avatar}}" alt="{{name}} lost" title="{{name}} lost" class="loser"/>
+            <img src="{{#avatarSize}}60{{/avatarSize}}" alt="{{name}} lost" title="{{name}} lost" class="loser"/>
         {{/losingPlayers}}
         
     </div>
