@@ -9,12 +9,12 @@
     
     <p><a href="mailto:{{email}}">Send {{name}} an email</a></p>
     
-    <h2>Recent Games</h2>
+    <h2>{{name}}'s Recent Games</h2>
     
     <ul class="container games">
         {{#games}}
             
-            <li class="half">
+            <li class="whole">
                 {{> partials/game}}
             </li>
         

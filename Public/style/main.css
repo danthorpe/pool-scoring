@@ -362,6 +362,7 @@ body {
     }
         .navigation li a {
             display: block;
+            float: left;
             border: none;
         }
 

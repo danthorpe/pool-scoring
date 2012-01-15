@@ -97,7 +97,15 @@ class PoolScoring < Sinatra::Base
         # now can just list the games.
         
     end
-
+    
+    # Recent games page.
+    get '/games' do
+        @title = 'Recent Games'
+        gc = GameController.new settings.couchdb
+        @games = gc.all
+        mustache :'games/index'
+    end
+    
     # Record a game
     get '/game/new' do
         @title = 'Record a Game'
@@ -119,6 +127,7 @@ class PoolScoring < Sinatra::Base
         gc = GameController.new settings.couchdb
         # Get the game
         @game = gc.byId params[:gameId]
+        @title = 'Game at ' + @game.dateFormatted.call('%l:%M%P on %B %d, %Y');
         # Do something with the game
         mustache :'games/game'
     end
