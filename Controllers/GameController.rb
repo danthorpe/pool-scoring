@@ -41,7 +41,7 @@ class GameController
         
         # Iterate through the game and create Game objects
         result['rows'].each do |row|    
-            games.push Game.new row['value']
+            games.push Game.new(row['value'], @server)
         end
         
         return games
@@ -80,7 +80,7 @@ class GameController
         games = Array.new
         
         gameDocs.each do |doc|
-            games.push Game.new doc
+            games.push Game.new(doc, @server)
         end
 
         return games

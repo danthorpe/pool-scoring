@@ -1,0 +1,38 @@
+
+<a class="game clearfix" href="/game/{{_id}}">
+    
+    <div class="game-players">
+        
+        {{#winningPlayers}}
+            <img src="{{avatar}}" alt="{{name}} won!" title="{{name}} won!" class="winner"/>
+        {{/winningPlayers}}
+        
+        {{#losingPlayers}}
+            <img src="{{avatar}}" alt="{{name}} lost" title="{{name}} lost" class="loser"/>
+        {{/losingPlayers}}
+        
+    </div>
+    
+    <div class="details">
+        
+        <h3>
+            {{#winningPlayers}}
+                {{name}}
+            {{/winningPlayers}}
+            
+            beat
+            
+            {{#losingPlayers}}
+                {{name}}
+            {{/losingPlayers}}
+        </h3>
+        
+        <p class="time">
+            <time datetime="{{#dateFormatted}}%FT%T%z{{/dateFormatted}}">
+                {{#dateFormatted}}%B %d, %Y at %l:%M%P{{/dateFormatted}}
+            </time>
+        </p>
+        
+    </div>
+    
+</a>

@@ -3,8 +3,22 @@
 
 {{#player}}
     
-    <img src="{{#avatarSize}}200{{/avatarSize}}" alt="{{name}}"/>
+    <p style="color: #f00;">Todo: this needs building properly</p>
+    
+    {{> partials/player}}
     
     <p><a href="mailto:{{email}}">Send {{name}} an email</a></p>
+    
+    <h2>Recent Games</h2>
+    
+    <ul class="container games">
+        {{#games}}
+            
+            <li class="whole">
+                {{> partials/game}}
+            </li>
+        
+        {{/games}}
+    </ul>
     
 {{/player}}

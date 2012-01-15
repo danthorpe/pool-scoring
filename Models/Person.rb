@@ -52,7 +52,7 @@ class Person
         # Define an array for Games
         games = Array.new
         response['rows'].each do |item|
-            games.push Game.new item['value']
+            games.push Game.new(item['value'], @server)
         end
         
         return games
@@ -74,7 +74,7 @@ class Person
          
         # Count the number of wins/losses
         games.each do |game|
-            if game.winningPlayers.include? self._id
+            if game.winningPlayerIds.include? self._id
                 stats[:wins] += 1
             else
                 stats[:losses] += 1
