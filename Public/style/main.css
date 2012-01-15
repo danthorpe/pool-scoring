@@ -409,11 +409,13 @@ body {
                 transition: all .2s ease-in;
             }
                 .header .navigation li a:hover {
-                    padding: 0 .5em;
                     background: rgb(46, 152, 171);
                     background: rgba(46, 152, 171, .8);
                     color: #fff;
                 }
+            .header .navigation li .add {
+                margin: 0 0 0 .125em;
+            }
 
 /* footer */
 .footer {
