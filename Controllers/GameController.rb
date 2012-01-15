@@ -37,7 +37,7 @@ class GameController
         games = Array.new
         
         # Get all the games
-        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/all"
+        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/all?descending=true"
         
         # Iterate through the game and create Game objects
         result['rows'].each do |row|    

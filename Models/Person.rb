@@ -47,7 +47,7 @@ class Person
     def games
         
         # Get all the games for the player
-        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?key=%22" + self._id + "%22"
+        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?descending=true&key=%22" + self._id + "%22"
         
         # Define an array for Games
         games = Array.new
