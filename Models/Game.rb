@@ -62,7 +62,7 @@ class Game
     end
 
     def winningPlayerIds
-        if (self.breakingTeamWon)
+        if self.breakingTeamWon
             return @doc['breakingTeam']
         else
             return @doc['otherTeam']
@@ -70,7 +70,7 @@ class Game
     end
     
     def losingPlayerIds
-        if (self.breakingTeamWon)
+        if self.breakingTeamWon
             return @doc['otherTeam']
         else
             return @doc['breakingTeam']
