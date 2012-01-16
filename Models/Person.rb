@@ -98,4 +98,46 @@ class Person
         return stats
     end
 
+
+    # Player statistics
+    def numberOfWins
+        # Use CouchDB views
+        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Person/_view/wins?group=true&key=%22" + self._id + "%22"
+        if response["rows"].length == 1
+            return response["rows"][0]["value"]
+        else
+            return 0
+        end
+    end
+
+    def numberOfLosses
+        # Use CouchDB views
+        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Person/_view/losses?group=true&key=%22" + self._id + "%22"
+        if response["rows"].length == 1
+            return response["rows"][0]["value"]
+        else
+            return 0
+        end
+    end
+
+    def winPercentage
+        # Use CouchDB views
+        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Person/_view/winPercentage?group=true&key=%22" + self._id + "%22"
+        if response["rows"].length == 1
+            return response["rows"][0]["value"]
+        else
+            return 0
+        end
+    end
+
+    def lossPercentage
+        # Use CouchDB views
+        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Person/_view/lossPercentage?group=true&key=%22" + self._id + "%22"
+        if response["rows"].length == 1
+            return response["rows"][0]["value"]
+        else
+            return 0
+        end
+    end
+
 end
