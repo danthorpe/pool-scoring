@@ -17,6 +17,7 @@ class Person
     def initialize(doc=nil, server=nil)
         @doc = doc if doc != nil
         @server = server if server != nil
+        @games = nil
     end
     
     # Use define_method for accessing the underlying CouchDB attributes
@@ -46,16 +47,24 @@ class Person
 
     def games
         
-        # Get all the games for the player
-        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?descending=true&key=%22" + self._id + "%22"
-        
-        # Define an array for Games
-        games = Array.new
-        response['rows'].each do |item|
-            games.push Game.new(item['value'], @server)
+        if @games == nil
+            print "Getting games for #{self.username}\n"
+            
+            # Get all the games for the player
+            response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?descending=true&key=%22" + self._id + "%22"
+
+            # Define an array for Games
+            @games = Array.new
+            response['rows'].each do |item|
+                @games.push Game.new(item['value'], @server)
+            end
         end
-        
-        return games
+                
+        return @games
+    end
+    
+    def recentGames(limit = 3)    
+        return self.games.slice(0,3)    
     end
     
     # Basic player statistics
