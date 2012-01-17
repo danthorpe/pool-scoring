@@ -2,16 +2,12 @@
 <h1>{{title}}</h1>
 
 {{#player}}
-    
-    <p style="color: #f00;">Todo: this needs building properly</p>
-    
+        
     {{> partials/player}}
     
     <p><a href="mailto:{{email}}">Send {{name}} an email</a></p>
     
     <h2>{{name}}'s Recent Games</h2>
-    
-    <p style="color: #f00;">Todo: ideally this should be in descending order by date</p>
     
     <ul class="container items games">
         {{#recentGames}}
