@@ -129,6 +129,10 @@ class Person
             return 0
         end
     end
+    
+    def winPercentageRounded
+        return winPercentage.round
+    end
 
     def lossPercentage
         # Use CouchDB views
@@ -138,6 +142,10 @@ class Person
         else
             return 0
         end
+    end
+    
+    def lossPercentageRounded
+        return lossPercentage.round
     end
 
 end
