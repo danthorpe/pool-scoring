@@ -94,14 +94,28 @@ class GameController
         
         # Create a game
         game = Game.new
-            
-        # Get the breaking player
-        player = pc.playerWithUsername params["breaking-player"]
-        game.addPlayerToBreakingTeam player
         
-        # Get the other player
-        player = pc.playerWithUsername params["other-player"]
-        game.addPlayerToOtherTeam player
+        # Make sure we have an array of breaking players
+        if not params["breaking-player"].kind_of? Array
+            params["breaking-player"] = [params["breaking-player"]];
+        end
+        
+        # Get the breaking players
+        for player in params["breaking-player"] do
+            playerModel = pc.playerWithUsername player
+            game.addPlayerToBreakingTeam playerModel
+        end
+        
+        # Make sure we have an array of other players
+        if not params["other-player"].kind_of? Array
+            params["other-player"] = [params["other-player"]];
+        end
+        
+        # Get the other players
+        for player in params["other-player"] do
+            playerModel = pc.playerWithUsername player
+            game.addPlayerToOtherTeam playerModel
+        end
         
         # What was the result?
         if params["breaking-player-won"] == "1"    
