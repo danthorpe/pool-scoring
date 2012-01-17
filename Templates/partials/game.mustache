@@ -16,19 +16,18 @@
     <div class="details">
         
         <h3>
-            {{#winningPlayers}}
-                {{name}}
-            {{/winningPlayers}}
-            
+            <span class="winners">
+                {{winningPlayerNames}}
+            </span>
             beat
-            
-            {{#losingPlayers}}
-                {{name}}
-                {{#foulOnBlack}}
+            <span class="losers">
+                {{losingPlayerNames}}
+            </span>
+            {{#foulOnBlack}}
+                <span class="win-details">
                     (foul on the black)
-                {{/foulOnBlack}}
-            {{/losingPlayers}}
-            
+                </span>
+            {{/foulOnBlack}}
         </h3>
         
         <p class="time">

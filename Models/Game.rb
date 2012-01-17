@@ -92,6 +92,26 @@ class Game
             return self.breakingPlayers
         end    
     end
+    
+    # Get player names as a neatly formatted string from an array of players.
+    def getPlayerNames(players)
+        playerNames = players.collect{|player| player.name }
+        if playerNames.count == 1
+            return playerNames[0]
+        else
+            lastPlayerName = playerNames.pop
+            playerNames.join(', ') + ' & ' + lastPlayerName
+        end
+    end
+    protected :getPlayerNames
+    
+    def winningPlayerNames
+        self.getPlayerNames self.winningPlayers
+    end
+    
+    def losingPlayerNames
+        self.getPlayerNames self.losingPlayers
+    end
 
     def addPlayerToBreakingTeam(player)
         @breakingTeam.push player

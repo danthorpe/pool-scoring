@@ -2,18 +2,18 @@
 {{#game}}
     
     <h1>
-        {{#winningPlayers}}
-            {{name}}
-        {{/winningPlayers}}
-        
+        <span class="winners">
+            {{winningPlayerNames}}
+        </span>
         beat
-        
-        {{#losingPlayers}}
-            {{name}}
-            {{#foulOnBlack}}
+        <span class="losers">
+            {{losingPlayerNames}}
+        </span>
+        {{#foulOnBlack}}
+            <span class="win-details">
                 (foul on the black)
-            {{/foulOnBlack}}
-        {{/losingPlayers}}
+            </span>
+        {{/foulOnBlack}}
     </h1>
     
     <p class="time">
