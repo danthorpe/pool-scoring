@@ -496,7 +496,7 @@ body {
         color: #009cff;
     }
 
-/* games */
+/* games (todo: make JS fade between player thumbs for multi-player games) */
 .game img.winner {
     z-index: 10;
 }

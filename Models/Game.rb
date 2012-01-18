@@ -112,6 +112,14 @@ class Game
     def losingPlayerNames
         self.getPlayerNames self.losingPlayers
     end
+    
+    def playerCount
+        self.winningPlayerIds.count + self.losingPlayerIds.count
+    end
+    
+    def isTeamGame?
+        return playerCount > 2
+    end
 
     def addPlayerToBreakingTeam(player)
         @breakingTeam.push player
