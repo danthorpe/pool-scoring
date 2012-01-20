@@ -131,7 +131,11 @@ class Person
     end
     
     def winPercentageRounded
-        return winPercentage.round
+        if winPercentage != nil
+            return winPercentage.round
+        else
+            return 0
+        end
     end
 
     def lossPercentage
@@ -145,7 +149,11 @@ class Person
     end
     
     def lossPercentageRounded
-        return lossPercentage.round
+        if lossPercentage != nil
+            return lossPercentage.round
+        else
+            return 0
+        end            
     end
 
 end
