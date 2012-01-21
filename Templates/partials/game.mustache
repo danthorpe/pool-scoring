@@ -1,8 +1,24 @@
 
 <a class="item clearfix game game-{{playerCount}}-players{{#isTeamGame?}} game-teams{{/isTeamGame?}}" href="/game/{{_id}}">
     
-    <div class="game-players">
+    {{#isTeamGame?}}
         
+        <div class="game-players clearfix">
+            
+            {{#winningPlayers}}
+                <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}} won!" title="{{name}} won!" class="winner"/>
+            {{/winningPlayers}}
+            
+            {{#losingPlayers}}
+                <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}} lost" title="{{name}} lost" class="loser"/>
+            {{/losingPlayers}}
+            
+        </div>
+        
+    {{/isTeamGame?}}
+    
+    {{^isTeamGame?}}
+    
         {{#winningPlayers}}
             <img src="{{#avatarSize}}60{{/avatarSize}}" alt="{{name}} won!" title="{{name}} won!" class="winner"/>
         {{/winningPlayers}}
@@ -11,7 +27,7 @@
             <img src="{{#avatarSize}}60{{/avatarSize}}" alt="{{name}} lost" title="{{name}} lost" class="loser"/>
         {{/losingPlayers}}
         
-    </div>
+    {{/isTeamGame?}}
     
     <div class="details">
         

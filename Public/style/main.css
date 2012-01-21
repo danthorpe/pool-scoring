@@ -689,7 +689,7 @@ label.player.disabled {
         padding: 0 0 0 50px;
     }
 
-/* games (todo: make JS fade between player thumbs for multi-player games) */
+/* games */
 .game img.winner {
     z-index: 10;
 }
@@ -698,6 +698,21 @@ label.player.disabled {
     left: 32px;
     top: 32px;
 }
+.game .game-players {
+    width: 100px;
+    min-height: 80px;
+    margin: -12px 0 0 0;
+    padding: 0;
+    float: left;
+}
+    .game-teams .game-players img {
+        width: 30px;
+        height: 30px;
+        margin: 12px 12px 0 0;
+        position: static;
+        display: block;
+        float: left;
+    }
 
 /* leaderboard */
 .leaderboard > li {
