@@ -100,7 +100,7 @@ class PoolScoring < Sinatra::Base
     get '/games' do
         @title = 'Recent Games'
         gc = GameController.new settings.couchdb
-        @games = gc.all
+        @games = gc.recent 8
         mustache :'games/index'
     end
     

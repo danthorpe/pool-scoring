@@ -46,6 +46,26 @@ class GameController
         
         return games
     end
+    
+    # Get recent games.
+    def recent(limit = 10)
+        
+        # Sanitise the limit
+        limit = limit.to_i
+        
+        # Define an array for games
+        games = Array.new
+        
+        # Get the games
+        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/all?descending=true&limit=" + limit.to_s
+        
+        # Iterate through the game and create Game objects
+        result['rows'].each do |row|    
+            games.push Game.new(row['value'], @server)
+        end
+        
+        return games
+    end
 
     # Get a game by identifier
     #
