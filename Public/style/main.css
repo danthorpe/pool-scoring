@@ -244,14 +244,15 @@ hr {
 /* grid */
 
 /* columns */
-.whole, .half, .third, .quarter, .fifth, .sixth {
+.half, .third, .quarter, .fifth, .sixth {
     float: left;
 }
 .half:nth-child(2n+1), .third:nth-child(3n+1), .quarter:nth-child(4n+1), .fifth:nth-child(5n+1), .sixth:nth-child(6n+1) {
     clear: left;
 }
 .whole {
-    width: 100%;
+    width: auto;
+    clear: both;
 }
 .half {
     width: 50%;
@@ -633,6 +634,7 @@ body {
     list-style: none;
 }
     .player .stats li {
+        margin: 0 0 .313em 0;
         padding: 0 .313em;
         display: inline;
         display: inline-block;
@@ -680,19 +682,19 @@ label.player {
 
 /* leaderboard */
 .leaderboard > li {
-    padding: 0 0 0 5em;
+    padding: 0 0 0 3.188em;
     position: relative;
 }
     .leaderboard > li .position {
         position: absolute;
-        width: 2.038em;
+        width: 1.346em;
         margin: 0;
-        padding: 0.538em;
+        padding: 0.308em;
         left: 0;
         top: 0;
         display: block;
         line-height: 1.308em;
-        background: #0a8fa2;
+        background: rgb(46, 152, 171);
         color: #fff;
     }
     .leaderboard .player {
