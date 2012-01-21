@@ -523,6 +523,12 @@ body {
 /* responsive header - small screens */
 @media all and (max-width: 660px) {
     
+    /* body padding - to compensate for fixed positioning */
+    .has-js .body {
+        padding-top: 5em;
+    }
+    
+    /* header */
     .header {
         height: auto;
         position: static;
