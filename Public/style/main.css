@@ -421,7 +421,7 @@ hr {
 
 /* body */
 body {
-    background: url('assets/body.png') repeat 0 0;
+    background: #fff url('assets/body.png') repeat 0 0;
 }
 
 /* error pages */
@@ -517,7 +517,15 @@ body {
     
     .header {
         height: auto;
+        position: static;
+        z-index: 100;
+        width: 100%;
         overflow: hidden;
+        background: #fff url('assets/header.mobile.png') repeat 0 0;
+        border-bottom: .063em solid #6db7c4;
+    }
+    .has-js .header {
+        position: fixed;
     }
     .header.closed {
         height: 5em;
