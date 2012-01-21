@@ -11,7 +11,7 @@
         // constants
         CLOSED_CLASS = 'closed',
         OPENED_TOGGLE_TEXT = '&#x25B2;',
-        CLOSED_TOGGLE_TEXT = '&#x25BC;'
+        CLOSED_TOGGLE_TEXT = '&#x25BC;',
         
         // constructor
         Header = function(headerElement, toggleElement) {
