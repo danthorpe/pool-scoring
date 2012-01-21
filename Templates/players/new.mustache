@@ -3,26 +3,38 @@
 
 <form method="post" action="{{request.path}}">
     
-    <div class="field">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value=""/>
-        <span class="help">Enter the player's name</span>
-    </div>
+    <div class="container">
+        
+        <div class="third">
+            <div class="field text-field inner">
+                <label for="name">Name</label>
+                <span class="help">Enter the player's name</span>
+                <input type="text" name="name" id="name" value=""/>
+            </div>
+        </div>
+        
+        <div class="third">
+            <div class="field text-field inner">
+                <label for="username">Username</label>
+                <span class="help">Enter a short username for the player (alphanumeric + underscore)</span>
+                <input type="text" name="username" id="username" value=""/>
+            </div>
+        </div>
+        
+        <div class="third">
+            <div class="field text-field inner">
+                <label for="email">Email Address</label>
+                <span class="help">Enter the player's (unique) email address</span>
+                <input type="email" name="email" id="email" value=""/>
+            </div>
+        </div>
     
-    <div class="field">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" value=""/>
-        <span class="help">Enter a short username for the player (alphanumeric + underscore)</span>
-    </div>
+        <div class="third">
+            <div class="field button-field">
+                <input type="submit" value="Create Player"/>
+            </div>
+        </div>
     
-    <div class="field">
-        <label for="email">Email Address</label>
-        <input type="email" name="email" id="email" value=""/>
-        <span class="help">Enter the player's (unique) email address</span>
     </div>
-    
-    <div class="field">
-        <input type="submit" value="Create Player"/>
-    </div>
-    
+        
 </form>

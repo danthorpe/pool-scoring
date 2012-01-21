@@ -85,7 +85,7 @@ body {
 }
 
 /* layout */
-blockquote, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, ul {
+blockquote, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, ul, .field {
     margin: .875em 0;
 }
 
@@ -244,11 +244,14 @@ hr {
 /* grid */
 
 /* columns */
-.half, .third, .quarter, .fifth, .sixth {
+.whole, .half, .third, .quarter, .fifth, .sixth {
     float: left;
 }
 .half:nth-child(2n+1), .third:nth-child(3n+1), .quarter:nth-child(4n+1), .fifth:nth-child(5n+1), .sixth:nth-child(6n+1) {
     clear: left;
+}
+.whole {
+    width: 100%;
 }
 .half {
     width: 50%;
@@ -333,6 +336,84 @@ hr {
         width: auto !important;
         float: none;
     }
+}
+
+/*========================================================*/
+/* forms */
+
+/* fields */
+.text-field, .select-field, .checkbox-field, .radio-field, .button-field {
+    margin-right: 1em;
+}
+
+/* labels */
+.field label {
+    display: block;
+    margin: .538em 0;
+}
+.checkbox-field label, .radio-field label {
+    display: inline;
+    display: inline-block;
+    zoom: 1;
+}
+.field label.title {
+    display: block;
+    font-size: 1.375em;
+    line-height: 1.182em;
+}
+.field .help {
+    margin: -.667em 0 1.333em 0;
+    display: block;
+    font-size: 0.750em;
+    line-height: 1em;
+}
+
+/* inputs */
+.text-field input, .select-field input {
+    display: block;
+}
+.text-field input {
+    width: 100%;
+    max-width: 260px;
+    padding: .538em .538em;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fff;
+    background: rgba(255, 255, 255, .4);
+    border: .125em solid rgb(46, 152, 171);
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: #333;
+}
+    .text-field input:focus {
+        background: #fff;
+        background: rgba(255, 255, 255, .8);
+        border: .125em solid #5fd93b;
+    }
+.button-field input {
+    padding: .538em .538em;
+    background: rgb(46, 152, 171);
+    background: rgba(46, 152, 171, .8);
+    border: .125em solid transparent;
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: #fff;
+    cursor: pointer;
+}
+    .button-field input:hover {
+        background: rgb(46, 152, 171);
+        border: .125em solid rgb(17, 100, 115);
+    }
+    .button-field input:focus, .button-field input:active {
+        background: #5fd93b;
+    }
+
+/* miscellany */
+.field ol, .field ul {
+    padding: 0;
+    list-style: none;
 }
 
 /*========================================================*/
@@ -499,9 +580,10 @@ body {
 /* player-as-label */
 label.player {
     min-height: 30px;
+    margin: 0 1em 1em 0;
 }
-    label.player h3, label.player input {
-        line-height: 1.154em;
+    label.player h5, label.player input {
+        line-height: 1.667em;
         margin-top: 0;
         margin-bottom: 0;
         display: inline;
