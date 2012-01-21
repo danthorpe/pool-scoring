@@ -384,24 +384,30 @@ hr {
     background: #fff;
     background: rgba(255, 255, 255, .4);
     border: .125em solid rgb(46, 152, 171);
+    border-radius: 0;
     font-family: Quicksand, Arial, Helvetica, sans-serif;
     font-size: 1em;
     color: #333;
+    box-shadow: none;
+    -webkit-appearance: none;
 }
     .text-field input:focus {
         background: #fff;
         background: rgba(255, 255, 255, .8);
         border: .125em solid #5fd93b;
+        outline: none;
     }
 .button-field input {
     padding: .538em;
     background: rgb(46, 152, 171);
     background: rgba(46, 152, 171, .8);
     border: .125em solid transparent;
+    border-radius: 0;
     font-family: Quicksand, Arial, Helvetica, sans-serif;
     font-size: 1em;
     color: #fff;
     cursor: pointer;
+    -webkit-appearance: none;
 }
     .button-field input:hover {
         background: rgb(46, 152, 171);
@@ -409,6 +415,7 @@ hr {
     }
     .button-field input:focus, .button-field input:active {
         background: #5fd93b;
+        outline: none;
     }
 
 /* miscellany */
