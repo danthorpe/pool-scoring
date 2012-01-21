@@ -30,7 +30,7 @@
         // (private) bind toggle click event
         bindToggleClick = function() {
             var header = this;
-            this.elements.toggle.bind('click', function(event) {
+            this.elements.toggle.on('click', function(event) {
                 if (header.isOpen() === true) {
                     header.close();
                 } else {
