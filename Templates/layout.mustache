@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <div class="header">
+    <div id="header" class="header">
         {{> partials/header}}
     </div>
 
@@ -28,6 +28,11 @@
     <div class="footer">
         {{> partials/footer}}
     </div>
-
+    
+    <!-- Yeah, yeah, I know. We'll get around to minifying all of this -->
+    <script src="/script/vendor/jquery.js"></script>
+    <script src="/script/pool/header.js"></script>
+    <script src="/script/main.js"></script>
+    
 </body>
 </html>

@@ -375,7 +375,7 @@ hr {
 .text-field input {
     width: 100%;
     max-width: 260px;
-    padding: .538em .538em;
+    padding: .538em;
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -393,7 +393,7 @@ hr {
         border: .125em solid #5fd93b;
     }
 .button-field input {
-    padding: .538em .538em;
+    padding: .538em;
     background: rgb(46, 152, 171);
     background: rgba(46, 152, 171, .8);
     border: .125em solid transparent;
@@ -463,13 +463,26 @@ body {
         color: #0a8fa2;
         border: none;
     }
-    .header .logo {
-        margin: 0;
-        padding: 0 .412em;
+    .header a:focus {
+        outline: none;
+    }
+    .header .title-bar {
         display: block;
         float: left;
-        font-size: 2.125em;
     }
+        .header .title-bar a {
+            margin: 0;
+            padding: 0 .412em;
+            display: block;
+            float: left;
+            font-size: 2.125em;
+        }
+        .header .title-bar .toggle {
+            display: none;
+            float: right;
+            font-size: 1.625em;
+            padding: 0 1em;
+        }
     .header .navigation {
         padding: 0 1em;
         float: right;
@@ -496,7 +509,60 @@ body {
                 }
             .header .navigation li .add {
                 margin: 0 0 0 .125em;
+                text-align: center;
             }
+
+/* responsive header - small screens */
+@media all and (max-width: 660px) {
+    
+    .header {
+        height: auto;
+        overflow: hidden;
+    }
+    .header.closed {
+        height: 5em;
+    }
+        .header .title-bar {
+            float: none;
+        }
+            .header .title-bar .toggle {
+                display: block;
+            }
+        .header .navigation {
+            float: none;
+        }
+            .header .navigation li {
+                margin: 1em 0;
+                padding: 0;
+                float: none;
+            }
+                .header .navigation li:after {
+                    content: '';
+                    display: table;
+                    clear: both;
+                }
+                .header .navigation li a {
+                    float: none;
+                }
+                .header .navigation li .view, .header .navigation li .add {
+                    margin: 0;
+                    float: left;
+                    -moz-box-sizing: border-box;
+                    -ms-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+                }
+                .header .navigation li .view {
+                    width: 80%;
+                }
+                .header .navigation li .add {
+                    width: 20%;
+                    background: rgb(46, 152, 171);
+                    background: rgba(46, 152, 171, .8);
+                    color: #fff;
+                }
+    
+}
 
 /* footer */
 .footer {
