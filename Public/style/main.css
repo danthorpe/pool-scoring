@@ -671,6 +671,12 @@ label.player {
     min-height: 30px;
     margin: 0 1em 1em 0;
 }
+label.player.recruited {
+    border-color: #e9c05f;
+}
+label.player.disabled {
+    opacity: .5;
+}
     label.player h5, label.player input {
         line-height: 1.667em;
         margin-top: 0;

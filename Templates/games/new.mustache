@@ -3,15 +3,15 @@
 
 <form method="post" action="{{request.path}}">
     
-    <div class="container">
+    <div id="team-picker" class="container">
         
         <div class="half">
             <div class="field inner">
                 <label class="title">Breaking Player(s)</label>
-                <ul class="items players">
+                <ul id="breaking-players" class="items players">
                     {{#players}}
                         <li>
-                            <label class="item player clearfix" data-username="{{username}}" for="breaking-player-{{username}}">
+                            <label class="item player clearfix" data-player-id="{{_id}}" data-username="{{username}}" for="breaking-player-{{username}}">
                                 
                                 <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}}"/>
                                 
@@ -30,10 +30,10 @@
         <div class="half">
             <div class="field inner">
                 <label class="title">Other Player(s)</label>
-                <ul class="items players">
+                <ul id="other-players" class="items players">
                     {{#players}}
                         <li>
-                            <label class="item player clearfix" data-username="{{username}}" for="other-player-{{username}}">
+                            <label class="item player clearfix" data-player-id="{{_id}}" data-username="{{username}}" for="other-player-{{username}}">
                                 
                                 <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}}"/>
                                 

@@ -68,7 +68,7 @@
         // return the constructor
         return Header;
         
-    })();
+    } ());
     
     // exports
     window.pool.Header = Header;
