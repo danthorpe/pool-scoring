@@ -496,6 +496,22 @@ body {
         color: #009cff;
     }
 
+/* player-as-label */
+label.player {
+    min-height: 30px;
+}
+    label.player h3, label.player input {
+        line-height: 1.154em;
+        margin-top: 0;
+        margin-bottom: 0;
+        display: inline;
+        display: inline-block;
+        zoom: 1;
+    }
+    label.player .details {
+        padding: 0 0 0 50px;
+    }
+
 /* games (todo: make JS fade between player thumbs for multi-player games) */
 .game img.winner {
     z-index: 10;
