@@ -1,12 +1,39 @@
 
 <h1>{{title}}</h1>
 
-<blockquote cite="Dan Thorpe">
-    <em>&ldquo;Welcome to pool scoring, make this pretty.&rdquo;</em><br/>
-    &mdash;Dan Thorpe
-</blockquote>
-
-<blockquote cite="Rowan Manning">
-    <em>&ldquo;I&rsquo;m working on it! Check out <a href="/styleguide">the styleguide</a> - just placeholder styles but we&rsquo;re certainly on our way&hellip;&rdquo;</em><br/>
-    &mdash;Rowan Manning
-</blockquote>
+<div class="container">
+    <div class="half">
+        <div class="inner players">
+            
+            <h2>Star Player</h2>
+            
+            {{#starPlayer}}
+                {{> partials/player}}
+            {{/starPlayer}}
+            
+            <p style="color: #f00;">TODO: should the leader-board and this be limited to the last seven days? This might keep things competitive and prevent leader-board stagnation. Similar decision to Foursquare's mayorships being 2-month rolling.</p>
+            
+            <h2>Newest Recruit</h2>
+            
+            <p style="color: #f00;">TODO: currently I can't seem to get users by date added. It'd be cool to get the newest recruit</p>
+            
+        </div>
+    </div>
+    <div class="half">
+        <div class="inner">
+            
+            <h2>Recent Games</h2>
+            
+            <ul class="container items games">
+                {{#games}}
+                    
+                    <li>
+                        {{> partials/game}}
+                    </li>
+                
+                {{/games}}
+            </ul>
+            
+        </div>
+    </div>
+</div>

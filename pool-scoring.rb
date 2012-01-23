@@ -32,6 +32,11 @@ class PoolScoring < Sinatra::Base
 
     # Index page.
     get '/' do
+        gc = GameController.new settings.couchdb
+        @games = gc.recent 3
+        pc = PlayerController.new settings.couchdb
+        @starPlayer = pc.star
+        @newRecruit = nil
         @title = 'Welcome!'
         mustache :'index'
     end

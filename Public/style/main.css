@@ -643,6 +643,7 @@ body {
 
 /* players */
 .player .stats {
+    margin-bottom: 0;
     padding: 0;
     list-style: none;
 }
@@ -713,6 +714,9 @@ label.player.disabled {
         display: block;
         float: left;
     }
+.game .time {
+    margin-bottom: 0;
+}
 
 /* leaderboard */
 .leaderboard > li {

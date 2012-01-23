@@ -6,6 +6,22 @@ class PoolScoring
     
         # Index view class.
         class Index < Layout
+            
+            # Recent games.
+            def games
+                @games || Array.new
+            end
+            
+            # Current star player.
+            def starPlayer
+                @starPlayer || nil
+            end
+            
+            # Newest recruit.
+            def newRecruit
+                @newRecruit || nil
+            end
+            
         end
     
     end

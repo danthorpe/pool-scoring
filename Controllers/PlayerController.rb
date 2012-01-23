@@ -72,6 +72,13 @@ class PlayerController
         }
     end
 
+    # Get the current star player
+    #
+    # This gets a single player
+    def star
+        leaderboard = self.leaderboard
+        return leaderboard[0] ? leaderboard[0][:person] : nil
+    end
 
     # Get a specific player using a username
     # 
