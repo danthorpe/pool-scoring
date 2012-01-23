@@ -41,7 +41,13 @@ class PoolScoring < Sinatra::Base
         mustache :'index'
     end
   
-    # Style-guide page - temporary.
+    # Rules page.
+    get '/rules' do
+        @title = 'House Rules'
+        mustache :'rules/index'
+    end
+    
+    # Style-guide page.
     get '/styleguide' do
         @title = 'Style-Guide'
         mustache :'styleguide/index'
