@@ -1,0 +1,14 @@
+
+{{#hasErrors?}}
+    <div class="errors">
+        
+        <p>We encountered errors processing the form. Please check that you've filled everything out correctly:</p>
+        
+        <ul>
+            {{#errors}}
+                <li>{{.}}</li>
+            {{/errors}}
+        </ul>
+        
+    </div>
+{{/hasErrors?}}
