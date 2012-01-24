@@ -1,5 +1,6 @@
 require 'json/ext'
 require 'sinatra/base'
+require 'sinatra/multi_route'
 require 'couchrest'
 require 'mustache/sinatra'
 
@@ -10,7 +11,10 @@ require './Controllers/PlayerController.rb'
 require './Controllers/GameController.rb'
 
 class PoolScoring < Sinatra::Base
-  
+    
+    # Register sinatra multi-routes
+    register Sinatra::MultiRoute
+    
     # Register mustache and initialise the Views module - Mustache requires this
     register Mustache::Sinatra
     module Views end
