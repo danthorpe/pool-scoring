@@ -14,8 +14,10 @@
             {{/starPlayer}}
 
             <h2>Newest Recruit</h2>
-            
-            <p style="color: #f00;">TODO: currently I can't seem to get users by date added. It'd be cool to get the newest recruit</p>
+
+            {{#newRecruit}}
+                {{> partials/player}}
+            {{/newRecruit}}
             
         </div>
     </div>

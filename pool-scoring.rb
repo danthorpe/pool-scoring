@@ -36,7 +36,7 @@ class PoolScoring < Sinatra::Base
         @games = gc.recent 3
         pc = PlayerController.new settings.couchdb
         @starPlayer = pc.star
-        @newRecruit = nil
+        @newRecruit = pc.newest
         @title = 'Welcome!'
         mustache :'index'
     end
