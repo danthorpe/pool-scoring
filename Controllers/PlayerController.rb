@@ -80,6 +80,21 @@ class PlayerController
         return leaderboard[0] ? leaderboard[0][:person] : nil
     end
 
+    # Get the newest player
+    #
+    # This gets a single player
+    def newest
+        # Get the newest players
+        result = CouchRest.get  @server + "/#{CouchDB::DB}/_design/Person/_view/newest?descending=true&limit=1"
+        if result["rows"].length == 1
+            return Person.new(result['rows'][0]['value'], @server)
+        else
+            return nil
+        end
+    end
+
+
+
     # Get a specific player using a username
     # 
     # This uses the `byUsername` view in the Person design
@@ -148,15 +163,17 @@ class PlayerController
         # Set the username
         doc[:username] = params["username"]
         
+        # Set the current date
+        doc[:date] = Time.now.to_i
+        
         # Get a new id from the CouchDB server
         uuid = CouchDB.nextUUID @server
         doc[:_id] = uuid
         
         # Put it to the database
-        CouchRest.put @server + "/#{CouchDB::DB}/#{uuid}", doc
+        response = CouchRest.put @server + "/#{CouchDB::DB}/#{uuid}", doc
         
-        # Return the person
-        return Person.new(CouchRest.get @server + "/#{CouchDB::DB}/#{uuid}", @server)
+        return response != false
     
     end
 
