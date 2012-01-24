@@ -79,8 +79,11 @@ class PoolScoring < Sinatra::Base
             status 400
             return
         else
-            @player = pc.createPlayer params
-            redirect to("/player/#{@player.username}")
+            if pc.createPlayer params
+                redirect to("/player/#{params['username']}")
+            else
+            
+            end
         end
     end
 
