@@ -28,7 +28,7 @@ class Person
     # Get the user's avatar at a specified size (as a lambda, mainly for use with Mustache)
     def avatarSize
         lambda { |size = 80|
-            Gravatar.new self.email, size, 'unicorn'
+            Gravatar.new self.email, size
         }
     end
     
