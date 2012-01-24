@@ -33,7 +33,7 @@ class Game
     # (as a lambda, mainly for use with Mustache)
     def dateFormatted
         lambda { |format = "%Y"|
-            Time.parse(self.date).strftime(format)
+            Time.at(self.date).strftime(format)
         }
     end
     
@@ -137,7 +137,7 @@ class Game
   
     def document 
         return @doc if @doc != nil    
-        doc = {:type => "Game", :date => @endDate, :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
+        doc = {:type => "Game", :date => @endDate.to_i , :breakingTeam => @breakingTeam.collect { |player| player._id }, :otherTeam => @otherTeam.collect { |player| player._id }, :breakingTeamWon => @breakingTeamWon, :foulOnBlack => @foulOnBlack}
         return doc    
     end
     
