@@ -4,6 +4,7 @@
 # Dependencies
 require './Controllers/CouchDB.rb'
 require './Models/Person.rb'
+require './Library/TrashTalk.rb'
 
 # An extensible Pool Game class.
 # 
@@ -95,13 +96,7 @@ class Game
     
     # Get player names as a neatly formatted string from an array of players.
     def getPlayerNames(players)
-        playerNames = players.collect{|player| player.name }
-        if playerNames.count == 1
-            return playerNames[0]
-        else
-            lastPlayerName = playerNames.pop
-            playerNames.join(', ') + ' & ' + lastPlayerName
-        end
+        players.collect{|player| player.name }
     end
     protected :getPlayerNames
     
@@ -119,6 +114,10 @@ class Game
     
     def isTeamGame?
         return playerCount > 2
+    end
+    
+    def description
+        TrashTalk.new self.winningPlayerNames, self.losingPlayerNames
     end
 
     def addPlayerToBreakingTeam(player)
