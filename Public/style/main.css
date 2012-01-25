@@ -794,3 +794,26 @@ label.player.disabled {
 }
 
 /*========================================================*/
+/* stuff for the shitty browsers */
+
+.ie-warning {
+    background: #ff0;
+}
+.ie-warning p {
+    width: 80%;
+    min-width: 280px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1em;
+    color: #f0f;
+}
+.ie-warning p, .ie-warning a, .ie-warning em {
+    font-weight: bold;
+}
+.ie-warning a {
+    color: #f0f;
+    border: none;
+    text-decoration: underline;
+}
+
+/*========================================================*/
