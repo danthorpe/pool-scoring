@@ -18,6 +18,17 @@
     
     <h2>Players in this Game</h2>
     
+    {{^isTeamGame?}}
+        <p>
+            <a href="/player/{{#winningPlayers}}{{username}}{{/winningPlayers}}/{{#losingPlayers}}{{username}}{{/losingPlayers}}">
+                Compare
+                {{#winningPlayers}}{{name}}{{/winningPlayers}}
+                with
+                {{#losingPlayers}}{{name}}{{/losingPlayers}}
+            </a>
+        </p>
+    {{/isTeamGame?}}
+    
     <ul class="container items players">
         
         {{#winningPlayers}}
