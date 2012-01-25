@@ -394,7 +394,7 @@ hr {
     .text-field input:focus {
         background: #fff;
         background: rgba(255, 255, 255, .8);
-        border: .125em solid #5fd93b;
+        border: .125em solid #e9c05f;
         outline: none;
     }
 .button-field input {
@@ -414,7 +414,8 @@ hr {
         border: .125em solid rgb(17, 100, 115);
     }
     .button-field input:focus, .button-field input:active {
-        background: #5fd93b;
+        background: rgb(23, 127, 145);
+        border: .125em solid rgb(46, 152, 171);
         outline: none;
     }
 
