@@ -642,6 +642,7 @@ body {
             left: 12px;
             top: 12px;
             display: block;
+            overflow: hidden;
             border: .125em solid #fff;
         }
         .item .details {
@@ -653,6 +654,10 @@ body {
         }
 
 /* players */
+.player .avatar {
+    width: 80px;
+    height: 80px;
+}
 .player .stats {
     margin-bottom: 0;
     padding: 0;
@@ -689,6 +694,10 @@ label.player.recruited {
 label.player.disabled {
     opacity: .5;
 }
+    label.player .avatar {
+        width: 30px;
+        height: 30px;
+    }
     label.player h5, label.player input {
         line-height: 1.667em;
         margin-top: 0;
@@ -710,6 +719,10 @@ label.player.disabled {
     left: 32px;
     top: 32px;
 }
+.game .avatar {
+    width: 60px;
+    height: 60px;
+}
 .game .game-players {
     width: 100px;
     min-height: 80px;
@@ -717,7 +730,7 @@ label.player.disabled {
     padding: 0;
     float: left;
 }
-    .game-teams .game-players img {
+    .game-teams .game-players .avatar {
         width: 30px;
         height: 30px;
         margin: 12px 12px 0 0;

@@ -6,11 +6,11 @@
         <div class="game-players clearfix">
             
             {{#winningPlayers}}
-                <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}} won!" title="{{name}} won!" class="winner"/>
+                <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}} won!" title="{{name}} won!" class="avatar winner"/>
             {{/winningPlayers}}
             
             {{#losingPlayers}}
-                <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}} lost" title="{{name}} lost" class="loser"/>
+                <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}} lost" title="{{name}} lost" class="avatar loser"/>
             {{/losingPlayers}}
             
         </div>
@@ -20,11 +20,11 @@
     {{^isTeamGame?}}
     
         {{#winningPlayers}}
-            <img src="{{#avatarSize}}60{{/avatarSize}}" alt="{{name}} won!" title="{{name}} won!" class="winner"/>
+            <img src="{{#avatarSize}}60{{/avatarSize}}" alt="{{name}} won!" title="{{name}} won!" class="avatar winner"/>
         {{/winningPlayers}}
         
         {{#losingPlayers}}
-            <img src="{{#avatarSize}}60{{/avatarSize}}" alt="{{name}} lost" title="{{name}} lost" class="loser"/>
+            <img src="{{#avatarSize}}60{{/avatarSize}}" alt="{{name}} lost" title="{{name}} lost" class="avatar loser"/>
         {{/losingPlayers}}
         
     {{/isTeamGame?}}
