@@ -44,6 +44,9 @@ class PoolScoring < Sinatra::Base
         @starPlayer = pc.star
         @newRecruit = pc.newest
         @title = 'Welcome!'
+        
+        puts "new recuit: #{@newRecruit.to_s}"
+        
         mustache :'index'
     end
   
