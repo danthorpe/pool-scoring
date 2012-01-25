@@ -365,7 +365,7 @@ hr {
 .field .help {
     margin: -.667em 0 1.333em 0;
     display: block;
-    font-size: 0.750em;
+    font-size: .750em;
     line-height: 1em;
 }
 
@@ -417,6 +417,16 @@ hr {
         background: #5fd93b;
         outline: none;
     }
+
+/* error-reporting */
+.errors {
+    margin: .875em 0;
+    padding: .313em 1em;
+    background: #f7cfcf;
+    background: rgba(255, 0, 0, .1);
+    border: .125em solid #ec8484;
+    color: #c00;
+}
 
 /* miscellany */
 .field ol, .field ul {
