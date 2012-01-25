@@ -129,8 +129,9 @@ class Game
     end 
   
     def endGame(didBreakingTeamWin, foulOnBlack = false)
-        now = Time.now        
-        @endDate = now.getutc
+        t = Time.now        
+        t.utc
+        @endDate = t
         @breakingTeamWon = didBreakingTeamWin
         @foulOnBlack = foulOnBlack
     end
