@@ -18,7 +18,7 @@ var, video, wbr, .reset {
     padding: 0;
     border: 0;
     outline: 0;
-    font-weight: lighter;
+    font-weight: normal;
     font-style: normal;
     font-size: 100%;
     font-family: inherit;
@@ -96,10 +96,12 @@ sub, sup {
 }
 h6, h5, h4, h3, h2, h1 {
     line-height: 1.625em;
+    font-weight: lighter;
 }
 h6, h5 {
     font-size: 1.125em;
     line-height: 1.444em;
+    font-weight: normal;
     margin: .778em 0;
 }
 h4 {
@@ -515,7 +517,6 @@ body {
                 padding: 0 .5em;
                 background: rgba(255, 255, 255);
                 background: rgba(255, 255, 255, .4);
-                font-weight: normal;
                 -moz-transition: all .2s ease-in;
                 -ms-transition: all .2s ease-in;
                 -webkit-transition: all .2s ease-in;
@@ -671,7 +672,6 @@ body {
         zoom: 1;
         background: #fff;
         background: rgba(255, 255, 255, .4);
-        font-weight: normal;
     }
     .player .stats .wins {
         color: #060;
