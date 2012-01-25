@@ -77,33 +77,37 @@ class PoolScoring < Sinatra::Base
             
             # Check to see if the name is set
             if !params['name'] || params['name'] == ''
-                @errors.push("Name is a required field.")
+                @errors.push "Name is a required field."
+            
+            # Check to see if the name is valid
+            elsif !params['name'].match(/^.{1,60}$/i)
+                @errors.push "That's a bit long for a name, isn't it?"
             end
             
             # Check to see if the username is set
             if !params['username'] || params['username'] == ''
-                @errors.push("Username is a required field.")
+                @errors.push "Username is a required field."
                 
             # Check to see if the username is valid
-            elsif !params['username'].match(/^[a-z0-9\_]+$/i)
-                @errors.push("Usernames must be alphanumeric with underscores. Please enter a valid username.")
+            elsif !params['username'].match(/^[a-z0-9\_]{3,20}$/i)
+                @errors.push "Usernames must be alphanumeric with underscores, and between 3 and 20 characters in length. Please enter a valid username."
                 
             # Check to see if the username is taken
             elsif !pc.isUsernameAvailable params['username']
-                @errors.push("The username '#{ params['username'] }' has been taken already. Please try another one.")
+                @errors.push "The username '#{ params['username'] }' has been taken already. Please try another one."
             end
             
             # Check to see if the email is set
             if !params['email'] || params['email'] == ''
-                @errors.push("Email Address is a required field.")
+                @errors.push "Email Address is a required field."
             
             # Check to see if the email is valid... Actually, you know what? I can't be bothered right now...
             elsif false
-                @errors.push("Please enter a valid email address.")
+                @errors.push "Please enter a valid email address."
             
             # Check to see if the email is taken
             elsif !pc.isEmailAvailable params['email']
-                @errors.push("The email address '#{ params['email'] }' has been registered to another user. Please try another one.")
+                @errors.push "The email address '#{ params['email'] }' has been registered to another user. Please try another one."
             end
             
             # All OK then!
@@ -116,7 +120,7 @@ class PoolScoring < Sinatra::Base
                 if pc.createPlayer params
                     redirect to("/player/#{ params['username'] }")
                 else
-                    @errors.push('Something broke... Blame Dan.')
+                    @errors.push 'Something broke... Blame Dan.'
                 end
             end
             
