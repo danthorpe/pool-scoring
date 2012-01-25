@@ -141,7 +141,7 @@ class PoolScoring < Sinatra::Base
         # Todo: the view for this needs tidying up - it ideally shouldn't use the player partial
         mustache :'players/profile'
     end
-
+    
     # Player vs Player statistics
     get '/player/:primary/:secondary' do
     
@@ -158,8 +158,8 @@ class PoolScoring < Sinatra::Base
         # Should probably generate more interesting statistics, but for 
         # now can just list the games.
         
-        @title = "#{ @primary.name } vs #{ @secondary.name }"
-        mustache :'players/vs'
+        @title = "Comparing #{ @primary.name } with #{ @secondary.name }"
+        mustache :'players/compare/view'
         
     end
     
