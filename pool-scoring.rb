@@ -33,7 +33,8 @@ class PoolScoring < Sinatra::Base
     
     # Register mustache and initialise the Views module - Mustache requires this
     register Mustache::Sinatra
-    require_relative 'Views/Layout'
+    require './Views/Layout.rb'
+    require './Views/Index.rb'    
     module Views end
 
 
