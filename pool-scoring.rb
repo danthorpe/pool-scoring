@@ -11,21 +11,14 @@ require './Controllers/PlayerController.rb'
 require './Controllers/GameController.rb'
 
 class PoolScoring < Sinatra::Base
-    
-    # Register sinatra multi-routes
-    register Sinatra::MultiRoute
-    
-    # Register mustache and initialise the Views module - Mustache requires this
-    register Mustache::Sinatra
-    module Views end
-  
+      
     # Define which CouchDB instance to use.
     if ENV['CLOUDANT_URL']
         set :couchdb, ENV['CLOUDANT_URL']
     else
         set :couchdb, 'http://poolscoring:yourmum@localhost:5984'
     end
-
+    
     set :root, File.dirname(__FILE__)
     set :public_folder, './Public'
     set :static, true
@@ -34,6 +27,18 @@ class PoolScoring < Sinatra::Base
         :templates => './Templates'
     }
 
+
+    # Register sinatra multi-routes
+    register Sinatra::MultiRoute
+    
+    # Register mustache and initialise the Views module - Mustache requires this
+    register Mustache::Sinatra
+    Dir["./Views/*.rb", "./Views/*/*.rb"].each do |file| 
+        require file
+    end
+    module Views end
+
+
     # Index page.
     get '/' do
         gc = GameController.new settings.couchdb
@@ -41,7 +46,7 @@ class PoolScoring < Sinatra::Base
         pc = PlayerController.new settings.couchdb
         @starPlayer = pc.star
         @newRecruit = pc.newest
-        @title = 'Welcome!'
+        @title = 'Welcome!'        
         mustache :'index'
     end
   

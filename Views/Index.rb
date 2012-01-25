@@ -1,6 +1,8 @@
 # @author Rowan Manning info@rowanmanning.co.uk
 # @date 12/12/2011
 
+require './Views/Layout.rb'
+
 class PoolScoring
     module Views
     
