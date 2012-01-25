@@ -33,7 +33,7 @@ class PoolScoring < Sinatra::Base
     
     # Register mustache and initialise the Views module - Mustache requires this
     register Mustache::Sinatra
-    Dir["./Views/*.rb", "./Views/*/*.rb"].each do |file| 
+    Dir["./Views/*.rb", "./Views/*/*.rb", "./Views/*/*/*.rb"].each do |file| 
         require file
     end
     module Views end
