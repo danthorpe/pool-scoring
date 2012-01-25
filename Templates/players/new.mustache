@@ -3,13 +3,15 @@
 
 <form method="post" action="{{request.path}}">
     
+    {{> partials/form-errors}}
+    
     <div class="container">
         
         <div class="third">
             <div class="field text-field inner">
                 <label for="name">Name</label>
                 <span class="help">Enter the player's name</span>
-                <input type="text" name="name" id="name" value=""/>
+                <input type="text" name="name" id="name" value="{{request.params.name}}"/>
             </div>
         </div>
         
@@ -17,7 +19,7 @@
             <div class="field text-field inner">
                 <label for="username">Username</label>
                 <span class="help">Enter a short username for the player (alphanumeric + underscore)</span>
-                <input type="text" name="username" id="username" value=""/>
+                <input type="text" name="username" id="username" value="{{request.params.username}}"/>
             </div>
         </div>
         
@@ -25,7 +27,7 @@
             <div class="field text-field inner">
                 <label for="email">Email Address</label>
                 <span class="help">Enter the player's (unique) email address</span>
-                <input type="email" name="email" id="email" value=""/>
+                <input type="email" name="email" id="email" value="{{request.params.email}}"/>
             </div>
         </div>
     

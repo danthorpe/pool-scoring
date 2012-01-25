@@ -64,31 +64,68 @@ class PoolScoring < Sinatra::Base
         @players = pc.all
         mustache :'players/index'
     end
-  
+    
     # Create players page.
-    get '/player/new' do
+    route :get, :post, '/player/new' do
+        
+        # POST
+        @errors = Array.new
+        if request.request_method == 'POST'
+            
+            # Create a player controller
+            pc = PlayerController.new settings.couchdb
+            
+            # Check to see if the name is set
+            if !params['name'] || params['name'] == ''
+                @errors.push("Name is a required field.")
+            end
+            
+            # Check to see if the username is set
+            if !params['username'] || params['username'] == ''
+                @errors.push("Username is a required field.")
+                
+            # Check to see if the username is valid
+            elsif !params['username'].match(/^[a-z0-9\_]+$/i)
+                @errors.push("Usernames must be alphanumeric with underscores. Please enter a valid username.")
+                
+            # Check to see if the username is taken
+            elsif !pc.isUsernameAvailable params['username']
+                @errors.push("The username '#{ params['username'] }' has been taken already. Please try another one.")
+            end
+            
+            # Check to see if the email is set
+            if !params['email'] || params['email'] == ''
+                @errors.push("Email Address is a required field.")
+            
+            # Check to see if the email is valid... Actually, you know what? I can't be bothered right now...
+            elsif false
+                @errors.push("Please enter a valid email address.")
+            
+            # Check to see if the email is taken
+            elsif !pc.isEmailAvailable params['email']
+                @errors.push("The email address '#{ params['email'] }' has been registered to another user. Please try another one.")
+            end
+            
+            # All OK then!
+            if @errors.size == 0
+                
+                # a little sanitisation
+                params['username'].downcase!
+                params['email'].downcase!
+                
+                if pc.createPlayer params
+                    redirect to("/player/#{ params['username'] }")
+                else
+                    @errors.push('Something broke... Blame Dan.')
+                end
+            end
+            
+        end
+                
+        # GET
         @title = 'Create a Player'
         mustache :'players/new'
-    end
-    post '/player/new' do
-        # Create a player controller
-        pc = PlayerController.new settings.couchdb    
-        # Check to see if the username & email are taken
-        if !pc.isUsernameAvailable params['username']
-            body "#{params['username']} is taken"
-            status 400
-            return
-        elsif !pc.isEmailAvailable params['email']
-            body "#{params['email']} is taken"
-            status 400
-            return
-        else
-            if pc.createPlayer params
-                redirect to("/player/#{params['username']}")
-            else
-            
-            end
-        end
+        
     end
 
     # Single player profile.
