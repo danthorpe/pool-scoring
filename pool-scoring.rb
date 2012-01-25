@@ -19,8 +19,10 @@ class PoolScoring < Sinatra::Base
     register Mustache::Sinatra
     module Views end
   
+    print ENV
+  
     # Define which CouchDB instance to use.
-    if ENV['CLOUDANT_URL']
+    if ENV['CLOUDANT_URL'] != ""
         set :couchdb, ENV['CLOUDANT_URL']
     else
         set :couchdb, 'http://poolscoring:yourmum@localhost:5984'
