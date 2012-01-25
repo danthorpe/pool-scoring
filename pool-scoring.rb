@@ -69,6 +69,7 @@ class PoolScoring < Sinatra::Base
     route :get, :post, '/player/new' do
         
         # POST
+        # Todo: Validation could definitely be more lean. Maybe look into a simple library for this.
         @errors = Array.new
         if request.request_method == 'POST'
             
@@ -163,21 +164,68 @@ class PoolScoring < Sinatra::Base
         mustache :'games/index'
     end
     
-    # Record a game
-    get '/game/new' do
-        @title = 'Record a Game'
+    # Record games page.
+    route :get, :post, '/game/new' do
+        
+        # Create a Player Controller
         pc = PlayerController.new settings.couchdb
+        
+        # POST
+        # Todo: Validation could definitely be more lean. Maybe look into a simple library for this.
+        @errors = Array.new
+        if request.request_method == 'POST'
+            
+            # Create a Game Controller
+            gc = GameController.new settings.couchdb
+            
+            # Make sure we have at least two players
+            if params['breaking-player'] == nil or params['other-player'] == nil or params['breaking-player'].size == 0 or params['other-player'].size == 0
+                @errors.push "Please select at least one player on each team."
+            else
+            
+                # Make sure we have an arrays of players - not strings
+                if not params['breaking-player'].kind_of? Array
+                    params['breaking-player'] = [params['breaking-player']];
+                end
+                if not params['other-player'].kind_of? Array
+                    params['other-player'] = [params['other-player']];
+                end
+                
+                # Check to see if the usernames exist
+                allUsernames = params['breaking-player'] + params['other-player']
+                for username in allUsernames do
+                    if pc.isUsernameAvailable username
+                        @errors.push "A user with username '#{ username }' does not exist."
+                    end
+                end
+            
+            end
+            
+            # Make sure we have a decision on whether the breaking player won
+            if params['breaking-player-won'] == nil
+                @errors.push "Please select a winning team."
+            end
+            
+            # Todo: work out how we pass the radio/checkbox values back to the view on error, so no user input is lost.
+            
+            # All OK then!
+            if @errors.size == 0
+                game = gc.record params
+                if game
+                    redirect to("/game/#{ game._id }")
+                else
+                    @errors.push 'Something broke... Blame Dan.'
+                end
+            end
+            
+        end
+        
+        @title = 'Record a Game'
         @players = pc.all
         mustache :'games/new'
-    end  
-    post '/game/new' do
-        # Create a Game Controller
-        gc = GameController.new settings.couchdb
-        # Record this game
-        @game = gc.record params
-        redirect to("/game/#{@game._id}")
+        
     end
-
+    
     # Display a game
     get '/game/:gameId' do
         # Create a Game Controller

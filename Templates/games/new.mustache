@@ -3,6 +3,8 @@
 
 <form method="post" action="{{request.path}}">
     
+    {{> partials/form-errors}}
+    
     <div id="team-picker" class="container">
         
         <div class="half">
@@ -67,7 +69,7 @@
     <div class="field checkbox-field">
         <label class="title">Game Details</label>
         <label for="foul-on-black">Was there a foul on the black?</label>
-        <input type="checkbox" name="foul-on-black" id="foul-on-black"/>
+        <input type="checkbox" name="foul-on-black" id="foul-on-black" {{#request.params.foul-on-black}}checked{{/request.params.foul-on-black}}/>
     </div>
     
     <div class="field button-field">
