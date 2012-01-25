@@ -163,6 +163,9 @@ class PlayerController
         # Set the username
         doc[:username] = params["username"]
         
+        # Set the guest flag
+        doc[:guest] = params["guest"] ? true : false
+        
         # Set the current date
         doc[:date] = Time.now.to_i
         

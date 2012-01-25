@@ -37,6 +37,11 @@ class Person
         avatarSize.call
     end
     
+    # Is the user a guest?
+    def guest?
+        @doc['guest'] ? true : false
+    end
+    
     def to_s
         "(#{self.username}, #{self.email})"
     end
