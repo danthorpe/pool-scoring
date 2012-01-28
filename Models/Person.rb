@@ -127,7 +127,9 @@ class Person
 
     def winPercentage
         # Use CouchDB views
-        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Person/_view/winPercentage?group=true&key=%22" + self._id + "%22"
+        req = @server + "/#{CouchDB::DB}/_design/Person/_view/winPercentage?group=true&key=%22" + self._id + "%22"
+        puts "getting win percentage: #{req}"
+        response = CouchRest.get req
         if response["rows"].length == 1
             return response["rows"][0]["value"]
         else
