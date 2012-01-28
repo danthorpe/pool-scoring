@@ -56,8 +56,7 @@ class Person
             
             # Get all the games for the player
             req = @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?descending=true&key=%22" + self._id + "%22"
-            print "Getting games for #{self.username}: #{req}\n"            
-            response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?descending=true&key=%22" + self._id + "%22"
+            response = CouchRest.get req
 
             # Define an array for Games
             @games = Array.new
