@@ -53,9 +53,10 @@ class Person
     def games
         
         if @games == nil
-            print "Getting games for #{self.username}\n"
             
             # Get all the games for the player
+            req = @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?descending=true&key=%22" + self._id + "%22"
+            print "Getting games for #{self.username}: #{req}\n"            
             response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?descending=true&key=%22" + self._id + "%22"
 
             # Define an array for Games
@@ -74,93 +75,83 @@ class Person
     
     # Basic player statistics
     def stats
-        # Store simple statistical measures in a hash
-        stats = Hash.new
-        
-        # Get the player's games
-        games = self.games
-        
-        # Number of games played in total
-        stats[:total] = games.count
-        stats[:wins] = 0
-        stats[:losses] = 0
-        stats[:percentage] = 0
-         
-        # Count the number of wins/losses
-        games.each do |game|
-            if game.winningPlayerIds.include? self._id
-                stats[:wins] += 1
-            else
-                stats[:losses] += 1
+        if @stats == nil
+
+            # Store simple statistical measures in a hash
+            @stats = Hash.new
+            
+            # Get the player's games
+            allGames = self.games
+            
+            # We only calculate stats over a rolling 7 day period
+            nSecsWeek = 604800            
+            t = Time.now        
+            t.utc
+            minimunDateTimestamp = t.to_i - nSecsWeek
+
+            games = allGames.select do |game|
+                game.date > minimunDateTimestamp
             end
-        end
-        
-        # Calculate the percentage wins
-        if stats[:total] != 0
-            stats[:percentage] = ((stats[:wins].to_f / stats[:total].to_f).to_f * 100).to_i
+            
+            # Number of games played in total
+            @stats[:total] = games.count
+            @stats[:wins] = 0
+            @stats[:losses] = 0
+            @stats[:percentage] = 0
+             
+            # Count the number of wins/losses
+            games.each do |game|
+                if game.winningPlayerIds.include? self._id
+                    @stats[:wins] += 1
+                else
+                    @stats[:losses] += 1
+                end
+            end
+            
+            # Calculate the percentage wins
+            if @stats[:total] != 0
+                @stats[:percentage] = ((@stats[:wins].to_f / @stats[:total].to_f).to_f * 100).to_i
+            end
+
         end
 
-        return stats
+        return @stats
     end
 
 
     # Player statistics
     def numberOfWins
-        # Use CouchDB views
-        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Person/_view/wins?group=true&key=%22" + self._id + "%22"
-        if response["rows"].length == 1
-            return response["rows"][0]["value"]
-        else
-            return 0
-        end
+        return self.stats[:wins]
     end
 
     def numberOfLosses
-        # Use CouchDB views
-        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Person/_view/losses?group=true&key=%22" + self._id + "%22"
-        if response["rows"].length == 1
-            return response["rows"][0]["value"]
-        else
-            return 0
-        end
+        return self.stats[:losses]
     end
 
     def winPercentage
-        # Use CouchDB views
-        req = @server + "/#{CouchDB::DB}/_design/Person/_view/winPercentage?group=true&key=%22" + self._id + "%22"
-        puts "getting win percentage: #{req}"
-        response = CouchRest.get req
-        if response["rows"].length == 1
-            return response["rows"][0]["value"]
-        else
-            return 0
-        end
+        return self.stats[:percentage]
     end
     
     def winPercentageRounded
-        if winPercentage != nil
-            return winPercentage.round
+        percentage = self.stats[:percentage]
+        if percentage != nil
+            return percentage.round
         else
             return 0
         end
     end
 
     def lossPercentage
-        # Use CouchDB views
-        response = CouchRest.get @server + "/#{CouchDB::DB}/_design/Person/_view/lossPercentage?group=true&key=%22" + self._id + "%22"
-        if response["rows"].length == 1
-            return response["rows"][0]["value"]
-        else
-            return 0
-        end
+        return 100 - self.stats[:percentage]
     end
     
     def lossPercentageRounded
+        lossPercentage = self.lossPercentage
         if lossPercentage != nil
             return lossPercentage.round
         else
             return 0
-        end            
+        end
     end
 
 end
