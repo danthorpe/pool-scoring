@@ -211,6 +211,14 @@ class PoolScoring < Sinatra::Base
                     end
                 end
             
+                # Check to make sure that there is no duplication of players between the
+                # breaking team and other team
+                params['breaking-player'].each do |breakingPlayer|
+                    if params['other-player'].include?(breakingPlayer)
+                        @errors.push "Player #{ username } cannot be on both teams."                    
+                    end
+                end
+            
             end
             
             # Make sure we have a decision on whether the breaking player won
