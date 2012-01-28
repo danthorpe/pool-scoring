@@ -85,7 +85,8 @@ class PlayerController
     # This gets a single player
     def newest
         # Get the newest players
-        result = CouchRest.get  @server + "/#{CouchDB::DB}/_design/Person/_view/newest?descending=true&limit=1"
+        req = @server + "/#{CouchDB::DB}/_design/Person/_view/byDate?descending=true&limit=1"
+        result = CouchRest.get req
         if result["rows"].length == 1
             return Person.new(result['rows'][0]['value'], @server)
         else
