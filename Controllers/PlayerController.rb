@@ -66,7 +66,7 @@ class PlayerController
 
         # Sort the objects        
         return result['rows'].sort_by { |item|
-            [-item['value']['score'], -item['value']['points'], -item['value']['wins'], item['value']['losses']]
+            [-item['value']['score'], -item['value']['wins'], item['value']['losses']]
         }.enum_for(:each_with_index).collect { |item, i|
             {:person => self.byId(item['key']), :rank => item['value'], :position => i + 1}
         }
