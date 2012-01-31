@@ -66,7 +66,7 @@ class PoolScoring < Sinatra::Base
     get '/players' do
         @title = 'Players'
         pc = PlayerController.new settings.couchdb
-        @players = pc.all
+        @players = pc.all(true)
         mustache :'players/index'
     end
     
@@ -241,7 +241,7 @@ class PoolScoring < Sinatra::Base
         end
         
         @title = 'Record a Game'
-        @players = pc.all
+        @players = pc.all(true)
         mustache :'games/new'
         
     end

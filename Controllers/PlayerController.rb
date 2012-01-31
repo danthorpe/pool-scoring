@@ -30,13 +30,20 @@ class PlayerController
     #    }
     #  }
     #
-    def all
+    def all(orderByName = false)
         
         # Define an array for people
         people = Array.new
         
         # Get all the players
-        result = CouchRest.get  @server + "/#{CouchDB::DB}/_design/Person/_view/all"
+        if orderByName
+            req = @server + "/#{CouchDB::DB}/_design/Person/_view/byName"
+        else
+            req = @server + "/#{CouchDB::DB}/_design/Person/_view/all"
+        end
+        
+        # Execute the request
+        result = CouchRest.get req
         
         # Iterate through the people and create Person objects
         result['rows'].each do |row|    
