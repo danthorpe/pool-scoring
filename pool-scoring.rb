@@ -27,7 +27,6 @@ class PoolScoring < Sinatra::Base
         :templates => './Templates'
     }
 
-
     # Register sinatra multi-routes
     register Sinatra::MultiRoute
     
@@ -38,6 +37,9 @@ class PoolScoring < Sinatra::Base
     end
     module Views end
 
+    before do
+      cache_control :public, :must_revalidate, :max_age => 60
+    end
 
     # Index page.
     get '/' do
