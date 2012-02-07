@@ -22,29 +22,48 @@ class GameController
 
     # All games currently on the database
     #
-    # This uses the `all` view in the Game design 
+    # This uses the `byDate` view in the Game design 
     # document on the database, which is:
     #  
     #  function(doc) {
     #    if (doc.type == "Game") {
-    #      emit([doc.date, doc._id], doc);
+    #      emit(doc.date, doc);
     #    }
     #  }
-    #
-    def all
+    # @param type to specify the date range given the constants
+    # @param to force retrieval
+    def all(type = Person::STATS_ALL_TIME, force = false)
     
-        # Define an array for games
-        games = Array.new
-        
-        # Get all the games
-        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/all?descending=true"
-        
-        # Iterate through the game and create Game objects
-        result['rows'].each do |row|    
-            games.push Game.new(row['value'], @server)
+        if force || @games == nil || @games[type] == nil
+
+            # Define our key objects
+            nSecsWeek = 604800            
+            t = Time.now        
+            t.utc
+            
+            startkey = t.to_i
+            endkey = 0
+            
+            # Get all the games for the player
+            if type == Person::STATS_ALL_TIME            
+                endkey = t.to_i - nSecsWeek
+            end
+            
+            req = @server + "/#{CouchDB::DB}/_design/Game/_view/byDate?descending=true&startkey=#{URI.escape(startkey.to_json, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}&endkey=#{URI.escape(endkey.to_json, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"
+
+            # Get the response from CouchDB
+            response = CouchRest.get req
+
+            # Define an hash for Games
+            @games = Hash.new if @games == nil
+            @games[type] = Array.new
+            response['rows'].each do |item|
+                @games[type].push Game.new(item['value'], @server)
+            end
         end
-        
-        return games
+
+        # Return the games
+        return @games[type]
     end
     
     # Get recent games.
@@ -53,18 +72,8 @@ class GameController
         # Sanitise the limit
         limit = limit.to_i
         
-        # Define an array for games
-        games = Array.new
-        
-        # Get the games
-        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/all?descending=true&limit=" + limit.to_s
-        
-        # Iterate through the game and create Game objects
-        result['rows'].each do |row|    
-            games.push Game.new(row['value'], @server)
-        end
-        
-        return games
+        # Slice the games
+        return self.all.slice(0, limit)
     end
 
     # Get a game by identifier
