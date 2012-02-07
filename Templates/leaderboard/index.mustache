@@ -1,4 +1,18 @@
 
 <h1>{{title}}</h1>
 
-<p>Leaderboard FTW!</p>
+<ol class="container items players leaderboard">
+    {{#leaderboard}}
+        
+        <li class="whole position-{{position}}">
+            
+            <h3 class="position">{{position}}</h3>
+            
+            {{#person}}
+                {{> partials/player}}
+            {{/person}}
+            
+        </li>
+        
+    {{/leaderboard}}
+</ol>

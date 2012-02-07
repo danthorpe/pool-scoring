@@ -11,19 +11,50 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     
+    <link rel="apple-touch-icon" href="/style/assets/icon.iphone.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="/style/assets/icon.ipad.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="/style/assets/icon.iphone-retina.png"/>
+    
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Quicksand:300,400,700"/>
     <link rel="stylesheet" type="text/css" href="/style/main.css"/>
     
 </head>
 <body>
-
-    <div class="header">
+    
+    {{> partials/ie-no-no}}
+    
+    <div id="header" class="header">
         {{> partials/header}}
     </div>
 
     <div class="body">
         {{{yield}}}
     </div>
-
+    
+    <div class="footer">
+        {{> partials/footer}}
+    </div>
+    
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        if (document.location.hostname !== 'localhost') {
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-28632753-1']);
+            _gaq.push(['_setDomainName', 'pool-scoring.heroku.com']);
+            _gaq.push(['_setAllowLinker', true]);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            } ());
+        }
+    </script>
+    
+    <!-- Yeah, yeah, I know. We'll get around to minifying all of this -->
+    <script src="/script/vendor/jquery.js"></script>
+    <script src="/script/pool/Header.js"></script>
+    <script src="/script/main.js"></script>
+    
 </body>
 </html>

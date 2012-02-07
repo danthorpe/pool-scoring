@@ -1,21 +1,52 @@
 
-{{#game.breakingTeamWon}}
+{{#game}}
     
-    <p>{{game.breakingPlayers}} won!</p>
+    <h1>
+        {{description}}
+        {{#foulOnBlack}}
+            <span class="win-details">
+                (foul on the black)
+            </span>
+        {{/foulOnBlack}}
+    </h1>
     
-    <p>{{game.otherPlayers}} lost...</p>
+    <p class="time">
+        <time datetime="{{#dateFormatted}}%FT%T%z{{/dateFormatted}}">
+            {{#dateFormatted}}%B %d, %Y at %l:%M%P{{/dateFormatted}}
+        </time>
+    </p>
     
-{{/game.breakingTeamWon}}
-{{^game.breakingTeamWon}}
-
-    <p>{{game.otherPlayers}} won!</p>
+    <h2>Players in this Game</h2>
     
-    <p>{{game.breakingPlayers}} lost...</p>
-
-{{/game.breakingTeamWon}}
-
-{{#game.foulOnBlack}}
-    <p>This game was won because there was a foul on the black.</p>
-{{/game.foulOnBlack}}
-
-{{game.date}}
+    {{^isTeamGame?}}
+        <p>
+            <a href="/player/{{#winningPlayers}}{{username}}{{/winningPlayers}}/{{#losingPlayers}}{{username}}{{/losingPlayers}}">
+                Compare
+                {{#winningPlayers}}{{name}}{{/winningPlayers}}
+                with
+                {{#losingPlayers}}{{name}}{{/losingPlayers}}
+            </a>
+        </p>
+    {{/isTeamGame?}}
+    
+    <ul class="container items players">
+        
+        {{#winningPlayers}}
+            
+            <li class="half">
+                {{> partials/player}}
+            </li>
+        
+        {{/winningPlayers}}
+        
+        {{#losingPlayers}}
+            
+            <li class="half">
+                {{> partials/player}}
+            </li>
+        
+        {{/losingPlayers}}
+        
+    </ul>
+    
+{{/game}}

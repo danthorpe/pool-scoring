@@ -30,17 +30,24 @@ class PlayerController
     #    }
     #  }
     #
-    def all
+    def all(orderByName = false)
         
         # Define an array for people
         people = Array.new
         
         # Get all the players
-        result = CouchRest.get  @server + "/#{CouchDB::DB}/_design/Person/_view/all"
+        if orderByName
+            req = @server + "/#{CouchDB::DB}/_design/Person/_view/byName"
+        else
+            req = @server + "/#{CouchDB::DB}/_design/Person/_view/all"
+        end
+        
+        # Execute the request
+        result = CouchRest.get req
         
         # Iterate through the people and create Person objects
         result['rows'].each do |row|    
-            people.push Person.new row['value']
+            people.push Person.new(row['value'], @server)
         end
         
         return people    
@@ -59,18 +66,41 @@ class PlayerController
     # Get the leaderboard
     #
     # This gets a leaderboard of players
-    def leaderboard
+    def leaderboard        
         # Get the key/values
-        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/pointsLeaderboard?group=true"
-        # Create an array for the result
-        ranks = Array.new
-        # Sort the objects
-        return result["rows"].sort_by { |a|
-            -a['value'].to_f
-        }.collect { |item|
-            {:person => self.byId(item['key']), :rank => item['value']}
+        req = @server + "/#{CouchDB::DB}/_design/Game/_view/pointsLeaderboard?group=true"
+        result = CouchRest.get req
+
+        # Sort the objects        
+        return result['rows'].sort_by { |item|
+            [-item['value']['points'], -item['value']['wins'], item['value']['losses']]
+        }.enum_for(:each_with_index).collect { |item, i|
+            {:person => self.byId(item['key']), :rank => item['value'], :position => i + 1}
         }
     end
+
+    # Get the current star player
+    #
+    # This gets a single player
+    def star
+        leaderboard = self.leaderboard
+        return leaderboard[0] ? leaderboard[0][:person] : nil
+    end
+
+    # Get the newest player
+    #
+    # This gets a single player
+    def newest
+        # Get the newest players
+        req = @server + "/#{CouchDB::DB}/_design/Person/_view/byDate?descending=true&limit=1"
+        result = CouchRest.get req
+        if result["rows"].length == 1
+            return Person.new(result['rows'][0]['value'], @server)
+        else
+            return nil
+        end
+    end
+
 
 
     # Get a specific player using a username
@@ -87,7 +117,7 @@ class PlayerController
     def playerWithUsername(username)
         result = CouchRest.get  @server + "/#{CouchDB::DB}/_design/Person/_view/byUsername?key=%22#{username}%22"
         if result["rows"].length == 1
-            return Person.new result['rows'][0]['value']
+            return Person.new(result['rows'][0]['value'], @server)
         else
             return nil
         end
@@ -107,7 +137,7 @@ class PlayerController
     def playerWithEmail(email)
         result = CouchRest.get  @server + "/#{CouchDB::DB}/_design/Person/_view/byEmail?key=%22#{email}%22"
         if result["rows"].length == 1
-            return Person.new result['rows'][0]['value']
+            return Person.new(result['rows'][0]['value'], @server)
         else
             return nil
         end
@@ -141,15 +171,20 @@ class PlayerController
         # Set the username
         doc[:username] = params["username"]
         
+        # Set the guest flag
+        doc[:guest] = params["guest"] ? true : false
+        
+        # Set the current date
+        doc[:date] = Time.now.to_i
+        
         # Get a new id from the CouchDB server
         uuid = CouchDB.nextUUID @server
         doc[:_id] = uuid
         
         # Put it to the database
-        CouchRest.put @server + "/#{CouchDB::DB}/#{uuid}", doc
+        response = CouchRest.put @server + "/#{CouchDB::DB}/#{uuid}", doc
         
-        # Return the person
-        return Person.new CouchRest.get @server + "/#{CouchDB::DB}/#{uuid}"
+        return response != false
     
     end
 

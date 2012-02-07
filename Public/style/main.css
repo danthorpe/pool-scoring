@@ -18,7 +18,7 @@ var, video, wbr, .reset {
     padding: 0;
     border: 0;
     outline: 0;
-    font-weight: lighter;
+    font-weight: normal;
     font-style: normal;
     font-size: 100%;
     font-family: inherit;
@@ -85,7 +85,7 @@ body {
 }
 
 /* layout */
-blockquote, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, ul {
+blockquote, h1, h2, h3, h4, h5, h6, hr, ol, p, pre, ul, .field {
     margin: .875em 0;
 }
 
@@ -96,10 +96,12 @@ sub, sup {
 }
 h6, h5, h4, h3, h2, h1 {
     line-height: 1.625em;
+    font-weight: lighter;
 }
 h6, h5 {
     font-size: 1.125em;
     line-height: 1.444em;
+    font-weight: normal;
     margin: .778em 0;
 }
 h4 {
@@ -199,7 +201,7 @@ li ol, li ul {
 /* preformatted text and code */
 
 pre, code {
-    font-family: Courier, 'Courier New', monospace;
+    font-family: 'Courier New', Courier, monospace;
 }
 code {
     padding: .214em .357em;
@@ -243,17 +245,16 @@ hr {
 /*========================================================*/
 /* grid */
 
-/* inner element for gutters */
-.inner {
-    padding: 0 1em 0 0;
-}
-
 /* columns */
 .half, .third, .quarter, .fifth, .sixth {
     float: left;
 }
 .half:nth-child(2n+1), .third:nth-child(3n+1), .quarter:nth-child(4n+1), .fifth:nth-child(5n+1), .sixth:nth-child(6n+1) {
     clear: left;
+}
+.whole {
+    width: auto;
+    clear: both;
 }
 .half {
     width: 50%;
@@ -285,6 +286,7 @@ hr {
     width: 80%;
     min-width: 280px;
     max-width: 900px;
+    min-height: 400px;
     margin: auto;
     padding: 1em;
 }
@@ -340,12 +342,116 @@ hr {
 }
 
 /*========================================================*/
+/* forms */
+
+/* fields */
+.text-field, .select-field, .checkbox-field, .radio-field, .button-field {
+    margin-right: 1em;
+}
+
+/* labels */
+.field label {
+    display: block;
+    margin: .538em 0;
+}
+.checkbox-field label, .radio-field label {
+    display: inline;
+    display: inline-block;
+    zoom: 1;
+}
+.field label.title {
+    display: block;
+    font-size: 1.375em;
+    line-height: 1.182em;
+}
+.field .help {
+    margin: -.667em 0 1.333em 0;
+    display: block;
+    font-size: .750em;
+    line-height: 1em;
+}
+
+/* inputs */
+.text-field input, .select-field input {
+    display: block;
+}
+.text-field input {
+    width: 100%;
+    max-width: 260px;
+    padding: .538em;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fff;
+    background: rgba(255, 255, 255, .4);
+    border: .125em solid rgb(46, 152, 171);
+    border-radius: 0;
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: #333;
+    box-shadow: none;
+    -webkit-appearance: none;
+}
+    .text-field input:focus {
+        background: #fff;
+        background: rgba(255, 255, 255, .8);
+        border: .125em solid #e9c05f;
+        outline: none;
+    }
+.button-field input {
+    padding: .538em;
+    background: rgb(46, 152, 171);
+    background: rgba(46, 152, 171, .8);
+    border: .125em solid transparent;
+    border-radius: 0;
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: #fff;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+    .button-field input:hover {
+        background: rgb(46, 152, 171);
+        border: .125em solid rgb(17, 100, 115);
+    }
+    .button-field input:focus, .button-field input:active {
+        background: rgb(23, 127, 145);
+        border: .125em solid rgb(46, 152, 171);
+        outline: none;
+    }
+
+/* error-reporting */
+.errors {
+    margin: .875em 0;
+    padding: .313em 1em;
+    background: #f7cfcf;
+    background: rgba(255, 0, 0, .1);
+    border: .125em solid #ec8484;
+    color: #c00;
+}
+
+/* miscellany */
+.field ol, .field ul {
+    padding: 0;
+    list-style: none;
+}
+
+/*========================================================*/
 /* general styling */
 
 /* body */
 body {
-    background: url('assets/body.png') repeat 0 0;
+    background: #fff url('assets/body.png') repeat 0 0;
 }
+
+/* error pages */
+.error {
+    text-align: center;
+}
+    .error img {
+        border: 2px solid #fff;
+    }
 
 /* navigation */
 .navigation {
@@ -359,7 +465,7 @@ body {
     }
         .navigation li a {
             display: block;
-            border: none;
+            float: left;
         }
 
 /* header */
@@ -376,15 +482,28 @@ body {
     }
     .header a, .header a:visited {
         color: #0a8fa2;
+        border: none;
     }
-    .header .logo {
-        margin: 0;
-        padding: 0 .412em;
+    .header a:focus {
+        outline: none;
+    }
+    .header .title-bar {
         display: block;
         float: left;
-        border: none;
-        font-size: 2.125em;
     }
+        .header .title-bar a {
+            margin: 0;
+            padding: 0 .412em;
+            display: block;
+            float: left;
+            font-size: 2.125em;
+        }
+        .header .title-bar .toggle {
+            display: none;
+            float: right;
+            font-size: 1.625em;
+            padding: 0 1em;
+        }
     .header .navigation {
         padding: 0 1em;
         float: right;
@@ -398,29 +517,106 @@ body {
                 padding: 0 .5em;
                 background: rgba(255, 255, 255);
                 background: rgba(255, 255, 255, .4);
-                font-weight: normal;
                 -moz-transition: all .2s ease-in;
                 -ms-transition: all .2s ease-in;
                 -webkit-transition: all .2s ease-in;
                 transition: all .2s ease-in;
             }
                 .header .navigation li a:hover {
-                    padding: 0 .5em;
                     background: rgb(46, 152, 171);
                     background: rgba(46, 152, 171, .8);
                     color: #fff;
                 }
+            .header .navigation li .add {
+                margin: 0 0 0 .125em;
+                text-align: center;
+            }
 
-/* players */
-.players {
+/* responsive header - small screens */
+@media all and (max-width: 660px) {
+    
+    /* body padding - to compensate for fixed positioning */
+    .has-js .body {
+        padding-top: 5em;
+    }
+    
+    /* header */
+    .header {
+        height: auto;
+        position: static;
+        z-index: 100;
+        width: 100%;
+        overflow: hidden;
+        background: #fff url('assets/header.mobile.png') repeat 0 0;
+        border-bottom: .063em solid #6db7c4;
+    }
+    .has-js .header {
+        position: fixed;
+    }
+    .header.closed {
+        height: 5em;
+    }
+        .header .title-bar {
+            float: none;
+        }
+            .header .title-bar .toggle {
+                display: block;
+            }
+        .header .navigation {
+            float: none;
+        }
+            .header .navigation li {
+                margin: 1em 0;
+                padding: 0;
+                float: none;
+            }
+                .header .navigation li:after {
+                    content: '';
+                    display: table;
+                    clear: both;
+                }
+                .header .navigation li a {
+                    float: none;
+                }
+                .header .navigation li .view, .header .navigation li .add {
+                    margin: 0;
+                    float: left;
+                    -moz-box-sizing: border-box;
+                    -ms-box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+                }
+                .header .navigation li .view {
+                    width: 80%;
+                }
+                .header .navigation li .add {
+                    width: 20%;
+                    background: rgb(46, 152, 171);
+                    background: rgba(46, 152, 171, .8);
+                    color: #fff;
+                }
+    
+}
+
+/* footer */
+.footer {
+    padding: 2em 0 1em 0;
+}
+    .footer .navigation {
+        padding: 0 1em;
+    }
+        .footer li {
+            margin: 0 1em 0 0;
+        }
+
+/* item - shared styles for players and games */
+.items {
     list-style: none;
     padding: 0;
 }
-.player {
-    margin: 0 1em 1em 0;
-    padding: 0;
-}
-    a.player, label.player {
+    .item {
+        margin: 0 1em 1em 0;
+        padding: 0;
         min-height: 80px;
         padding: .875em;
         position: relative;
@@ -434,24 +630,190 @@ body {
         -webkit-transition: all .5s ease-in-out;
         transition: all .5s ease-in-out;
     }
-        a.player:hover, label.player:hover {
+    .whole .item {
+        margin: 0 0 1em 0;
+    }
+        .item:hover, .item:active, .item:focus {
             background: #fff;
             background: rgba(255, 255, 255, .8);
             border: .125em solid rgb(46, 152, 171);
         }
-    .player img {
-        position: absolute;
-        left: 12px;
-        top: 12px;
-        display: block;
-        border: .125em solid #fff;
+        .item img {
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            display: block;
+            overflow: hidden;
+            border: .125em solid #fff;
+        }
+        .item .details {
+            padding: 0 0 0 100px;
+        }
+        .item h3 {
+            margin-top: 0;
+            line-height: 1.308em;
+        }
+
+/* players */
+.player .avatar {
+    width: 80px;
+    height: 80px;
+}
+.player .stats {
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+}
+    .player .stats li {
+        margin: 0 0 .313em 0;
+        padding: 0 .313em;
+        display: inline;
+        display: inline-block;
+        zoom: 1;
+        background: #fff;
+        background: rgba(255, 255, 255, .4);
     }
-    .player .details {
-        padding: 0 0 0 100px;
+    .player .stats .wins {
+        color: #060;
     }
-    .player h3 {
+    .player .stats .losses {
+        color: #c00;
+    }
+    .player .stats .percentage {
+        color: #009cff;
+    }
+
+/* player-as-label */
+label.player {
+    min-height: 30px;
+    margin: 0 1em 1em 0;
+}
+label.player.recruited {
+    border-color: #e9c05f;
+}
+label.player.disabled {
+    opacity: .5;
+}
+    label.player .avatar {
+        width: 30px;
+        height: 30px;
+    }
+    label.player h5, label.player input {
+        line-height: 1.667em;
         margin-top: 0;
-        line-height: 1.308em;
+        margin-bottom: 0;
+        display: inline;
+        display: inline-block;
+        zoom: 1;
     }
+    label.player .details {
+        padding: 0 0 0 50px;
+    }
+
+/* games */
+.game img.winner {
+    z-index: 10;
+}
+.game img.loser {
+    z-index: 5;
+    left: 32px;
+    top: 32px;
+}
+.game .avatar {
+    width: 60px;
+    height: 60px;
+}
+.game .game-players {
+    width: 100px;
+    min-height: 80px;
+    margin: -12px 0 0 0;
+    padding: 0;
+    float: left;
+}
+    .game-teams .game-players .avatar {
+        width: 30px;
+        height: 30px;
+        margin: 12px 12px 0 0;
+        position: static;
+        display: block;
+        float: left;
+    }
+.game .time {
+    margin-bottom: 0;
+}
+
+/* leaderboard */
+.leaderboard > li {
+    padding: 0 0 0 3.188em;
+    position: relative;
+}
+    .leaderboard > li .position {
+        position: absolute;
+        width: 1.346em;
+        margin: 0;
+        padding: 0.308em;
+        left: 0;
+        top: 0;
+        display: block;
+        line-height: 1.308em;
+        background: rgb(46, 152, 171);
+        color: #fff;
+    }
+    .leaderboard .player {
+        border-left: .125em solid rgb(46, 152, 171);
+    }
+/* position 1 */
+.leaderboard > li.position-1 .position {
+    background: #e9c05f;
+}
+.leaderboard > li.position-1 .player {
+    border-left-color: #e9c05f;
+}
+.leaderboard > li.position-1 .player:hover {
+    border-color: #e9c05f;
+}
+/* position 2 */
+.leaderboard > li.position-2 .position {
+    background: #b4bbbf;
+}
+.leaderboard > li.position-2 .player {
+    border-left-color: #b4bbbf;
+}
+.leaderboard > li.position-2 .player:hover {
+    border-color: #b4bbbf;
+}
+/* position 3 */
+.leaderboard > li.position-3 .position {
+    background: #c4834a;
+}
+.leaderboard > li.position-3 .player {
+    border-left-color: #c4834a;
+}
+.leaderboard > li.position-3 .player:hover {
+    border-color: #c4834a;
+}
+
+/*========================================================*/
+/* stuff for the shitty browsers */
+
+.ie-warning {
+    background: #ff0;
+}
+.ie-warning p {
+    width: 80%;
+    min-width: 280px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1em;
+    color: #f0f;
+}
+.ie-warning p, .ie-warning a, .ie-warning em {
+    font-weight: bold;
+}
+.ie-warning a {
+    color: #f0f;
+    border: none;
+    text-decoration: underline;
+}
 
 /*========================================================*/

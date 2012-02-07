@@ -30,9 +30,20 @@ class PoolScoring
                 @request
             end
             
-            # The current time
+            # The current time.
             def now
                 Time.now
+            end
+            
+            # Any user-generated errors that should be presented.
+            # For example, after a failed POST request.
+            def errors
+                @errors || Array.new
+            end
+            
+            # Whether any user-generated errors are present.
+            def hasErrors?
+                self.errors.size > 0
             end
       
         end

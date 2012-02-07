@@ -37,14 +37,34 @@ class GameController
         games = Array.new
         
         # Get all the games
-        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/all"
+        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/all?descending=true"
         
         # Iterate through the game and create Game objects
         result['rows'].each do |row|    
-            people.push Game.new row['value']
+            games.push Game.new(row['value'], @server)
         end
         
-        return game
+        return games
+    end
+    
+    # Get recent games.
+    def recent(limit = 10)
+        
+        # Sanitise the limit
+        limit = limit.to_i
+        
+        # Define an array for games
+        games = Array.new
+        
+        # Get the games
+        result = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/all?descending=true&limit=" + limit.to_s
+        
+        # Iterate through the game and create Game objects
+        result['rows'].each do |row|    
+            games.push Game.new(row['value'], @server)
+        end
+        
+        return games
     end
 
     # Get a game by identifier
@@ -56,6 +76,36 @@ class GameController
         return Game.new(doc, @server)
     end
 
+    # Get the games between two players
+    #
+    # This makes use of a CouchDB view 
+    def gamesBetweenPlayers(a, b)
+
+        # Get all the games for player A
+        responseForA = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?key=%22" + a._id + "%22"
+        gamesForA = responseForA['rows'].collect do |item|
+            item['value']
+        end
+
+        # Get all the games for player B
+        responseForB = CouchRest.get @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?key=%22" + b._id + "%22"
+        gamesForB = responseForB['rows'].collect do |item|
+            item['value']
+        end
+
+        # We just need to union these two results now.
+        gameDocs = gamesForA & gamesForB
+
+        # Create Game objects
+        games = Array.new
+        
+        gameDocs.each do |doc|
+            games.push Game.new(doc, @server)
+        end
+
+        return games
+    end
+
     # Record a new game
     def record(params)
         
@@ -64,14 +114,28 @@ class GameController
         
         # Create a game
         game = Game.new
-            
-        # Get the breaking player
-        player = pc.playerWithUsername params["breaking-player"]
-        game.addPlayerToBreakingTeam player
         
-        # Get the other player
-        player = pc.playerWithUsername params["other-player"]
-        game.addPlayerToOtherTeam player
+        # Make sure we have an array of breaking players
+        if not params["breaking-player"].kind_of? Array
+            params["breaking-player"] = [params["breaking-player"]];
+        end
+        
+        # Get the breaking players
+        for player in params["breaking-player"] do
+            playerModel = pc.playerWithUsername player
+            game.addPlayerToBreakingTeam playerModel
+        end
+        
+        # Make sure we have an array of other players
+        if not params["other-player"].kind_of? Array
+            params["other-player"] = [params["other-player"]];
+        end
+        
+        # Get the other players
+        for player in params["other-player"] do
+            playerModel = pc.playerWithUsername player
+            game.addPlayerToOtherTeam playerModel
+        end
         
         # What was the result?
         if params["breaking-player-won"] == "1"    

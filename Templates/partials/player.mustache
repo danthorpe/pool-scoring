@@ -1,0 +1,18 @@
+
+<a class="item player {{#guest?}}guest{{/guest?}} clearfix" href="/player/{{username}}">
+    
+    <img src="{{avatar}}" alt="{{name}}" class="avatar"/>
+    
+    <div class="details">
+        <h3>{{name}}</h3>
+        <ul class="stats">
+            <li class="wins">+{{numberOfWins}}</li>
+            <li class="losses">-{{numberOfLosses}}</li>
+            <li class="percentage" title="{{winPercentage}}% if you're being picky">{{winPercentageRounded}}%</li>
+            {{#guest?}}
+                <li class="is-guest">Guest</li>
+            {{/guest?}}
+        </ul>
+    </div>
+    
+</a>

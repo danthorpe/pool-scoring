@@ -1,0 +1,33 @@
+
+<!--[if lt IE 9]>
+    
+    <div id="ie-warning" class="ie-warning">
+        <p>
+            Yeah, so it turns out your browser's a little out of date. That means that this
+            awesome site won't display very well for you&hellip; Bummer! But it's not all
+            doom-and-gloom: you can <a href="http://browsehappy.com/">download an awesome
+            <em>modern</em> browser</a> for free!
+        </p>
+    </div>
+    
+    <script type="text/javascript">
+        // Super-Sexy Motherfuckin' DHTML FX!!!!!1 (tm)
+        var ieWarning = document.getElementById('ie-warning'),
+            links = ieWarning.getElementsByTagName('a'),
+            colors = [
+                '#f00',
+                '#0f0',
+                '#00f',
+                '#f0f',
+                '#0ff'
+            ];
+        setInterval(function() {
+            var i, len = links.length, link;
+            for (i = 0; i < len; i++) {
+                link = links[i];
+                link.style.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+        }, 200);
+    </script>
+    
+<![endif]-->

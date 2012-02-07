@@ -1,19 +1,11 @@
 
 <h1>{{title}}</h1>
 
-<ul class="container players">
+<ul class="container items players">
     {{#players}}
         
         <li class="half">
-            <a class="inner player clearfix" href="/player/{{username}}">
-                
-                <img src="{{avatar}}" alt="{{name}}"/>
-                
-                <div class="details">
-                    <h3>{{name}}</h3>
-                </div>
-                
-            </a>
+            {{> partials/player}}
         </li>
     
     {{/players}}

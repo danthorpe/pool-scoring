@@ -3,21 +3,23 @@
 
 <form method="post" action="{{request.path}}">
     
-    <div class="container">
+    {{> partials/form-errors}}
+    
+    <div id="team-picker" class="container">
         
         <div class="half">
             <div class="field inner">
-                <label>Breaking Player</label>
-                <ul class="players">
+                <label class="title">Breaking Player(s)</label>
+                <ul id="breaking-players" class="items players">
                     {{#players}}
                         <li>
-                            <label class="player clearfix" data-username="{{username}}" for="breaking-player-{{username}}">
+                            <label class="item player clearfix" data-player-id="{{_id}}" data-username="{{username}}" for="breaking-player-{{username}}">
                                 
-                                <img src="{{avatar}}" alt="{{name}}"/>
+                                <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}}" class="avatar"/>
                                 
                                 <div class="details">
-                                    <h3>{{name}}</h3>
-                                    <input type="radio" name="breaking-player" id="breaking-player-{{username}}" value="{{username}}"/>
+                                    <h5>{{name}}</h5>
+                                    <input type="checkbox" name="breaking-player[]" id="breaking-player-{{username}}" value="{{username}}"/>
                                 </div>
                                 
                             </label>
@@ -29,17 +31,17 @@
     
         <div class="half">
             <div class="field inner">
-                <label>Other Player</label>
-                <ul class="players">
+                <label class="title">Other Player(s)</label>
+                <ul id="other-players" class="items players">
                     {{#players}}
                         <li>
-                            <label class="player clearfix" data-username="{{username}}" for="other-player-{{username}}">
+                            <label class="item player clearfix" data-player-id="{{_id}}" data-username="{{username}}" for="other-player-{{username}}">
                                 
-                                <img src="{{avatar}}" alt="{{name}}"/>
+                                <img src="{{#avatarSize}}30{{/avatarSize}}" alt="{{name}}" class="avatar"/>
                                 
                                 <div class="details">
-                                    <h3>{{name}}</h3>
-                                    <input type="radio" name="other-player" id="other-player-{{username}}" value="{{username}}"/>
+                                    <h5>{{name}}</h5>
+                                    <input type="checkbox" name="other-player[]" id="other-player-{{username}}" value="{{username}}"/>
                                 </div>
                             </label>
                         </li>
@@ -50,26 +52,27 @@
     
     </div>
     
-    <div class="field">
-        <label>Winner</label>
+    <div class="field radio-field">
+        <label class="title">Winner</label>
         <ul>
             <li>
                 <input type="radio" name="breaking-player-won" id="winning-player-breaking" value="1"/>
-                <label for="winning-player-breaking">Breaking Player</label>
+                <label for="winning-player-breaking">Breaking Player(s)</label>
             </li>
             <li>
                 <input type="radio" name="breaking-player-won" id="winning-player-other" value="0"/>
-                <label for="winning-player-other">Other Player</label>
+                <label for="winning-player-other">Other Player(s)</label>
             </li>
         </ul>
     </div>
     
-    <div class="field">
+    <div class="field checkbox-field">
+        <label class="title">Game Details</label>
         <label for="foul-on-black">Was there a foul on the black?</label>
-        <input type="checkbox" name="foul-on-black" id="foul-on-black"/>
+        <input type="checkbox" name="foul-on-black" id="foul-on-black" {{#request.params.foul-on-black}}checked{{/request.params.foul-on-black}}/>
     </div>
     
-    <div class="field">
+    <div class="field button-field">
         <input type="submit" value="Record Game"/>
     </div>
     

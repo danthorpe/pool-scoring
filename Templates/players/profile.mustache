@@ -1,6 +1,22 @@
 
 <h1>{{title}}</h1>
 
-<img src="{{player.avatar}}" alt="{{player.name}}"/>
-
-<p><a href="mailto:{{player.email}}">Send {{player.name}} an email</a></p>
+{{#player}}
+        
+    {{> partials/player}}
+    
+    <p><a href="mailto:{{email}}">Send {{name}} an email</a></p>
+    
+    <h2>{{name}}'s Recent Games</h2>
+    
+    <ul class="container items games">
+        {{#recentGames}}
+            
+            <li class="whole">
+                {{> partials/game}}
+            </li>
+        
+        {{/recentGames}}
+    </ul>
+    
+{{/player}}
