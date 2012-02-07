@@ -11,6 +11,10 @@ class Person
     # Mixin CouchDB
     include CouchDB
     
+    # Time durations for statistics
+    STATS_SEVEN_DAY = "7 Day Statistics"
+    STATS_ALL_TIME = "All Time Statistics"
+    
     # Constructor
     # @param doc A CouchDB document representing the person
     # @param server A CouchDB server on which the document exists
