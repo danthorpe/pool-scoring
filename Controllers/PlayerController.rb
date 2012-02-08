@@ -62,13 +62,45 @@ class PlayerController
         return Person.new(doc, @server)
     end
 
+    # Get the player leaderboard
+    #
+    # Store the leaderboard in Redis
+    # Calculate it using Game objects from CouchDB
+    def leaderboard(type = Person::STATS_ALL_TIME, force = false)
+
+        key = "Leaderboard #{type}"
+
+        # Get our Redis store
+        store = Redis.new
+        
+        # Check Redis for the leaderboard first        
+        leaderboard = JSON.parse(store.get(key))
+        
+        # Get the object for the player from Redis
+        # or a new Hash if it doesn't exist
+        if force || leaderboard == nil
+
+            # Calculate the leaderboard afresh
+            
+
+
+
+
+
+        end
+
+        # Return the leaderboard
+        return leaderboard
+    end
+
 
     # Get the leaderboard
     #
     # This gets a leaderboard of players
-    def leaderboard        
+    def oldLeaderboard        
         # Get the key/values
         req = @server + "/#{CouchDB::DB}/_design/Game/_view/pointsLeaderboard?group=true"
+        puts req
         result = CouchRest.get req
 
         # Sort the objects        
