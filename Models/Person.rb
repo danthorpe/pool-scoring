@@ -54,26 +54,109 @@ class Person
         @doc.to_json
     end
 
-    def games
+    def games(type = STATS_ALL_TIME, force = false)
         
-        if @games == nil
+        if force || @games == nil || @games[type] == nil
+
+            # Define our key objects
+            nSecsWeek = 604800            
+            t = Time.now        
+            t.utc
+            
+            startkey = Array.new
+            startkey.push self._id
+            startkey.push t.to_i                
+            
+            endkey = Array.new
+            endkey.push self._id
             
             # Get all the games for the player
-            req = @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayer?descending=true&key=%22" + self._id + "%22"
+            if type == STATS_SEVEN_DAY            
+                endkey.push t.to_i - nSecsWeek
+            else
+                endkey.push 0
+            end
+            
+            req = @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayerByDate?descending=true&startkey=#{URI.escape(startkey.to_json, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}&endkey=#{URI.escape(endkey.to_json, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"
+
+            puts "querying games: #{req}"
+
+            # Get the response from CouchDB
             response = CouchRest.get req
 
-            # Define an array for Games
-            @games = Array.new
+            # Define an hash for Games
+            @games = Hash.new if @games == nil
+            @games[type] = Array.new
             response['rows'].each do |item|
-                @games.push Game.new(item['value'], @server)
+                @games[type].push Game.new(item['value'], @server)
             end
         end
-                
-        return @games
+
+        # Return the game types
+        return @games[type]
     end
     
     def recentGames(limit = 3)    
         return self.games.slice(0,3)    
+    end
+    
+    # Player Statistics
+    #
+    # Call this method to retrieve the statistics for the person from Redis
+    # If the statistics haven't already been calculated (for the calculate flag 
+    # is set), then the stats will be recalculated and stored in Redis overwriting
+    # the previous value.
+    #
+    # Calculating the statistics is a relatively expensive operation, because it 
+    # requires extra HTTP calls to get the games from CouchDB
+    def statistics(type = STATS_ALL_TIME, force = false)
+
+        # Check Redis for the stats
+        store = Redis.new
+        
+         # Get the object for the player from Redis
+         # or a new Hash if it doesn't exist
+         if force || store[self.username] == nil
+             playerStats = Hash.new
+         else
+            playerStats = JSON.parse(store.get(self.username))
+        end
+
+        if force || playerStats[type] == nil
+            
+            # Get the games for this time duration
+            games = self.games(type, force)
+
+            # Create a hash to store statistics in
+            stats = Hash.new
+            stats[:points] = 0
+            stats[:wins] = 0
+            stats[:losses] = 0
+
+            games.each do |game|
+                # Get the points for the player earnt for the game
+                points = game.pointsForPlayer(self._id)
+                if points != 0
+                    stats[:points] += points
+                    if points > 0
+                        stats[:wins] += 1
+                    else
+                        stats[:losses] += 1
+                    end
+                end
+            end
+
+            stats[:percentage] = (stats[:wins].to_f / (stats[:wins] + stats[:losses])) * 100
+
+            # Update the stats object
+            playerStats[type] = stats
+
+            # Save the stats in Redis
+            store.set self.username, playerStats.to_json
+        end
+        
+        # Return the stats object
+        return playerStats[type]
     end
     
     # Basic player statistics
@@ -120,7 +203,6 @@ class Person
 
         return @stats
     end
-
 
     # Player statistics
     def numberOfWins
