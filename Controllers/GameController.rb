@@ -47,7 +47,7 @@ class GameController
             endkey = 0
             
             # Get all the games for the player
-            if type == Person::STATS_ALL_TIME            
+            if type == Person::STATS_SEVEN_DAY            
                 endkey = t.to_i - nSecsWeek
             end
             
