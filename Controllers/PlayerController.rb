@@ -2,6 +2,7 @@
 # @date 18/12/2011
 
 require './Controllers/CouchDB.rb'
+require './Controllers/GameController.rb'
 require './Models/Person.rb'
 
 # Player Controller
@@ -66,27 +67,45 @@ class PlayerController
     #
     # Store the leaderboard in Redis
     # Calculate it using Game objects from CouchDB
-    def leaderboard(type = Person::STATS_ALL_TIME, force = false)
-
-        key = "Leaderboard #{type}"
-
+    def newLeaderboard(type = Person::STATS_ALL_TIME, force = false)
         # Get our Redis store
         store = Redis.new
+
+        # Define the key
+        key = "Leaderboard " + type
         
-        # Check Redis for the leaderboard first        
-        leaderboard = JSON.parse(store.get(key))
+        # Get the value from Redis
+        val = store.get(key)
         
         # Get the object for the player from Redis
         # or a new Hash if it doesn't exist
-        if force || leaderboard == nil
-
+        if force || val == nil
             # Calculate the leaderboard afresh
             
+            # Define our key objects
+            nSecsWeek = 604800            
+            t = Time.now        
+            t.utc
+            
+            startkey = t.to_i
+            endkey = 0
+
+            
+            # Get all the games for the player
+            if type == Person::STATS_SEVEN_DAY            
+                endkey = t.to_i - nSecsWeek
+            end
+            
+            req = @server + "/#{CouchDB::DB}/_design/Game/_view/leaderboard?descending=true&startkey=%5B#{startkey}%5D&endkey=%5B%7B%7D%2C#{endkey}%5D"
+
+            puts "query: #{req}"
+
+            # Get the response from CouchDB
+            response = CouchRest.get req
 
 
-
-
-
+        elsif val != nil
+        
         end
 
         # Return the leaderboard
@@ -97,17 +116,16 @@ class PlayerController
     # Get the leaderboard
     #
     # This gets a leaderboard of players
-    def oldLeaderboard        
+    def leaderboard        
         # Get the key/values
-        req = @server + "/#{CouchDB::DB}/_design/Game/_view/pointsLeaderboard?group=true"
-        puts req
+        req = @server + "/#{CouchDB::DB}/_design/Game/_view/leaderboard?group_level=1"
         result = CouchRest.get req
 
         # Sort the objects        
         return result['rows'].sort_by { |item|
             [-item['value']['points'], -item['value']['wins'], item['value']['losses']]
         }.enum_for(:each_with_index).collect { |item, i|
-            {:person => self.byId(item['key']), :rank => item['value'], :position => i + 1}
+            {:person => self.byId(item['key'][0]), :rank => item['value'], :position => i + 1}
         }
     end
 

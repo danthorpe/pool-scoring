@@ -79,8 +79,6 @@ class Person
             
             req = @server + "/#{CouchDB::DB}/_design/Game/_view/byPlayerByDate?descending=true&startkey=#{URI.escape(startkey.to_json, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}&endkey=#{URI.escape(endkey.to_json, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))}"
 
-            puts "querying games: #{req}"
-
             # Get the response from CouchDB
             response = CouchRest.get req
 

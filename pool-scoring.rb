@@ -264,6 +264,7 @@ class PoolScoring < Sinatra::Base
         @title = 'Leaderboard'
         # Create a Player Controller
         pc = PlayerController.new settings.couchdb
+        newLeaderboard = pc.newLeaderboard(Person::STATS_SEVEN_DAY)
         @leaderboard = pc.leaderboard
         mustache :'leaderboard/index'
     end
