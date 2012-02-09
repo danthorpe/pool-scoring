@@ -38,6 +38,10 @@ class Game
         }
     end
     
+    def playerIds
+        return @doc['breakingTeam'] + @doc['otherTeam']
+    end
+    
     def breakingPlayers
         # Get all the documents
         docs = CouchRest.post(@server + "/#{CouchDB::DB}/_all_docs?include_docs=true", {:keys => @doc['breakingTeam']})
@@ -96,7 +100,9 @@ class Game
     
     # Get player names as a neatly formatted string from an array of players.
     def getPlayerNames(players)
-        players.collect{|player| player.name }
+        players.collect do |player|
+            player.name
+        end
     end
     protected :getPlayerNames
     
@@ -144,6 +150,16 @@ class Game
     
     def to_json
         @doc.to_json
+    end
+
+    def pointsForPlayer(player)
+        if @doc["breakingTeam"].include?(player)
+            return (self.breakingTeamWon ? 1.0 : -1.0) / @doc["breakingTeam"].length
+        elsif @doc["otherTeam"].include?(player)
+            return (self.breakingTeamWon ? -1.0 : 1.0) / @doc["otherTeam"].length
+        else
+            return 0
+        end
     end
 
 end
