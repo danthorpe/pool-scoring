@@ -68,14 +68,15 @@ class PlayerController
     # Store the leaderboard in Redis
     # Calculate it using Game objects from CouchDB
     def leaderboard(type = Person::STATS_ALL_TIME, force = false)
+
         # Get our Redis store
-        store = Redis.new
+#        store = Redis.new
 
         # Define the key
         key = "Leaderboard " + type
         
         # Get the value from Redis
-        val = store.get(key)
+        val = nil #store.get(key)
         
         # Get the object for the player from Redis
         # or a new Hash if it doesn't exist

@@ -1,7 +1,7 @@
 # @author Daniel Thorpe dan@blindingskies.com
 # @date 18/12/2011
 
-require 'redis'
+#require 'redis'
 
 require './Controllers/CouchDB.rb'
 require './Controllers/PlayerController.rb'
