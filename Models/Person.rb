@@ -109,15 +109,18 @@ class Person
     # requires extra HTTP calls to get the games from CouchDB
     def statistics(type = STATS_ALL_TIME, force = false)
 
-        # Check Redis for the stats
-        store = Redis.new
+        # Use Redis
+#        store = Redis.new
         
-         # Get the object for the player from Redis
-         # or a new Hash if it doesn't exist
-         if force || store[self.username] == nil
-             playerStats = Hash.new
-         else
-            playerStats = JSON.parse(store.get(self.username))
+        # Check Redis for the key
+        val = nil #store.get(self.username)
+        
+        # Get the object for the player from Redis
+        # or a new Hash if it doesn't exist
+        if force || val == nil
+            playerStats = Hash.new
+        else
+            playerStats = JSON.parse(val)
         end
 
         if force || playerStats[type] == nil
@@ -150,7 +153,7 @@ class Person
             playerStats[type] = stats
 
             # Save the stats in Redis
-            store.set self.username, playerStats.to_json
+#            store.set self.username, playerStats.to_json
         end
         
         # Return the stats object
@@ -159,79 +162,38 @@ class Person
     
     # Basic player statistics
     def stats
-        if @stats == nil
-
-            # Store simple statistical measures in a hash
-            @stats = Hash.new
-            
-            # Get the player's games
-            allGames = self.games
-            
-            # We only calculate stats over a rolling 7 day period
-            nSecsWeek = 604800            
-            t = Time.now        
-            t.utc
-            minimunDateTimestamp = t.to_i - nSecsWeek
-
-            games = allGames.select do |game|
-                game.date > minimunDateTimestamp
-            end
-            
-            # Number of games played in total
-            @stats[:total] = games.count
-            @stats[:wins] = 0
-            @stats[:losses] = 0
-            @stats[:percentage] = 0
-             
-            # Count the number of wins/losses
-            games.each do |game|
-                if game.winningPlayerIds.include? self._id
-                    @stats[:wins] += 1
-                else
-                    @stats[:losses] += 1
-                end
-            end
-            
-            # Calculate the percentage wins
-            if @stats[:total] != 0
-                @stats[:percentage] = ((@stats[:wins].to_f / @stats[:total].to_f).to_f * 100).to_i
-            end
-
-        end
-
-        return @stats
+        return self.statistics(STATS_SEVEN_DAY)
     end
 
     # Player statistics
     def numberOfWins
-        return self.stats[:wins]
+        number = self.stats["wins"]
+        if number != nil
+            return number
+        end
+        return 0
     end
 
     def numberOfLosses
-        return self.stats[:losses]
+        number = self.stats["losses"]
+        if number != nil
+            return number
+        end
+        return 0
     end
 
     def winPercentage
-        return self.stats[:percentage]
+        number = self.stats["percentage"]
+        if number != nil
+            return number
+        end
+        return 0.0
     end
     
     def winPercentageRounded
-        percentage = self.stats[:percentage]
+        percentage = self.winPercentage
         if percentage != nil
             return percentage.round
-        else
-            return 0
-        end
-    end
-
-    def lossPercentage
-        return 100 - self.stats[:percentage]
-    end
-    
-    def lossPercentageRounded
-        lossPercentage = self.lossPercentage
-        if lossPercentage != nil
-            return lossPercentage.round
         else
             return 0
         end
