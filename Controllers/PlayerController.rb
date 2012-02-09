@@ -67,7 +67,7 @@ class PlayerController
     #
     # Store the leaderboard in Redis
     # Calculate it using Game objects from CouchDB
-    def newLeaderboard(type = Person::STATS_ALL_TIME, force = false)
+    def leaderboard(type = Person::STATS_ALL_TIME, force = false)
         # Get our Redis store
         store = Redis.new
 
@@ -80,32 +80,102 @@ class PlayerController
         # Get the object for the player from Redis
         # or a new Hash if it doesn't exist
         if force || val == nil
-            # Calculate the leaderboard afresh
-            
-            # Define our key objects
-            nSecsWeek = 604800            
-            t = Time.now        
-            t.utc
-            
-            startkey = t.to_i
-            endkey = 0
 
-            
-            # Get all the games for the player
+            # Get all the games in the given time window
             if type == Person::STATS_SEVEN_DAY            
-                endkey = t.to_i - nSecsWeek
-            end
             
-            req = @server + "/#{CouchDB::DB}/_design/Game/_view/leaderboard?descending=true&startkey=%5B#{startkey}%5D&endkey=%5B%7B%7D%2C#{endkey}%5D"
+                # Define our key objects
+                nSecsWeek = 604800            
+                t = Time.now        
+                t.utc
+                
+                startkey = t.to_i
+                endkey = t.to_i - nSecsWeek
+                
+                # We can't compute these stats in CouchDB, because we can't
+                # reduce on a filtered view. Therefore we have to calculate the
+                # stats here.
+                
+                # Get the games from the Game Controller
+                gc = GameController.new @server                
+                games = gc.all(type)
 
-            puts "query: #{req}"
+                # Create storage to calculate the stats in
+                stats = Hash.new
+                
+                # Define a lambda to initialize a new hash for statistics
+                initStatsHash = ->{ 
+                    {:points => 0, :wins => 0, :losses => 0}
+                }
+                
+                # Iterate through the games
+                games.each do |game| 
+                    # Get the winners
+                    playerIds = game.playerIds
+                    # Calculate the stats for each player in the game
+                    playerIds.each do |playerId|
+                        # Check to see if we've created stats before
+                        if ! stats.has_key?(playerId)
+                            # Create a new hash for statistics
+                            stats[playerId] = initStatsHash.call()
+                        end
+                        
+                        # Get the points for the player earnt for the game
+                        points = game.pointsForPlayer(playerId)
+                        if points != 0
+                            stats[playerId][:points] += points
+                            if points > 0
+                                stats[playerId][:wins] += 1
+                            else
+                                stats[playerId][:losses] += 1
+                            end
+                        end
+                    end
+                end
+                
+                # Turn this into an array
+                results = stats.each { |key,value|
+                    value[:playerId] = key
+                }.values
+                                
+                # Now update the percentages
+                results.each do |stats|
+                    stats[:percentage] = (stats[:wins].to_f / (stats[:wins] + stats[:losses])) * 100                
+                end
 
-            # Get the response from CouchDB
-            response = CouchRest.get req
+                # Now we need to sort it
+                leaderboard = results.sort_by { |item|
+                    # This sorts everyone with out a single win to the bottom, then by points, descending, and by wins descending
+                    [item[:wins] == 0 ? 1 : 0, -item[:points], -item[:wins]]
+                }.enum_for(:each_with_index).collect { |item, i|
+                    {:person => self.byId(item[:playerId]), :rank => item, :position => i + 1}
+                }
 
+                
+            else
+
+                # Create a request
+                req = @server + "/#{CouchDB::DB}/_design/Game/_view/leaderboard?group_level=1"
+
+                # Get the response from CouchDB
+                response = CouchRest.get req
+
+                # Sort the results
+                leaderboard = response['rows'].sort_by { |item|
+                    # This sorts everyone with out a single win to the bottom, then by points, descending, and by wins descending
+                    [item['value']['wins'] == 0 ? 1 : 0, -item['value']['points'], -item['value']['wins']]
+                }.enum_for(:each_with_index).collect { |item, i|
+                    {:person => self.byId(item['key'][0]), :rank => item['value'], :position => i + 1}
+                }
+                                                
+            end
+
+            # Save the leaderboard in redis
+#            store.set key, leaderboard.to_json
 
         elsif val != nil
-        
+            # Parse the leaderboard out of redis
+            leaderboard = JSON.parse(val)
         end
 
         # Return the leaderboard
@@ -116,7 +186,7 @@ class PlayerController
     # Get the leaderboard
     #
     # This gets a leaderboard of players
-    def leaderboard        
+    def oldLeaderboard        
         # Get the key/values
         req = @server + "/#{CouchDB::DB}/_design/Game/_view/leaderboard?group_level=1"
         result = CouchRest.get req
