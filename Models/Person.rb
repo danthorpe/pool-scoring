@@ -130,24 +130,24 @@ class Person
 
             # Create a hash to store statistics in
             stats = Hash.new
-            stats[:points] = 0
-            stats[:wins] = 0
-            stats[:losses] = 0
+            stats["points"] = 0
+            stats["wins"] = 0
+            stats["losses"] = 0
 
             games.each do |game|
                 # Get the points for the player earnt for the game
                 points = game.pointsForPlayer(self._id)
                 if points != 0
-                    stats[:points] += points
+                    stats["points"] += points
                     if points > 0
-                        stats[:wins] += 1
+                        stats["wins"] += 1
                     else
-                        stats[:losses] += 1
+                        stats["losses"] += 1
                     end
                 end
             end
 
-            stats[:percentage] = (stats[:wins].to_f / (stats[:wins] + stats[:losses])) * 100
+            stats["percentage"] = (stats["wins"].to_f / (stats["wins"] + stats["losses"])) * 100
 
             # Update the stats object
             playerStats[type] = stats
