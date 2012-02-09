@@ -38,6 +38,10 @@ class Game
         }
     end
     
+    def playerIds
+        return @doc['breakingTeam'] + @doc['otherTeam']
+    end
+    
     def breakingPlayers
         # Get all the documents
         docs = CouchRest.post(@server + "/#{CouchDB::DB}/_all_docs?include_docs=true", {:keys => @doc['breakingTeam']})
