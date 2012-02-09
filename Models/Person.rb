@@ -169,7 +169,7 @@ class Person
     def numberOfWins
         number = self.stats["wins"]
         if number != nil
-            return number
+            return number.to_i
         end
         return 0
     end
@@ -177,7 +177,7 @@ class Person
     def numberOfLosses
         number = self.stats["losses"]
         if number != nil
-            return number
+            return number.to_i
         end
         return 0
     end
@@ -185,15 +185,15 @@ class Person
     def winPercentage
         number = self.stats["percentage"]
         if number != nil
-            return number
+            return number.to_f
         end
         return 0.0
     end
     
     def winPercentageRounded
-        percentage = self.winPercentage
-        if percentage != nil
-            return percentage.round
+        number = self.winPercentage
+        if ! number.nan?
+            return number.round
         else
             return 0
         end
