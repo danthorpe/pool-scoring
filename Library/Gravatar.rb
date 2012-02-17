@@ -16,7 +16,7 @@ class Gravatar
         end
         
         def default
-            "http://unicornify.appspot.com/avatar/#{ self.emailHash }?s=#{ @size }"
+            "http://unicornify.appspot.com/avatar/#{ self.emailHash }%3Fs=#{ @size }"
         end
         
         def url
