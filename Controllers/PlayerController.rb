@@ -204,7 +204,7 @@ class PlayerController
     #
     # This gets a single player
     def star
-        leaderboard = self.leaderboard
+        leaderboard = self.leaderboard(Person::STATS_SEVEN_DAY)
         return leaderboard[0] ? leaderboard[0][:person] : nil
     end
 
